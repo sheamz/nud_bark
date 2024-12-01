@@ -1,0 +1,9 @@
+.login_bg {
+  height: 100vh;
+  background-color: #34418e;
+}
+.login_bg .left {
+  height: 100vh;
+  width: 50vw;
+  background-color: white;
+}
