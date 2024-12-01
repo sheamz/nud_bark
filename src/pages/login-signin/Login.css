@@ -3,7 +3,25 @@
   background-color: #34418e;
 }
 .login_bg .left {
+  display: flex;
   height: 100vh;
   width: 50vw;
   background-color: white;
+}
+
+.left form {
+  width: 70%;
+  height: fit-content;
+  margin: auto;
+  text-align: center;
+}
+.left form input {
+  background-color: #efeded;
+  border-color: #c9c9c9;
+}
+.left form .btn_submit {
+  width: 50%;
+  background-color: #34418e;
+  border-radius: 40px;
+  border: none;
 }
