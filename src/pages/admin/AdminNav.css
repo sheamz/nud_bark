@@ -17,27 +17,28 @@
   
   /* Sidebar Section */
   .side-nav {
-    width: 200px; 
+    width: auto; /* Adjust sidebar width to fit content */
     background-color: white;
     color: black;
     padding: 20px;
     display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    border-right: 1px solid #ddd; /* Light border on the right */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Light shadow on the right side */
+    justify-content: space-around; /* Distribute items horizontally */
+    align-items: center; /* Vertically center the items */
+    height: 60px; /* Set a fixed height for the sidebar */
+    border-bottom: 1px solid #ddd; /* Light border at the bottom */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow on the bottom */
   }
   
-  
+  /* Sidebar Navigation List */
   .side-nav-list {
     list-style: none;
+    display: flex; /* Align items horizontally */
     padding: 0;
-    margin-top: 30%;
+    margin: 0;
   }
   
   .side-nav-list li {
-    margin: 10px 0;
+    margin: 0 15px; /* Add horizontal spacing between items */
   }
   
   .side-nav-list li a {
@@ -45,21 +46,18 @@
     text-decoration: none;
     font-size: 15px;
     display: flex;
-    padding: 8px 0;
-    margin-top: 5%;
     align-items: center;
   }
   
   .side-nav-list li a svg {
     margin-right: 10px; /* Add space between the icon and the text */
   }
-
+  
   .side-nav-list li a:hover {
     background-color: #34418E;
-    padding-left: 10px;
+    padding: 10px;
     border-radius: 20px;
     color: white;
-    font-size: 10px;
   }
   
   /* Main Content Section */
@@ -87,7 +85,7 @@
   }
   
   .logo h1 {
-    font-size: 32px; 
+    font-size: 32px;
     color: #2c3e90;
     font-weight: bold;
   }
