@@ -1,3 +1,7 @@
+* {
+  font-family: "Poppins";
+}
+
 .login_bg {
   height: 100vh;
   background-color: #34418e;
@@ -14,6 +18,10 @@
   height: fit-content;
   margin: auto;
   text-align: center;
+}
+.left form h1 {
+  font-weight: 900;
+  font-size: 50px;
 }
 .left form input {
   background-color: #efeded;
