@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/login-signin/Login";
 import Home from "./pages/user/Home";
+import PostManagement from "./pages/admin/PostMngmt/PostMngmt.jsx";
+
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/post-management" element={<PostManagement />} />
         </Routes>
       </BrowserRouter>
     </>
