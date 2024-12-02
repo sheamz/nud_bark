@@ -1,5 +1,5 @@
 import React from "react";
-import NavUser from "../../components/NavUser";
+import NavUser from "../../../components/NavUser";
 import HomeCat from "./HomeCat";
 import HomeContri from "./HomeContri";
 import HomeList from "./HomeList";
