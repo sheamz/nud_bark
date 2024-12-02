@@ -1,4 +1,3 @@
-/* Reset and Styling */
 * {
     margin: 0;
     padding: 0;
@@ -8,37 +7,34 @@
   body {
     font-family: Arial, sans-serif;
   }
-  
-  /* Layout */
+
   .app-container {
     display: flex;
-    height: 100vh;
+    margin-top: 20px;
   }
-  
-  /* Sidebar Section */
+
   .side-nav {
-    width: auto; /* Adjust sidebar width to fit content */
+    width: auto; 
     background-color: white;
     color: black;
     padding: 20px;
     display: flex;
-    justify-content: space-around; /* Distribute items horizontally */
-    align-items: center; /* Vertically center the items */
-    height: 60px; /* Set a fixed height for the sidebar */
-    border-bottom: 1px solid #ddd; /* Light border at the bottom */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow on the bottom */
+    justify-content: space-around; 
+    align-items: center; 
+    height: 60px; 
+    border-bottom: 1px solid #ddd; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
   }
   
-  /* Sidebar Navigation List */
   .side-nav-list {
     list-style: none;
-    display: flex; /* Align items horizontally */
+    display: flex; 
     padding: 0;
     margin: 0;
   }
   
   .side-nav-list li {
-    margin: 0 15px; /* Add horizontal spacing between items */
+    margin: 0 15px; 
   }
   
   .side-nav-list li a {
@@ -50,7 +46,7 @@
   }
   
   .side-nav-list li a svg {
-    margin-right: 10px; /* Add space between the icon and the text */
+    margin-right: 10px; 
   }
   
   .side-nav-list li a:hover {
@@ -60,14 +56,12 @@
     color: white;
   }
   
-  /* Main Content Section */
-  .main-content {
+  .main-content1 {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
-  
-  /* Header Section */
+
   .header-adminnav {
     display: flex;
     justify-content: space-between;
@@ -76,8 +70,7 @@
     background-color: #ffffff;
     border-bottom: 1px solid #e0e0e0;
   }
-  
-  /* Logo Section */
+
   .logo {
     display: flex;
     align-items: center;
@@ -97,8 +90,7 @@
     object-fit: cover;
     border: 2px solid #ccc;
   }
-  
-  /* Profile and Search Section */
+
   .profile-and-search {
     display: flex;
     align-items: center;
@@ -134,8 +126,7 @@
     object-fit: cover;
     border: 2px solid #ccc;
   }
-  
-  /* Content Area */
+
   .content-area {
     padding: 20px;
     background-color: #f4f6f9;
