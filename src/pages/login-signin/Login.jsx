@@ -2,6 +2,7 @@ import React from "react";
 import "./Login.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+// import Button from "@mui/material/Button";
 
 export default function Login() {
   return (
@@ -9,9 +10,12 @@ export default function Login() {
       <div className="left">
         <Form>
           <h1>Sign In</h1>
-          {/* <p className="m-0 text-secondary">or use your account</p> */}
-          <Form.Group className="mb-3 mt-5" controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Enter email" />
+          {/* <Button className="text-black" variant="outline-secondary">
+            Sign up with Google
+          </Button>
+          <Form.Text>or use your account</Form.Text> */}
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control type="email" placeholder="Enter" />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
