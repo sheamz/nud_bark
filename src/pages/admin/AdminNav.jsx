@@ -2,6 +2,7 @@ import React from "react";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./AdminNav.css";
 
 function AdminNav() {
@@ -11,7 +12,7 @@ function AdminNav() {
         <header className="header-adminnav">
           <div className="logo">
             <img
-              src="https://via.placeholder.com/40" 
+              src="https://via.placeholder.com/40"
               alt="Logo"
               className="logo-picture"
             />
@@ -30,7 +31,7 @@ function AdminNav() {
                 <span className="username">Anima Agrawal</span>
               </div>
               <img
-                src="https://via.placeholder.com/40" 
+                src="https://via.placeholder.com/40"
                 alt="Profile picture of Anima Agrawal"
                 className="profile-picture"
               />
@@ -38,23 +39,22 @@ function AdminNav() {
           </div>
         </header>
 
-
         <div className="side-nav">
           <ul className="side-nav-list">
             <li>
-              <a href="#">
+              <Link to="/dashboard"> 
                 <TbLayoutDashboardFilled /> Dashboard
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="/user-management"> 
                 <FaUser /> User Management
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="/post-management"> 
                 <BsFileEarmarkPostFill /> Post Management
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
