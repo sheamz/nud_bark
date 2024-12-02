@@ -4,7 +4,7 @@ import Login from "./pages/login-signin/Login";
 import Home from "./pages/user/HomePage/Home";
 import PostManagement from "./pages/admin/PostMngmt/PostMngmt.jsx";
 import ConversationPage from "./pages/user/ConversationPage/ConversationPage.jsx";
-import UserManagement from "./pages/admin/UserMngmt/UserMngmt.jsx";
+import UserManagement from "./pages/admin/UserMngmt/UserManagement.jsx";
 import Dashboard from "./pages/admin/AdminDash/Dashboard.jsx";
 import Register from "./pages/login-signin/Register.jsx";
 import "./App.css";

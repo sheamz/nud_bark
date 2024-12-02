@@ -1,4 +1,6 @@
-/* General styling for the post management container */
+body{
+  font-family: Roboto;
+}
 .post-management-container {
   padding: 20px;
   background-color: #f4f6f9;
