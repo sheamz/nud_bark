@@ -7,20 +7,17 @@ import "./AdminNav.css";
 function AdminNav() {
   return (
     <div className="app-container">
-      {/* Main Content Section */}
-      <main className="main-content">
+      <main className="main-content1">
         <header className="header-adminnav">
-          {/* Logo Section */}
           <div className="logo">
             <img
-              src="https://via.placeholder.com/40" // Replace with your logo URL
+              src="https://via.placeholder.com/40" 
               alt="Logo"
               className="logo-picture"
             />
             <h1>BARK</h1>
           </div>
 
-          {/* Profile and Search Section */}
           <div className="profile-and-search">
             <input
               type="text"
@@ -33,7 +30,7 @@ function AdminNav() {
                 <span className="username">Anima Agrawal</span>
               </div>
               <img
-                src="https://via.placeholder.com/40" // Replace with your profile picture URL
+                src="https://via.placeholder.com/40" 
                 alt="Profile picture of Anima Agrawal"
                 className="profile-picture"
               />
@@ -41,7 +38,7 @@ function AdminNav() {
           </div>
         </header>
 
-        {/* Sidebar Section */}
+
         <div className="side-nav">
           <ul className="side-nav-list">
             <li>

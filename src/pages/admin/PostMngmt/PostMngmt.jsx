@@ -1,15 +1,14 @@
 import React from "react";
 import "./PostMngmt.css"; 
-import AdminNav from "../AdminNav"; // Import AdminNav for the sidebar and top navigation
+import AdminNav from "../AdminNav"; 
 
 function PostMngmt() {
   return (
     <div>
-      <AdminNav /> {/* AdminNav component renders sidebar and top navigation */}
+      <AdminNav /> 
       
-      {/* Post Management Content */}
       <div className="post-management-container">
-        {/* Header with filters */}
+
         <div className="header">
           <h2>Post Management</h2>
           <div className="filters">
@@ -18,14 +17,14 @@ function PostMngmt() {
               <option value="">Category</option>
               <option value="ask">Ask the Community</option>
               <option value="news">News</option>
-              {/* Add more categories as needed */}
+
             </select>
             <button className="filter-button">Filter by</button>
             <button className="delete-button">DELETE</button>
           </div>
         </div>
 
-        {/* Post Table */}
+
         <table className="post-table">
           <thead className="title">
             <tr>
@@ -46,7 +45,7 @@ function PostMngmt() {
               <td>Ask the Community</td>
               <td><button className="go-to-post">Go to post</button></td>
             </tr>
-            {/* Add more rows here */}
+
             <tr>
               <td><input type="checkbox" /></td>
               <td>Pano magka pera 101: Guide para sa mga walang pera.</td>
