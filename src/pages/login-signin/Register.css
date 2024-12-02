@@ -1,37 +1,42 @@
-.login_bg {
+.reg_bg {
+  display: flex;
   height: 100vh;
   background-color: #34418e;
 }
-.login_bg .left {
-  display: flex;
-  height: 100vh;
+.reg_bg .left {
   width: 50vw;
-  background-color: white;
+  height: 100vh;
 }
-
-.login_bg .left form {
+.reg_bg .right {
+  display: flex;
+  background-color: white;
+  width: 50vw;
+  height: 100vh;
+}
+.reg_bg .right form {
   width: 70%;
   height: fit-content;
   margin: auto;
   text-align: center;
 }
-.login_bg .left form h1 {
+
+.reg_bg .right form h1 {
   font-weight: 700;
   font-size: 50px;
 }
-.login_bg .left form input {
+.reg_bg .right form input {
   background-color: #efeded;
   border-color: #c9c9c9;
 }
-.login_bg .left form .btn_submit {
+.reg_bg .right form .btn_submit {
   width: 50%;
   background-color: #34418e;
   border-radius: 40px;
   border: none;
 }
-.login_bg .left form p {
+.reg_bg .right form p {
   font-size: 14px;
 }
-.login_bg .left form a {
+.reg_bg .right form a {
   text-decoration: none;
 }
