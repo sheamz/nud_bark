@@ -16,11 +16,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          {/* user pages */}
           <Route path="/home" element={<Home />} />
-          <Route path="/post-management" element={<PostManagement />} />
           <Route path="/conversation-page" element={<ConversationPage />} />
-          <Route path="/user-management" element={<UserManagement />} />
+
+          {/* admin pages */}
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user-management" element={<UserManagement />} />
+          <Route path="/post-management" element={<PostManagement />} />
         </Routes>
       </BrowserRouter>
     </>
