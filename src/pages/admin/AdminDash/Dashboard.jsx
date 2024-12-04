@@ -1,11 +1,37 @@
 import React from "react";
 import AdminNav from "../AdminNav";
 import "./Dashboard.css";
-import { Button } from "@mui/material";
+import { Avatar, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
+// import Stack from "@mui/material";
+// table
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 // charts
 import Chart from "react-apexcharts";
+
+const rows = [
+  {
+    uid: "usr-1000",
+    uname: "reztydde",
+    email: "ddd@email.com",
+    count: 9823,
+    percent: "68%",
+  },
+  {
+    uid: "usr-1002",
+    uname: "shasha",
+    email: "ddd@email.com",
+    count: 9823,
+    percent: "68%",
+  },
+];
 
 export default function Dashboard() {
   let active = location.pathname;
@@ -61,16 +87,16 @@ export default function Dashboard() {
   let cat_chart = {
     options: {
       colors: [
-        "#1F2A6B",
-        "#4A5ABD",
-        "#1A204C",
-        "#5072D4",
-        "#1C2844",
-        "#3C55AD",
-        "#17234E",
-        "#536ED0",
-        "#1F295C",
-        "#4756C2",
+        "#4A6FA5",
+        "#3B5998",
+        "#4666B0",
+        "#5C7EA6",
+        "#5078B7",
+        "#6181A1",
+        "#49659C",
+        "#5373B9",
+        "#4F79A4",
+        "#5B7FB1",
       ],
       chart: { id: "cat-chart", foreColor: "#34418E", fontFamily: "Poppins" },
       title: {
@@ -97,7 +123,7 @@ export default function Dashboard() {
         <div className="admin-dash" style={{ width: "100%" }}>
           <h2>Dashboard</h2>
           <div className="row m-0 mt-5 justify-content-around">
-            <div className="users-chart">
+            <div className="users-chart rounded-3">
               <Chart
                 options={user_chart.options}
                 series={user_chart.series}
@@ -107,7 +133,7 @@ export default function Dashboard() {
               {/* <Button variant="contained">go</Button>? */}
               {/* <Link to={"/user-management"}>manage users --{">"}</Link> */}
             </div>
-            <div className="cat-chart">
+            <div className="cat-chart rounded-3">
               <Chart
                 options={cat_chart.options}
                 series={cat_chart.options.series}
@@ -116,27 +142,29 @@ export default function Dashboard() {
               />
             </div>
           </div>
+          <Stack direction={"row"} gap={5} className="mt-5">
+            <Paper
+              elevation={5}
+              style={{ flex: "1" }}
+              className="top-contibutor p-4 rounded-3"
+            >
+              <h6>Top Contributor</h6>
 
-          <div className="row m-0 mt-5 justify-content-around">
-            <div className="users-chart">
-              <Chart
-                options={user_chart.options}
-                series={user_chart.series}
-                type="bar"
-                width="600"
-              />
-              {/* <Button variant="contained">go</Button>? */}
-              {/* <Link to={"/user-management"}>manage users --{">"}</Link> */}
-            </div>
-            <div className="cat-chart">
-              <Chart
-                options={cat_chart.options}
-                series={cat_chart.options.series}
-                type="pie"
-                width="500"
-              />
-            </div>
-          </div>
+              <Stack
+                spacing={2}
+                direction={"row"}
+                style={{ width: "fit-content" }}
+              >
+                <Avatar>H</Avatar>
+                <div>
+                  <p className="uname">Jesse Thomas</p>
+                  <p className="email">emdadasdasdail.com</p>
+                </div>
+                <p className="count">9999</p>
+                <p className="percent">89%</p>
+              </Stack>
+            </Paper>
+          </Stack>
         </div>
       </div>
     </div>

@@ -1,13 +1,25 @@
 .users-chart {
   width: fit-content;
   height: fit-content;
-  border-radius: 10px;
   box-shadow: 0px 0px 15px 3px rgba(52, 65, 142, 0.271);
 }
 .cat-chart {
   padding-bottom: 20px;
   width: fit-content;
   height: fit-content;
-  border-radius: 10px;
   box-shadow: 0px 0px 15px 3px rgba(52, 65, 142, 0.271);
+}
+.top-contibutor p {
+  margin: 0;
+  width: fit-content;
+  color: gray;
+  font-weight: 500;
+  font-size: 14px;
+}
+.top-contibutor .uname {
+  color: black;
+  font-weight: 600;
+}
+.top-contibutor .email {
+  font-size: 12px;
 }
