@@ -4,17 +4,14 @@ import { FaUser } from "react-icons/fa";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./AdminNav.css";
+import Logo from "../../assets/logo.png";
 
 function AdminNav() {
   return (
-    <main className="admin-nav">
+    <>
       <header className="header-adminnav">
         <div className="logo">
-          <img
-            src="https://via.placeholder.com/40"
-            alt="Logo"
-            className="logo-picture"
-          />
+          <img src={Logo} alt="Logo" className="logo-picture" />
           <h1>BARK</h1>
         </div>
 
@@ -30,7 +27,7 @@ function AdminNav() {
         </div>
       </header>
 
-      <div className="side-nav">
+      <div className="side-nav  sticky-top">
         <ul className="side-nav-list">
           <li>
             <Link to="/dashboard">
@@ -49,7 +46,7 @@ function AdminNav() {
           </li>
         </ul>
       </div>
-    </main>
+    </>
   );
 }
 

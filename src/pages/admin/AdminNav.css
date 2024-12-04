@@ -1,4 +1,5 @@
 .side-nav {
+  /* position: sticky; */
   width: auto;
   background-color: white;
   color: black;
@@ -51,20 +52,20 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
-.admin-nav .logo {
+.header-adminnav .logo {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.admin-nav .logo h1 {
+.header-adminnav .logo h1 {
   margin: 0;
   font-size: 32px;
   color: #2c3e90;
   font-weight: bold;
 }
 
-.admin-nav .logo-picture {
+.header-adminnav .logo-picture {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -72,28 +73,28 @@
   border: 2px solid #ccc;
 }
 
-.admin-nav .profile-and-search {
+.header-adminnav .profile-and-search {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.admin-nav .profile {
+.header-adminnav .profile {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.admin-nav .profile-info {
+.header-adminnav .profile-info {
   text-align: left;
 }
 
-.admin-nav .username {
+.header-adminnav .username {
   font-weight: bold;
   display: block;
 }
 
-.admin-nav .profile-picture {
+.header-adminnav .profile-picture {
   width: 40px;
   height: 40px;
   border-radius: 50%;
