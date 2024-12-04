@@ -31,7 +31,7 @@
   align-items: center;
   border-radius: 20px;
   padding: 10px;
-  transition: all 200ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
 .side-nav-list li a svg {
@@ -39,6 +39,11 @@
 }
 
 .side-nav-list li a:hover {
+  background-color: #34418e;
+  color: white;
+}
+
+.side-nav-list li .active {
   background-color: #34418e;
   color: white;
 }

@@ -89,6 +89,8 @@ const headCells = [
 ];
 
 function UserManagement() {
+  let active = location.pathname;
+
   // Enhanced Table
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -124,7 +126,7 @@ function UserManagement() {
 
   return (
     <div>
-      <AdminNav />
+      <AdminNav active={active} />
       <section className="container p-0 mt-5">
         <div className="user-management-container ">
           <h2>User Management</h2>

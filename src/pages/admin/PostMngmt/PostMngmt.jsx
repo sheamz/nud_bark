@@ -118,7 +118,7 @@ const headCells = [
 ];
 
 function PostMngmt() {
-  // const [showMenu, setShowMenu] = useState(null);
+  let active = location.pathname;
 
   // Enhanced Table
   const [order, setOrder] = React.useState("asc");
@@ -155,7 +155,7 @@ function PostMngmt() {
 
   return (
     <div>
-      <AdminNav />
+      <AdminNav active={active} />
       <section className="container mt-5 p-0">
         <div className="post-management-container">
           <h2>Post Management</h2>

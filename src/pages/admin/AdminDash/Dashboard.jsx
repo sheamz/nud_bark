@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import Chart from "react-apexcharts";
 
 export default function Dashboard() {
+  let active = location.pathname;
+  // alert(active);
+
   let user_chart = {
     options: {
       colors: ["#34418E"],
@@ -89,7 +92,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <AdminNav />
+      <AdminNav active={active} />
       <div className="container p-0 mt-5">
         <div className="admin-dash" style={{ width: "100%" }}>
           <h2>Dashboard</h2>
