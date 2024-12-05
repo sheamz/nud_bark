@@ -7,6 +7,11 @@ import ConversationPage from "./pages/user/ConversationPage/ConversationPage.jsx
 import UserManagement from "./pages/admin/UserMngmt/UserManagement.jsx";
 import Dashboard from "./pages/admin/AdminDash/Dashboard.jsx";
 import Register from "./pages/login-signin/Register.jsx";
+import CreateTopic from "./pages/user/Rte/CreateTopic.jsx";
+import YourContri from "./pages/user/YourContri/YourContri.jsx"
+import YourComments from "./pages/user/YourContri/YourComments.jsx";
+import ALT from "./pages/user/AllLatestTop/ALT.jsx";
+import UProfile from "./pages/user/UserProfile/UProfile.jsx";
 import "./App.css";
 
 function App() {
@@ -21,6 +26,11 @@ function App() {
           <Route path="/conversation-page" element={<ConversationPage />} />
           <Route path="/user-management" element={<UserManagement />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create-topic" element={<CreateTopic />} />
+          <Route path="/your-contri" element={<YourContri />} />
+          <Route path="/your-comments" element={<YourComments />} />
+          <Route path="/alt" element={<ALT />} />
+          <Route path="/user-profile" element={<UProfile />} />
         </Routes>
       </BrowserRouter>
     </>
