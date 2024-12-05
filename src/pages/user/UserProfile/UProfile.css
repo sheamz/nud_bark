@@ -1,0 +1,156 @@
+.profile-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .upper-section {
+    background: linear-gradient(90deg, #34418E, #FDD41F);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .det{
+    display: flex;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .profile-picture-page img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2%;
+  }
+  
+  .name {
+    font-size: 1.5rem;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .email {
+    font-size: 1.1rem;
+    color: black;
+  }
+  
+  .edit-btn {
+    background-color: #FDD41F;
+    color: #34418E;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto; 
+    width: 10vh;
+    height: 5vh;
+  }
+  
+  .edit-btn:hover {
+    background-color: #34418E;
+    color: white;
+  }
+
+  .user-details {
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .user-details label {
+    font-size: 1.1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-box {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+
+  .email-section {
+    background-color: transparent;
+    padding: 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+  }
+  
+  .email-info span {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .email-details {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .email-icon {
+    font-size: 1.5rem;
+    color: #34418E;
+    margin-right: 1rem;
+  }
+  
+  .email-details span {
+    margin-right: 1rem;
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .action-buttons button {
+    width: 30%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .change-password {
+    color: #34418E;
+  }
+  
+  .logout {
+    background-color: #D9534F;
+    color: white;
+  }
+  
+  .action-buttons button:hover {
+    opacity: 0.9;
+  }
+  
+  .lower-email {
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  .lower-email span {
+    margin-bottom: 0.5rem; 
+  }
+  
+  .first-used {
+    font-size: 0.9rem;
+    color: #777; 
+  }
+  
+  .action-buttons{
+    display: flex;
+    flex-direction: column; 
+  }
