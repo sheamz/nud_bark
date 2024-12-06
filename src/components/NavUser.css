@@ -21,7 +21,7 @@
 .nav_bar li {
   padding: 10px;
   list-style: none;
-  border-radius: 10px;
+  border-radius: 20px;
   color: white;
   font-weight: 500;
   transition: all 500ms ease;
@@ -31,4 +31,9 @@
 }
 .nav_bar li .active {
   background-color: #212b5f;
+}
+.nav_bar .username {
+  color: white;
+  font-weight: 400;
+  font-size: medium;
 }
