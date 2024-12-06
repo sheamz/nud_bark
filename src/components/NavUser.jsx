@@ -4,6 +4,9 @@ import "./NavUser.css";
 import Logo from "../assets/logo.png";
 import { Stack, Avatar, Divider, Collapse } from "@mui/material";
 
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+
 export default function NavUser() {
   return (
     <div className="nav_bar d-flex justify-content-between sticky-top px-3">
@@ -40,10 +43,16 @@ export default function NavUser() {
           </ul>
         </Stack>
       </Stack>
-      <Stack direction="row" alignItems={"center"} gap={1} mr={4}>
+      <Stack direction="row" alignItems={"center"} gap={1} mr={2}>
         <Avatar>r</Avatar>
-        <p className="username">uusername</p>
-        <Collapse in={open} timeout="auto" unmountOnExit></Collapse>
+        <DropdownButton id="dropdown-item-button" title="Username">
+          <Dropdown.ItemText>
+            {" "}
+            <h6>Username</h6>{" "}
+          </Dropdown.ItemText>
+          <Divider />
+          <Dropdown.Item as="button">Log out</Dropdown.Item>
+        </DropdownButton>
       </Stack>
     </div>
   );
