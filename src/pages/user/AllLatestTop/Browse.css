@@ -113,9 +113,10 @@
 }
 /* new */
 .browse-container {
-  flex: 2;
+  flex: 4;
 }
 .side-panel {
   border: 1px solid red;
+  border-radius: 10px;
   flex: 1;
 }

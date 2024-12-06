@@ -1,7 +1,7 @@
 import React from "react";
 import "./Browse.css";
 
-const ALTtblTemplate = (props) => {
+const PostCard = (props) => {
   return (
     <div className="your-alt">
       {/* <div className="header-alt">
@@ -37,4 +37,4 @@ const ALTtblTemplate = (props) => {
   );
 };
 
-export default ALTtblTemplate;
+export default PostCard;
