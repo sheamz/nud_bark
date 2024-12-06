@@ -1,0 +1,121 @@
+.your-alt {
+  width: 90%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.header-alt {
+  display: flex;
+  align-items: center;
+  background-color: #34418e;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.alt-header {
+  flex: 3;
+}
+
+.alt-header-details {
+  display: flex;
+  justify-content: space-between;
+  flex: 7;
+}
+
+.alt-box {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid black;
+  padding: 10px 15px;
+  transition: box-shadow 0.3s ease-in-out;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.alt-box:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.alt-header {
+  flex: 3;
+  font-size: 16px;
+}
+
+.alt-header h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.category-alt {
+  display: inline-block;
+  font-size: 12px;
+  background-color: #f1f1f1;
+  color: #666;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-top: 5px;
+}
+
+.alt-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  flex: 2;
+}
+
+.alt-author img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.alt-author span {
+  display: block;
+  color: #333;
+  font-weight: bold;
+}
+
+.alt-author small {
+  color: #999;
+  font-size: 12px;
+}
+
+.alt-details {
+  display: flex;
+  justify-content: space-between;
+  flex: 7;
+}
+
+.alt-details div {
+  text-align: center;
+  font-size: 14px;
+}
+
+/* likes */
+.alt-details .likes {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.alt-details .likes img {
+  width: 16px;
+  height: 16px;
+}
+/* new */
+.browse-container {
+  flex: 2;
+}
+.side-panel {
+  border: 1px solid red;
+  flex: 1;
+}

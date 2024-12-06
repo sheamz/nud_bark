@@ -1,32 +1,20 @@
 import React from "react";
-import "./ALT.css";
+import "./Browse.css";
 
-const ALTtblTemplate = () => {
-  const alt = [
-    {
-      alttopicName: "Looking for my section: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
-    },
-  ];
-
+const ALTtblTemplate = (props) => {
   return (
     <div className="your-alt">
-      <div className="header-alt">
+      {/* <div className="header-alt">
         <div className="alt-header">Topic</div>
         <div className="alt-header-details">
-            <div>Author</div>
+          <div>Author</div>
           <div>Replies</div>
           <div>Views</div>
           <div>Date Posted</div>
         </div>
-      </div>
+      </div> */}
 
-      {alt.map((altItem, index) => (
+      {props.data.map((altItem, index) => (
         <div key={index} className="alt-box">
           <div className="alt-header">
             <h3>{altItem.alttopicName}</h3>
@@ -34,11 +22,10 @@ const ALTtblTemplate = () => {
           </div>
           <div className="alt-body">
             <div className="alt-details">
-                <div className="authordet">
+              <div className="authordet">
                 <div>{altItem.altauthor}</div>
                 <div>{altItem.altusername}</div>
-
-                </div>
+              </div>
               <div>{altItem.altreplies}</div>
               <div>{altItem.altviews}</div>
               <div>{altItem.altdatePosted}</div>

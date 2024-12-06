@@ -1,7 +1,10 @@
 .nav_bar {
   background-color: #34418e;
   height: fit-content;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .nav_bar h1 {
   height: fit-content;

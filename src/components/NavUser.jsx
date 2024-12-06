@@ -9,7 +9,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function NavUser() {
   return (
-    <div className="nav_bar d-flex justify-content-between sticky-top px-3">
+    <div className="nav_bar sticky-top">
       <Stack direction="row" alignItems={"center"} width={"50%"}>
         <Stack direction="row" gap={2} alignItems={"center"}>
           <img
@@ -34,7 +34,7 @@ export default function NavUser() {
             <Link to={"/home"}>
               <li>Home</li>
             </Link>
-            <Link to={"/home"}>
+            <Link to={"/browse"}>
               <li>Browse</li>
             </Link>
             <Link to={"/create-topic"}>

@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import NavUser from "../../../components/NavUser";
 import { Link } from "react-router-dom";
-import "./ALT.css";
+import "./Browse.css";
 
 const ALTNav = () => {
-  const [category, setCategory] = useState(""); 
-  const categories = ["Ask Community", "Marketplace", "Suggestions", "Off Topic", "Issue", "Bark News"]; 
+  const [category, setCategory] = useState("");
+  const categories = [
+    "Ask Community",
+    "Marketplace",
+    "Suggestions",
+    "Off Topic",
+    "Issue",
+    "Bark News",
+  ];
 
   return (
     <>
@@ -37,7 +44,7 @@ const ALTNav = () => {
               ))}
             </select>
           </div>
-          
+
           <div className="actions">
             <Link to="/create-topic">
               <button className="create-post-btn">Create Post</button>
