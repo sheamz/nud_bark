@@ -1,0 +1,14 @@
+.top-contibutor p {
+  margin: 0;
+  width: fit-content;
+  color: gray;
+  font-weight: 500;
+  font-size: 14px;
+}
+.top-contibutor .uname {
+  color: black;
+  font-weight: 600;
+}
+.top-contibutor .email {
+  font-size: 12px;
+}

@@ -12,9 +12,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
 
 // charts
 import Chart from "react-apexcharts";
+import Ranking from "./Ranking";
 
 const rows = [
   {
@@ -79,7 +81,7 @@ export default function Dashboard() {
     series: [
       {
         name: "New Users", // user count
-        data: [30, 40, 45, 50, 49, 60, 70, 91],
+        data: [30, 40, 45, 50, 49, 600, 70, 91],
       },
     ],
   };
@@ -142,28 +144,12 @@ export default function Dashboard() {
               />
             </div>
           </div>
-          <Stack direction={"row"} gap={5} className="mt-5">
-            <Paper
-              elevation={5}
-              style={{ flex: "1" }}
-              className="top-contibutor p-4 rounded-3"
-            >
-              <h6>Top Contributor</h6>
-
-              <Stack
-                spacing={2}
-                direction={"row"}
-                style={{ width: "fit-content" }}
-              >
-                <Avatar>H</Avatar>
-                <div>
-                  <p className="uname">Jesse Thomas</p>
-                  <p className="email">emdadasdasdail.com</p>
-                </div>
-                <p className="count">9999</p>
-                <p className="percent">89%</p>
-              </Stack>
-            </Paper>
+          <Stack
+            direction={"row"}
+            gap={5}
+            className="my-5 justify-content-around flex-wrap"
+          >
+            <Ranking />
           </Stack>
         </div>
       </div>

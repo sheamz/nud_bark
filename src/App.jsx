@@ -8,7 +8,7 @@ import UserManagement from "./pages/admin/UserMngmt/UserManagement.jsx";
 import Dashboard from "./pages/admin/AdminDash/Dashboard.jsx";
 import Register from "./pages/login-signin/Register.jsx";
 import CreateTopic from "./pages/user/Rte/CreateTopic.jsx";
-import YourContri from "./pages/user/YourContri/YourContri.jsx"
+import YourContri from "./pages/user/YourContri/YourContri.jsx";
 import YourComments from "./pages/user/YourContri/YourComments.jsx";
 import ALT from "./pages/user/AllLatestTop/ALT.jsx";
 import UProfile from "./pages/user/UserProfile/UProfile.jsx";
@@ -18,25 +18,24 @@ function App() {
   return (
     <>
       <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-            {/* user pages */}
-            <Route path="/home" element={<Home />} />
-            <Route path="/conversation-page" element={<ConversationPage />} />
-            <Route path="/create-topic" element={<CreateTopic />} />
-            <Route path="/your-contri" element={<YourContri />} />
-            <Route path="/your-comments" element={<YourComments />} />
-            <Route path="/alt" element={<ALT />} />
-            <Route path="/user-profile" element={<UProfile />} />
+          {/* user pages */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/conversation-page" element={<ConversationPage />} />
+          <Route path="/create-topic" element={<CreateTopic />} />
+          <Route path="/your-contri" element={<YourContri />} />
+          <Route path="/your-comments" element={<YourComments />} />
+          <Route path="/alt" element={<ALT />} />
+          <Route path="/user-profile" element={<UProfile />} />
 
-            {/* admin pages */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/user-management" element={<UserManagement />} />
-            <Route path="/post-management" element={<PostManagement />} />
-          </Routes>
-
+          {/* admin pages */}
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user-management" element={<UserManagement />} />
+          <Route path="/post-management" element={<PostManagement />} />
+        </Routes>
       </BrowserRouter>
     </>
   );
