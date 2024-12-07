@@ -24,12 +24,13 @@ function App() {
 
           {/* user pages */}
           <Route path="/home" element={<Home />} />
-          <Route path="/conversation-page" element={<ConversationPage />} />
+          {/* <Route path="/conversation-page" element={<ConversationPage />} /> */}
           <Route path="/create-topic" element={<CreateTopic />} />
           <Route path="/your-contri" element={<YourContri />} />
           <Route path="/your-comments" element={<YourComments />} />
           <Route path="/browse" element={<ALT />} />
           <Route path="/user-profile" element={<UProfile />} />
+          <Route path="/browse/post*" element={<ConversationPage />} />
 
           {/* admin pages */}
           <Route path="/dashboard" element={<Dashboard />} />

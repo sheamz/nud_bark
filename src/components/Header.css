@@ -1,0 +1,20 @@
+.header-prop {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #34418e;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.header-prop h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.header-prop a {
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+}

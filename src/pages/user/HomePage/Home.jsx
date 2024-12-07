@@ -5,103 +5,60 @@ import HomeContri from "./HomeContri";
 import HomeList from "./HomeList";
 import HomeUpper from "./HomeUpper";
 import PostCard from "../../../components/PostCard/PostCard";
+import Footer from "../../../components/Footer";
+import Header from "../../../components/Header";
 
 import { Link } from "react-router-dom";
-import { Paper, Stack } from "@mui/material";
+import { Paper, Stack, Divider } from "@mui/material";
 
 export default function Home() {
-  const alt = [
+  const posts = [
     {
-      alttopicName: "Looking for my section: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
+      tit: "Looking for my section: INF290",
+      cat: "Ask Community",
+      uname: "@basher",
+      com: 100,
+      views: 100,
+      date: "11/29/2024",
     },
     {
-      alttopicName: "Looking for my section: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
+      tit: "Looking for my section: INF290",
+      cat: "Ask Community",
+      uname: "@basher",
+      com: 100,
+      views: 100,
+      date: "11/29/2024",
     },
     {
-      alttopicName: "Looking for my section: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
-    },
-    {
-      alttopicName: "Looking for my section: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
-    },
-    {
-      alttopicName: "Looking for my section: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
-    },
-    {
-      alttopicName: "Looking for my section: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
-    },
-    {
-      alttopicName: "Looking for my secasddation: INF290",
-      altcategory: "Ask Community",
-      altauthor: "basher",
-      altusername: "@basher",
-      altreplies: 100,
-      altviews: 100,
-      altdatePosted: "11/29/2024",
+      tit: "Looking for my section: INF290",
+      cat: "Ask Community",
+      uname: "@basher",
+      com: 100,
+      views: 100,
+      date: "11/29/2024",
     },
   ];
   return (
-    <>
+    <div className="home-body">
       <NavUser />
       <div className="container mt-5 p-0">
-        <div className="home-container">
+        <Stack className="home-container" width="100%" gap={10}>
           <HomeUpper />
-
-          <Stack direction="row" gap={5}>
+          <Stack direction="row" gap={5} m={0}>
             {/* <HomeList /> */}
-            <Stack flex={3} gap={4} alignItems="center">
-              <div className="header">
-                <h3>Most Popular</h3>
-                <Link>
-                  <small>see more {">>"}</small>
-                </Link>
-              </div>
-              <PostCard data={alt} _pagination={false} />
+            <Stack flex={3} gap={2} alignItems="center">
+              <Header title={"Most Popular"} link={"/browse"} />
+              <PostCard data={posts} _pagination={false} />
             </Stack>
             {/* <HomeContri /> */}
             <Paper sx={{ flex: 1 }}>ewan</Paper>
           </Stack>
-
-          <div className="underline"></div>
-
+          {/* <Divider /> */}
+          <hr />
           <HomeCat />
-        </div>
+        </Stack>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

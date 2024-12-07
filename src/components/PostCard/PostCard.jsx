@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PostCard.css";
-import { Avatar, Stack } from "@mui/material";
+import { Avatar, Stack, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
@@ -39,16 +39,16 @@ const PostCard = (_props) => {
 
   return (
     <div className="post-list">
-      {_selected_posts.map((altItem, index) => (
-        <Link key={index}>
+      {_selected_posts.map((data, index) => (
+        <Link key={index} to={"/browse/post/pid=" + data.uname}>
           <div className="post-container">
             <div className="post-section">
-              <Avatar>r</Avatar>
+              <Avatar alt={data.uname}>{data.uname[1]}</Avatar>
               <div className="post-detail">
                 {/* title */}
-                <h3>{altItem.alttopicName}</h3>
+                <h3>{data.tit}</h3>
                 {/* category */}
-                <span style={{ padding: "3px" }}>{altItem.altcategory}</span>
+                <span style={{ padding: "3px" }}>{data.cat}</span>
               </div>
             </div>
 
@@ -56,12 +56,12 @@ const PostCard = (_props) => {
               <div className="post-stat">
                 {/* number of views */}
                 <VisibilityIcon />
-                <p>599d09</p>
+                <p>{data.views}</p>
               </div>
               <div className="post-stat">
                 {/* number of comments */}
                 <CommentRoundedIcon />
-                <p>59909</p>
+                <p>{data.com}</p>
               </div>
             </div>
           </div>
@@ -70,25 +70,25 @@ const PostCard = (_props) => {
       {/* pagination */}
 
       {_pagination ? (
-        <Stack direction="row" justifyContent="center" mb={2} gap={5}>
-          <ArrowBackIosNewRoundedIcon
-            onClick={handlePrevious}
-            color={_current_page == 0 ? "disabled" : ""}
-            sx={{
-              cursor: _current_page == 0 ? "not-allowed" : "pointer",
-            }}
-          />
+        <Stack
+          direction="row"
+          justifyContent="center"
+          mb={2}
+          gap={5}
+          alignItems="center"
+        >
+          <IconButton disabled={_current_page == 0 ? true : false}>
+            <ArrowBackIosNewRoundedIcon onClick={handlePrevious} />
+          </IconButton>
+
           <small>
             page {_current_page + 1} of {_total_pages}{" "}
           </small>
-          <ArrowForwardIosRoundedIcon
-            onClick={handleNext}
-            color={_current_page + 1 == _total_pages ? "disabled" : ""}
-            sx={{
-              cursor:
-                _current_page + 1 == _total_pages ? "not-allowed" : "pointer",
-            }}
-          />
+          <IconButton
+            disabled={_current_page + 1 == _total_pages ? true : false}
+          >
+            <ArrowForwardIosRoundedIcon onClick={handleNext} />
+          </IconButton>
         </Stack>
       ) : (
         <></>

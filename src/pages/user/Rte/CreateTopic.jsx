@@ -4,6 +4,7 @@ import { FiSend } from "react-icons/fi";
 import JoditEditor from "jodit-react";
 import "./CreateTopic.css";
 import NavUser from "../../../components/NavUser";
+import OtherNav from "../../../components/OtherNav";
 
 const CreateTopic = () => {
   const [question, setQuestion] = useState("");
@@ -32,7 +33,8 @@ const CreateTopic = () => {
 
   return (
     <>
-      <NavUser />
+      {/* <NavUser /> */}
+      <OtherNav title={"Create New Topic"} />
       <div className="create-topic">
         <header className="header">
           <button className="plus-sign">
