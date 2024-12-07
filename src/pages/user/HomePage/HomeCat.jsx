@@ -1,22 +1,28 @@
 import React from "react";
 import "./Home.css";
+import Header from "../../../components/Header";
+import { Stack } from "@mui/material";
 
 export default function HomeCat() {
+  const cat = [
+    { name: "Ask Community" },
+    { name: "Market Place" },
+    { name: "Suggestion" },
+    { name: "Off Topic" },
+    { name: "Issue" },
+    { name: "Bark News" },
+  ];
+
   return (
-    <div className="container-cat">
-      <div className="box-header-cat">
-        <h3>CATEGORIES</h3>
-      </div>
+    <Stack gap={2}>
+      <Header title={"Categories"} />
       <div className="box-row-cat">
-        <div className="box blue-border"></div>
-        <div className="box green-border"></div>
-        <div className="box red-border"></div>
+        {cat.map((data, index) => (
+          <div className="box" key={index} style={{}}>
+            {data.name}
+          </div>
+        ))}
       </div>
-      <div className="box-row-cat"> 
-        <div className="box purple-border"></div>
-        <div className="box orange-border"></div>
-        <div className="box yellow-border"></div>
-      </div>
-    </div>
+    </Stack>
   );
 }

@@ -1,6 +1,6 @@
-.create-topic {
+/* .create-topic {
   font-family: Arial, sans-serif;
-}
+} */
 
 /* .header {
   display: flex;
@@ -11,13 +11,13 @@
   margin-bottom: 20px;
 } */
 
-.header h1 {
+/* .header h1 {
   flex-grow: 1;
   margin: 0;
   text-align: left;
-}
+} */
 
-.plus-sign {
+/* .plus-sign {
   color: #fdd41f;
   border: none;
   font-size: 50px;
@@ -25,26 +25,31 @@
   border-radius: 50%;
   cursor: pointer;
   background-color: transparent;
-}
+} */
 
-.date {
+/* .date {
   font-size: 25px;
   color: white;
   padding: 20px;
+} */
+.create-topic-container {
+  width: 100%;
+  border: 1px solid green;
 }
 
 .form-container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  margin-left: 5%;
+  /* justify-content: space-between; */
+  /* margin-bottom: 20px; */
+  /* margin-left: 5%; */
+  border: 1px solid red;
 }
 
-.form-left,
+/* .form-left,
 .form-right {
   width: 48%;
   margin-right: 5%;
-}
+} */
 
 .form-left label,
 .form-right label {

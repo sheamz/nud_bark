@@ -30,7 +30,7 @@ function App() {
           <Route path="/your-comments" element={<YourComments />} />
           <Route path="/browse" element={<ALT />} />
           <Route path="/user-profile" element={<UProfile />} />
-          <Route path="/browse/post*" element={<ConversationPage />} />
+          <Route path="/browse/post/*" element={<ConversationPage />} />
 
           {/* admin pages */}
           <Route path="/dashboard" element={<Dashboard />} />

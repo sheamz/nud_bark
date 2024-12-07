@@ -6,6 +6,7 @@ import { Stack, Avatar, Divider, Collapse } from "@mui/material";
 
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 export default function NavUser() {
   return (
@@ -39,7 +40,10 @@ export default function NavUser() {
                 <li>Browse</li>
               </Link>
               <Link to={"/create-topic"}>
-                <li>Create</li>
+                <li>
+                  <AddRoundedIcon sx={{ color: "white" }} />
+                  Create
+                </li>
               </Link>
             </ul>
           </Stack>

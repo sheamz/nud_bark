@@ -27,6 +27,7 @@
   border-radius: 20px;
   color: white;
   font-weight: 500;
+  align-items: center;
   transition: all 500ms ease;
 }
 .nav_bar li:hover {

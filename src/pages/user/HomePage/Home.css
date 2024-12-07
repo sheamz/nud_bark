@@ -199,25 +199,16 @@
 
 /* Homecontri */
 
-.underline {
-  width: 80%;
-  height: 2px;
-  background-color: #0f1228;
-  margin: 3% auto;
-}
-
 /* HomeCat */
 
 .container-cat {
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  width: 70%;
-  margin: 0 auto;
+  width: 100%;
+  border: 1px solid red;
 }
 
-.box-header-cat h3 {
+.container-cat .box-header-cat h3 {
   padding: 10px;
   color: black;
   font-size: 23px;
@@ -227,40 +218,42 @@
 
 .box-row-cat {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
 
-.box {
-  width: 28%;
+  /* margin-top: 20px; */
+}
+.box-row-cat .box {
+  width: 20%;
   height: 200px;
-  border-radius: 10px;
-  background-color: #f4f4f4;
+  border-bottom: 4px solid;
+  border-radius: 5px;
+  background-color: white;
 }
-
-.blue-border {
+/* .box-row-cat .blue-border {
   border-bottom: 4px solid blue;
 }
 
-.green-border {
+.box-row-cat .green-border {
   border-bottom: 4px solid green;
 }
 
-.red-border {
+.box-row-cat .red-border {
   border-bottom: 4px solid red;
 }
 
-.purple-border {
+.box-row-cat .purple-border {
   border-bottom: 4px solid purple;
 }
 
-.orange-border {
+.box-row-cat .orange-border {
   border-bottom: 4px solid orange;
 }
 
-.yellow-border {
+.box-row-cat .yellow-border {
   border-bottom: 4px solid yellow;
-}
+} */
 
 /* new */
 

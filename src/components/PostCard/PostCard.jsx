@@ -77,8 +77,11 @@ const PostCard = (_props) => {
           gap={5}
           alignItems="center"
         >
-          <IconButton disabled={_current_page == 0 ? true : false}>
-            <ArrowBackIosNewRoundedIcon onClick={handlePrevious} />
+          <IconButton
+            disabled={_current_page == 0 ? true : false}
+            onClick={handlePrevious}
+          >
+            <ArrowBackIosNewRoundedIcon />
           </IconButton>
 
           <small>
@@ -86,8 +89,9 @@ const PostCard = (_props) => {
           </small>
           <IconButton
             disabled={_current_page + 1 == _total_pages ? true : false}
+            onClick={handleNext}
           >
-            <ArrowForwardIosRoundedIcon onClick={handleNext} />
+            <ArrowForwardIosRoundedIcon />
           </IconButton>
         </Stack>
       ) : (

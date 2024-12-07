@@ -4,6 +4,8 @@ import ALTNav from "./ALTNav";
 import PostCard from "../../../components/PostCard/PostCard.jsx";
 import "./Browse.css";
 
+import Footer from "../../../components/Footer.jsx";
+
 const alt = [
   {
     tit: "Looking for my section: INF290",
@@ -85,6 +87,7 @@ const Browse = () => {
         </div>
         {/* <div className="side-panel">categories</div> */}
       </div>
+      <Footer />
     </div>
   );
 };
