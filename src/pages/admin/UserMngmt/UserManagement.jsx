@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserManagement.css";
 import AdminNav from "../AdminNav";
 
@@ -14,11 +14,12 @@ import Paper from "@mui/material/Paper";
 
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import axios from "../../../backend/axios";
 
 const rows = [
   {
     uid: "usr-1000",
-    email: "email1@email.com",
+    email: "helen1@email.com",
     role: "user",
     date: "12-04-2024",
   },
@@ -123,6 +124,11 @@ function UserManagement() {
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [order, orderBy, page, rowsPerPage]
   );
+
+  useEffect(() => {
+
+    axios.get("/getUser.php")
+  }, []);
 
   return (
     <div>
