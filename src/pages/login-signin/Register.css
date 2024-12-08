@@ -28,15 +28,21 @@
   background-color: #efeded;
   border-color: #c9c9c9;
 }
+.reg_bg .right form select {
+  background-color: #efeded;
+  border-color: #c9c9c9;
+}
 .reg_bg .right form .btn_submit {
   width: 50%;
   background-color: #34418e;
   border-radius: 40px;
   border: none;
+  align-self: center;
 }
 .reg_bg .right form p {
   font-size: 14px;
 }
 .reg_bg .right form a {
   text-decoration: none;
+  color: #34418e;
 }
