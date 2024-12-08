@@ -1,125 +1,96 @@
-/* .create-topic {
-  font-family: Arial, sans-serif;
-} */
-
-/* .header {
-  display: flex;
-  align-items: center;
-  background-color: #34418e;
-  padding: 2px 20px;
-  color: white;
-  margin-bottom: 20px;
-} */
-
-/* .header h1 {
-  flex-grow: 1;
-  margin: 0;
-  text-align: left;
-} */
-
-/* .plus-sign {
-  color: #fdd41f;
-  border: none;
-  font-size: 50px;
-  padding: 8px 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  background-color: transparent;
-} */
-
-/* .date {
-  font-size: 25px;
-  color: white;
-  padding: 20px;
-} */
 .create-topic-container {
   width: 100%;
-  border: 1px solid green;
-}
-
-.form-container {
   display: flex;
-  /* justify-content: space-between; */
-  /* margin-bottom: 20px; */
-  /* margin-left: 5%; */
-  border: 1px solid red;
+  flex-direction: column;
+  row-gap: 60px;
 }
 
-/* .form-left,
-.form-right {
-  width: 48%;
-  margin-right: 5%;
-} */
-
-.form-left label,
-.form-right label {
-  font-weight: bold;
+.create-topic-container .MuiFormControl-root {
+  font-family: "Poppins";
 }
 
-textarea {
-  width: 100%;
-  height: 100px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.create-topic-container .MuiFormControl-root .MuiFormLabel-root {
+  color: gray;
+  font-family: "Poppins";
+}
+.create-topic-container
+  .MuiFormControl-root
+  .MuiFormLabel-root[data-shrink="true"] {
+  background-color: white;
+  color: #34418e;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 500ms ease;
 }
 
-select {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.create-topic-container
+  .MuiFormControl-root:nth-last-child(1)
+  .MuiInputBase-root {
+  background-color: #f1f1f1;
 }
 
-.jodit-wysiwyg {
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  height: 200px;
+.create-topic-container
+  .MuiFormControl-root:nth-last-child(1)
+  .MuiInputBase-root:hover {
+  background-color: #dfdfdf;
 }
 
-.buttons {
+.create-topic-container .MuiFormControl-root fieldset {
+  border-radius: 10px;
+}
+
+.create-topic-container .MuiFormControl-root:nth-last-child(1) fieldset {
+  border: none;
+}
+
+.create-topic-container .jodit-react-container {
+  /* border: 1px solid red; */
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.create-topic-container .jodit-react-container .jodit-container {
+  border: none;
+}
+
+.create-topic-container .jodit-container .jodit-toolbar__box {
+  border: none;
+}
+
+.create-topic-container .buttons {
   display: flex;
-  margin-top: 20px;
+  justify-content: flex-end;
+  gap: 20px;
 }
 
-.publish-btn,
-.close-btn {
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
+.create-topic-container .buttons .publish-btn,
+.create-topic-container .buttons .close-btn {
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 10px;
   cursor: pointer;
 }
 
-.publish-btn {
+.create-topic-container .buttons .publish-btn {
   background-color: #fdd41f;
   color: #34418e;
   border: none;
-  margin-left: 5%;
 }
 
-.close-btn {
+.create-topic-container .buttons .close-btn {
   background-color: transparent;
-  color: black;
-  border: none;
-  margin-left: 5px;
+  color: lightgray;
+  border: 1px solid lightgray;
 }
 
-.publish-btn:hover {
-  background-color: #218838;
+.create-topic-container .buttons .publish-btn:hover {
+  background-color: #34418e;
+  color: #fdd41f;
 }
 
-.close-btn:hover {
-  background-color: #c82333;
-}
-
-.jodit-container {
-  margin-left: 5%;
-  margin-right: 5%;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #fff;
+.create-topic-container .buttons .close-btn:hover {
+  background-color: lightgray;
+  color: white;
 }

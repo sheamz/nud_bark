@@ -126,8 +126,7 @@ function UserManagement() {
   );
 
   useEffect(() => {
-
-    axios.get("/getUser.php")
+    axios.get("/getUser.php");
   }, []);
 
   return (

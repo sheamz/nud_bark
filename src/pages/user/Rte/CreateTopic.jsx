@@ -1,92 +1,146 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { FaPlus } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import JoditEditor from "jodit-react";
 import "./CreateTopic.css";
 import NavUser from "../../../components/NavUser";
 import OtherNav from "../../../components/OtherNav";
+import CircleIcon from "@mui/icons-material/Circle";
+
+import {
+  Select,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  TextField,
+  Stack,
+} from "@mui/material";
 
 const CreateTopic = () => {
-  const [question, setQuestion] = useState("");
-  const [editorContent, setEditorContent] = useState("");
-  const [category, setCategory] = useState("");
+  const editor = useRef(null);
+  const [form_data, setFormData] = useState({
+    tit: "",
+    cat: "",
+    con: "",
+  });
 
   const categories = [
-    "Ask Community",
-    "Marketplace",
-    "Suggestions",
-    "Off Topic",
-    "Issue",
-    " Bark News",
+    { name: "Ask Community", col: "cyan" },
+    { name: "Marketplace", col: "lightblue" },
+    { name: "Ask Suggestion", col: "green" },
+    { name: "Off Topic", col: "yellow" },
+    { name: "Issue", col: "pink" },
+    { name: "Bark News", col: "violet" },
   ];
 
   const handlePublish = () => {
-    console.log("Topic Published");
-    console.log("Question:", question);
-    console.log("Content:", editorContent);
-    console.log("Category:", category);
+    console.log(form_data);
   };
 
   const handleClose = () => {
     console.log("Topic Creation Closed");
   };
 
+  const setData = (e) => {
+    setFormData({ ...form_data, [e.target.name]: e.target.value });
+  };
+
+  const handleJodit = (e) => {
+    // e.preventDefault();
+    setFormData({ ...form_data, con: e });
+  };
+
+  const config = useMemo(
+    () => ({
+      readonly: false,
+      placeholder: "Start typings...",
+      // removeButtons: ["Break"],
+      // showXPathInStatusbar: false,
+      // showCharsCounter: false,
+      // showWordsCounter: false,
+      toolbarAdaptive: false,
+      uploader: { insertImageAsBase64URI: true },
+      addNewLine: false,
+      statusbar: false,
+      buttons: [
+        "bold",
+        "italic",
+        "underline",
+        "strikethrough",
+        "superscript",
+        "subscript",
+        "|",
+        "ul",
+        "ol",
+        "|",
+        "center",
+        "left",
+        "right",
+        "justify",
+        "|",
+        "link",
+        "image",
+      ],
+    }),
+    []
+  );
+
   return (
     <>
-      {/* <NavUser /> */}
       <OtherNav title={"Create New Topic"} />
       <div className="container p-0 mt-5">
         <div className="create-topic-container">
-          {/* <header className="header">
-          <button className="plus-sign">
-            <FaPlus />
-          </button>
-          <h1>CREATE NEW TOPIC</h1>
-          <span className="date">{new Date().toLocaleDateString()}</span>
-        </header> */}
+          <Stack direction="row" gap={5}>
+            <TextField
+              id="input_title"
+              label="Title*"
+              variant="outlined"
+              name="tit"
+              sx={{ borderRadius: "20px", width: "100%" }}
+              onInput={setData}
+            />
 
-          <div className="form-container">
-            <div className="form-left">
-              <label htmlFor="question">WHAT IS YOUR QUESTION OR TOPIC?</label>
-              <textarea
-                id="question"
-                placeholder="Title *"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-              />
-            </div>
-
-            <div className="form-right">
-              <label htmlFor="category">Category</label>
-              <select
-                id="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+            <FormControl sx={{ minWidth: 250 }}>
+              <InputLabel id="input_id_label">Select a Category</InputLabel>
+              <Select
+                labelId="input_id_label"
+                id="input_id"
+                value={form_data.cat}
+                onChange={setData}
+                autoWidth
+                label="Select a Category"
+                sx={{ borderRadius: "20px" }}
+                name="cat"
               >
-                <option value="" disabled>
-                  -- Select a category --
-                </option>
-                {categories.map((cat, index) => (
-                  <option key={index} value={cat}>
-                    {cat}
-                  </option>
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+
+                {categories.map((data, index) => (
+                  <MenuItem value={data.name} key={index}>
+                    <Stack direction="row" gap={2} alignItems="center">
+                      <CircleIcon fontSize="small" sx={{ color: data.col }} />
+                      {data.name}
+                    </Stack>
+                  </MenuItem>
                 ))}
-              </select>
-            </div>
-          </div>
+              </Select>
+            </FormControl>
+          </Stack>
 
           <JoditEditor
-            value={editorContent}
-            config={{ readonly: false }}
-            onChange={(newContent) => setEditorContent(newContent)}
+            ref={editor}
+            value={form_data.con}
+            config={config}
+            onChange={handleJodit}
           />
 
           <div className="buttons">
-            <button className="publish-btn" onClick={handlePublish}>
-              <FiSend style={{ marginRight: "8px" }} /> Publish
-            </button>
             <button className="close-btn" onClick={handleClose}>
               Close
+            </button>
+            <button className="publish-btn" onClick={handlePublish}>
+              <FiSend style={{ marginRight: "8px" }} /> Publish
             </button>
           </div>
         </div>
