@@ -9,6 +9,10 @@
   font-family: "Poppins";
 }
 
+.create-topic-container .MuiFormControl-root .MuiInputBase-root {
+  background-color: white;
+}
+
 .create-topic-container .MuiFormControl-root .MuiFormLabel-root {
   color: gray;
   font-family: "Poppins";
@@ -16,7 +20,7 @@
 .create-topic-container
   .MuiFormControl-root
   .MuiFormLabel-root[data-shrink="true"] {
-  background-color: white;
+  background-color: #f1f8ff;
   color: #34418e;
   border-radius: 10px;
   padding: 5px;
@@ -37,6 +41,7 @@
 
 .create-topic-container .MuiFormControl-root fieldset {
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .create-topic-container .MuiFormControl-root:nth-last-child(1) fieldset {
@@ -56,6 +61,11 @@
 
 .create-topic-container .jodit-container .jodit-toolbar__box {
   border: none;
+}
+
+.create-topic-container .jodit-container .jodit-toolbar-button {
+  /* border: 1px solid red; */
+  border-radius: 100px;
 }
 
 .create-topic-container .buttons {

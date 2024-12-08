@@ -66,6 +66,7 @@ const CreateTopic = () => {
         "bold",
         "italic",
         "underline",
+        "|",
         "strikethrough",
         "superscript",
         "subscript",
@@ -86,7 +87,7 @@ const CreateTopic = () => {
   );
 
   return (
-    <>
+    <div className="blue-bg">
       <OtherNav title={"Create New Topic"} />
       <div className="container p-0 mt-5">
         <div className="create-topic-container">
@@ -145,7 +146,7 @@ const CreateTopic = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

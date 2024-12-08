@@ -39,7 +39,7 @@ export default function Home() {
     },
   ];
   return (
-    <div className="home-body">
+    <div className="blue-bg">
       <NavUser />
       <div className="container mt-5 p-0">
         <Stack className="home-container" width="100%" gap={10}>

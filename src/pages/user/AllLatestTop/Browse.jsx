@@ -75,7 +75,7 @@ const alt = [
 
 const Browse = () => {
   return (
-    <div className="browse-bg">
+    <div className="blue-bg">
       <NavUser />
 
       <div className="container p-0 mt-5">
