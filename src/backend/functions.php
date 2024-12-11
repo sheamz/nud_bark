@@ -5,7 +5,11 @@ header('Access-Control-Allow-Headers: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Content-Type: application/json');
 
+
 include 'db_con.php';
+require '../../../vendor/autoload.php';
+use ReallySimpleJWT\Token;
+
 
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
@@ -85,4 +89,55 @@ function getUser()
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
+}
+
+
+function login($email, $pass)
+{
+
+    global $conn, $env;
+
+    $sql = "SELECT * 
+            FROM db_bark.tbl_user 
+            WHERE email=? 
+            LIMIT 1;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $email);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($result)) {
+        //  walang ganitong user
+        echo json_encode(['status' => 400, 'message' => 'The email is invalid.']);
+
+    } else {
+        // may user
+
+        $hash = $result[0]['pass'];
+
+        if (password_verify($pass, $hash)) {
+            // correct password
+
+            // create jwt
+            $user_id = $result[0]["uid"];
+            $secret = $env['JWT_SECRET'];
+            $expiration = time() + 3600;
+            $issuer = 'nud_bark';
+
+            $token = Token::create($user_id, $secret, $expiration, $issuer);
+
+
+            echo json_encode(['status' => 200, 'message' => 'Logged in successfully', 'atk' => $token]);
+
+        } else {
+            // wrong password
+            echo json_encode(['status' => 400, 'message' => 'The password is wrong.']);
+
+        }
+
+    }
+
+
+
 }

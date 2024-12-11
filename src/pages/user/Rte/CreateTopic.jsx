@@ -133,7 +133,8 @@ const CreateTopic = () => {
             ref={editor}
             value={form_data.con}
             config={config}
-            onChange={handleJodit}
+            // onChange={handleJodit}
+            onInput={handleJodit}
           />
 
           <div className="buttons">
