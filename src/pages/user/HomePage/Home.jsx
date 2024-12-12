@@ -1,6 +1,5 @@
 import React from "react";
 import NavUser from "../../../components/NavUser";
-import HomeCat from "./HomeCat";
 import HomeContri from "./HomeContri";
 import HomeList from "./HomeList";
 import HomeUpper from "./HomeUpper";
@@ -9,9 +8,14 @@ import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 
 import { Link } from "react-router-dom";
-import { Paper, Stack, Divider } from "@mui/material";
+import { Paper, Stack, Divider, Typography, Button } from "@mui/material";
+import "./Home.css"; // Import the CSS file
 
 export default function Home() {
+  const username = "@basher"; // Example username, replace with actual user data
+  const totalPosts = 100; // Example total posts, replace with actual data
+  const totalComments = 100; // Example total comments, replace with actual data
+
   const posts = [
     {
       tit: "Looking for my section: INF290",
@@ -51,11 +55,31 @@ export default function Home() {
               <PostCard data={posts} _pagination={false} />
             </Stack>
             {/* <HomeContri /> */}
-            <Paper sx={{ flex: 1 }}>ewan</Paper>
+            <Paper className="card-contri" sx={{ flex: 1 }}>
+              <div className="card-header-contri">
+                <Typography variant="h6">Your Contributions</Typography>
+              </div>
+              <div className="card-body-contri">
+                <Typography variant="body1">
+                  Hi {username}, here is your total contributions.
+                </Typography>
+                <Typography variant="body2" className="body2">
+                  {totalPosts} Total Posts
+                </Typography>
+                <Typography variant="body2" className="body2">
+                  {totalComments} Total Comments
+                </Typography>
+                <div className="see-all-button-contri">
+                  <Button
+                    component={Link}
+                    to="/your-contri"
+                  >
+                    See All
+                  </Button>
+                </div>
+              </div>
+            </Paper>
           </Stack>
-          {/* <Divider /> */}
-          <hr />
-          <HomeCat />
         </Stack>
       </div>
       <Footer />
