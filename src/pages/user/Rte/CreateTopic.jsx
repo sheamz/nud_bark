@@ -47,6 +47,7 @@ const CreateTopic = () => {
 
   const handleJodit = (e) => {
     // e.preventDefault();
+    console.log("teet");
     setFormData({ ...form_data, con: e });
   };
 
@@ -59,7 +60,7 @@ const CreateTopic = () => {
       // showCharsCounter: false,
       // showWordsCounter: false,
       toolbarAdaptive: false,
-      uploader: { insertImageAsBase64URI: true },
+      uploader: { insertImageAsBase64URI: false },
       addNewLine: false,
       statusbar: false,
       buttons: [
@@ -74,10 +75,8 @@ const CreateTopic = () => {
         "ul",
         "ol",
         "|",
-        "center",
-        "left",
-        "right",
-        "justify",
+        "font",
+        "align",
         "|",
         "link",
         "image",
@@ -133,8 +132,8 @@ const CreateTopic = () => {
             ref={editor}
             value={form_data.con}
             config={config}
+            onBlur={handleJodit}
             // onChange={handleJodit}
-            onInput={handleJodit}
           />
 
           <div className="buttons">
