@@ -2,8 +2,8 @@
 
 include '../functions.php';
 
-$email = $data['eml'];
-$pass = $data['pas'];
+$email = $data['email'];
+$pass = $data['pass'];
 
 login($email, $pass);
 
