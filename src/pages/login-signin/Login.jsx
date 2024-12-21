@@ -67,7 +67,7 @@ export default function Login() {
             Log In
           </Button>
           <p className="mt-3">
-            Not registered yet? Register <Link to={"register"}>here</Link>
+            Not registered yet? Register <Link to={"/register"}>here</Link>
           </p>
         </Form>
       </div>

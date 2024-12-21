@@ -6,6 +6,9 @@ import "./CreateTopic.css";
 import NavUser from "../../../components/NavUser";
 import OtherNav from "../../../components/OtherNav";
 import CircleIcon from "@mui/icons-material/Circle";
+import { Cookies } from "react-cookie";
+import { jwtDecode } from "jwt-decode";
+import axios from "../../../backend/axios.jsx";
 
 import {
   Select,
@@ -16,9 +19,12 @@ import {
   Stack,
 } from "@mui/material";
 
+let cookie = new Cookies();
+
 const CreateTopic = () => {
   const editor = useRef(null);
   const [form_data, setFormData] = useState({
+    uid: jwtDecode(cookie.get("atk")).uid,
     tit: "",
     cat: "",
     con: "",
@@ -34,11 +40,19 @@ const CreateTopic = () => {
   ];
 
   const handlePublish = () => {
-    console.log(form_data);
+    // console.log(form_data);
+    axios
+      .post("/createPost.php", form_data)
+      .then((res) => {
+        alert(res.data.message);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const handleClose = () => {
-    console.log("Topic Creation Closed");
+    // console.log("Topic Creation Closed");
   };
 
   const setData = (e) => {
@@ -47,7 +61,7 @@ const CreateTopic = () => {
 
   const handleJodit = (e) => {
     // e.preventDefault();
-    console.log("teet");
+    // console.log("teet");
     setFormData({ ...form_data, con: e });
   };
 
