@@ -200,13 +200,6 @@ function PostMngmt() {
                           <Button
                             variant="contained"
                             disableElevation
-                            style={{ backgroundColor: "#34418E" }}
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            variant="contained"
-                            disableElevation
                             sx={{ backgroundColor: "#e53b3b" }}
                           >
                             Remove
