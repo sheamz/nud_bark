@@ -8,8 +8,8 @@ header('Content-Type: application/json');
 
 include 'db_con.php';
 require '../../../vendor/autoload.php';
-use ReallySimpleJWT\Token;
-
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
@@ -120,15 +120,15 @@ function login($email, $pass)
             // correct password
 
             // create jwt
-            $user_id = $result[0]["uid"];
-            $secret = $env['JWT_SECRET'];
-            $expiration = time() + 3600;
-            $issuer = 'nud_bark';
+            $key = $env['JWT_SECRET'];
+            $payload = [
+                'uid' => $result[0]["uid"],
+                'rol' => $result[0]["role"]
 
-            $token = Token::create($user_id, $secret, $expiration, $issuer);
+            ];
+            $jwt = JWT::encode($payload, $key, 'HS256');
 
-
-            echo json_encode(['status' => 200, 'message' => 'Logged in successfully', 'atk' => $token]);
+            echo json_encode(['status' => 200, 'message' => 'Logged in successfully', 'atk' => $jwt]);
 
         } else {
             // wrong password
@@ -139,5 +139,47 @@ function login($email, $pass)
     }
 
 
+
+}
+
+function createPost($uid, $title, $content, $category)
+{
+
+    global $conn;
+
+    // get muna latest post id
+    $sql = "SELECT pid 
+            FROM db_bark.tbl_post 
+            ORDER BY pid DESC
+            LIMIT 1;";
+
+    $stmt = $conn->prepare($sql);
+    // $stmt->bindParam(1, $email);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // echo json_encode($result);
+
+    $latest_pid = '0';
+
+    if (!empty($result)) {
+        $latest_pid = explode('-', $result[0]['pid'])[1];
+    }
+    $new_pid = 'PST-' . sprintf("%05d", (int) $latest_pid + 1);
+
+
+    // prepare and bind
+
+    $sql = "INSERT INTO `db_bark`.`tbl_post` (`pid`, `uid`, `title`, `content`, `category`) 
+            VALUES (?,?,?,?,?);";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $new_pid);
+    $stmt->bindParam(2, $uid);
+    $stmt->bindParam(3, $title);
+    $stmt->bindParam(4, $content);
+    $stmt->bindParam(5, $category);
+    $stmt->execute();
+
+    echo json_encode(['message' => 'goods sirr!!!']);
 
 }
