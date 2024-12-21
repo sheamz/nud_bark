@@ -49,7 +49,9 @@ export default function NavUser() {
           </Stack>
         </Stack>
         <Stack direction="row" alignItems={"center"} gap={1} mr={2}>
-          <Avatar>r</Avatar>
+          <Link to="/user-profile">
+            <Avatar>r</Avatar>
+          </Link>
           <DropdownButton id="dropdown-item-button" title="Username">
             <Dropdown.ItemText>
               {" "}

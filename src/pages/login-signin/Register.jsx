@@ -27,6 +27,7 @@ export default function Register() {
             navigate("/");
           } else {
             alert(res.data.message);
+            console.log(res);
           }
         })
         .catch((err) => {
