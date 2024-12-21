@@ -1,6 +1,7 @@
 {
     "name": "red/nud_bark",
     "require": {
-        "rbdwllr/reallysimplejwt": "^5.0"
+        "rbdwllr/reallysimplejwt": "^5.0",
+        "firebase/php-jwt": "^6.10"
     }
 }

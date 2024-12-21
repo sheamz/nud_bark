@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../backend/axios";
 import { Cookies } from "react-cookie";
+import { jwtDecode } from "jwt-decode";
 
 // import Button from "@mui/material/Button";
 
@@ -29,7 +30,14 @@ export default function Login() {
         if (res.data.status == 200) {
           alert(res.data.message);
           cookie.set("atk", res.data.atk);
-          navigate("/home");
+
+          let role = jwtDecode(res.data.atk).rol;
+
+          if (role == "user") {
+            navigate("/home");
+          } else {
+            navigate("/dashboard");
+          }
         } else {
           alert(res.data.message);
         }
@@ -67,7 +75,7 @@ export default function Login() {
             Log In
           </Button>
           <p className="mt-3">
-            Not registered yet? Register <Link to={"register"}>here</Link>
+            Not registered yet? Register <Link to={"/register"}>here</Link>
           </p>
         </Form>
       </div>

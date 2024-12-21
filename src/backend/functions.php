@@ -5,7 +5,6 @@ header('Access-Control-Allow-Headers: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Content-Type: application/json');
 
-
 include 'db_con.php';
 require '../../../vendor/autoload.php';
 use Firebase\JWT\JWT;
@@ -14,8 +13,7 @@ use Firebase\JWT\Key;
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
 
-
-function register($email, $pass, $role, )
+function register($email, $pass, $role)
 {
     global $conn;
 
@@ -57,7 +55,6 @@ function register($email, $pass, $role, )
         $new_uid_prefix = $role == 'user' ? 'USR-' : 'ADM-';
         $new_uid = $new_uid_prefix . sprintf("%05d", (int) $latest_uid + 1);
 
-
         // hash password
         $hash = password_hash(
             $pass,
@@ -75,11 +72,8 @@ function register($email, $pass, $role, )
         $stmt->execute();
 
         echo json_encode(['status' => 200, 'message' => 'I got your deets na bruh, you can go in na.']);
-
     }
-
 }
-
 
 function getUser()
 {
@@ -91,10 +85,8 @@ function getUser()
     echo json_encode($result);
 }
 
-
 function login($email, $pass)
 {
-
     global $conn, $env;
 
     $sql = "SELECT * 
@@ -108,12 +100,10 @@ function login($email, $pass)
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (empty($result)) {
-        //  walang ganitong user
+        // walang ganitong user
         echo json_encode(['status' => 400, 'message' => 'The email is invalid.']);
-
     } else {
         // may user
-
         $hash = $result[0]['pass'];
 
         if (password_verify($pass, $hash)) {
@@ -124,27 +114,19 @@ function login($email, $pass)
             $payload = [
                 'uid' => $result[0]["uid"],
                 'rol' => $result[0]["role"]
-
             ];
             $jwt = JWT::encode($payload, $key, 'HS256');
 
             echo json_encode(['status' => 200, 'message' => 'Logged in successfully', 'atk' => $jwt]);
-
         } else {
             // wrong password
             echo json_encode(['status' => 400, 'message' => 'The password is wrong.']);
-
         }
-
     }
-
-
-
 }
 
 function createPost($uid, $title, $content, $category)
 {
-
     global $conn;
 
     // get muna latest post id
@@ -154,11 +136,8 @@ function createPost($uid, $title, $content, $category)
             LIMIT 1;";
 
     $stmt = $conn->prepare($sql);
-    // $stmt->bindParam(1, $email);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // echo json_encode($result);
 
     $latest_pid = '0';
 
@@ -167,9 +146,7 @@ function createPost($uid, $title, $content, $category)
     }
     $new_pid = 'PST-' . sprintf("%05d", (int) $latest_pid + 1);
 
-
     // prepare and bind
-
     $sql = "INSERT INTO `db_bark`.`tbl_post` (`pid`, `uid`, `title`, `content`, `category`) 
             VALUES (?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
@@ -181,5 +158,5 @@ function createPost($uid, $title, $content, $category)
     $stmt->execute();
 
     echo json_encode(['message' => 'goods sirr!!!']);
-
 }
+?>
