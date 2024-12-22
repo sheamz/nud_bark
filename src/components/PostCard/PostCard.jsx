@@ -40,10 +40,12 @@ const PostCard = (_props) => {
   return (
     <div className="post-list">
       {_selected_posts.map((data, index) => (
-        <Link key={index} to={"/browse/post/pid=" + data.uname}>
+        <Link key={index} to={"/browse/post/" + data.pid}>
           <div className="post-container">
             <div className="post-section">
-              <Avatar alt={data.uname}>{data.uname[1]}</Avatar>
+              <Avatar alt={data.uname ?? data.uid}>
+                {data.uname == null ? "user" : data.uname[1]}
+              </Avatar>
               <div className="post-detail">
                 {/* title */}
                 <h3>{data.tit}</h3>
@@ -61,7 +63,7 @@ const PostCard = (_props) => {
               <div className="post-stat">
                 {/* number of comments */}
                 <CommentRoundedIcon />
-                <p>{data.com}</p>
+                <p>{data.com ?? 0}</p>
               </div>
             </div>
           </div>

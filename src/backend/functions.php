@@ -159,4 +159,81 @@ function createPost($uid, $title, $content, $category)
 
     echo json_encode(['message' => 'goods sirr!!!']);
 }
-?>
+
+
+
+function getPost()
+{
+    global $conn;
+    $sql = "SELECT p.pid, p.uid, usd.username as uname , p.title as tit, p.content, p.category as cat, p.date_created as date, p.view as views, COUNT(c.content) as com
+            FROM db_bark.tbl_post as p
+            LEFT JOIN db_bark.tbl_comment as c
+            ON p.pid = c.pid
+            INNER JOIN db_bark.tbl_user as usr
+            ON p.uid = usr.uid
+            LEFT JOIN db_bark.tbl_user_details as usd
+            ON usr.uid = usd.uid
+            GROUP BY pid
+            ORDER BY date DESC
+            ;";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode(['status' => 200, 'message' => 'so eto na nga ang mga chika', 'data' => $result]);
+}
+
+function getPostById($pid)
+{
+    global $conn;
+    $sql = "SELECT p.pid, p.uid, usd.username as uname , p.title as tit, p.content, p.category as cat, p.date_created as date, p.view as views, COUNT(c.content) as com
+            FROM db_bark.tbl_post as p
+            LEFT JOIN db_bark.tbl_comment as c
+            ON p.pid = c.pid
+            INNER JOIN db_bark.tbl_user as usr
+            ON p.uid = usr.uid
+            LEFT JOIN db_bark.tbl_user_details as usd
+            ON usr.uid = usd.uid
+            WHERE p.pid = :pid
+            ;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':pid', $pid);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode(['status' => 200, 'message' => 'so eto na nga ang specific chika', 'data' => $result]);
+}
+// cat: "Off Topic"
+// com : 2
+// content: "<p>aldasldhash<strong>dasidk
+// date:"2024-12-21 11:03:47"
+// pid:"PST-00004"
+// tit:"asdasddhad"
+// uid:"USR-00001"
+// uname:null
+// views:0
+
+function addViews($pid)
+{
+    global $conn;
+
+    $sql = "SELECT tbl_post.view
+            FROM db_bark.tbl_post
+            WHERE tbl_post.pid = ?
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $pid);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $new_count = $result[0]['view'] + 1;
+
+    $sql = "UPDATE `db_bark`.`tbl_post` 
+            SET `view` = ? 
+            WHERE `pid` = ?;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $new_count);
+    $stmt->bindParam(2, $pid);
+    $stmt->execute();
+
+}

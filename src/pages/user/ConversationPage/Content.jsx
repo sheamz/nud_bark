@@ -1,38 +1,36 @@
 import React from "react";
-import "./ConversationPage.css"
+import { Avatar } from "@mui/material";
+import { formatDistanceToNow } from "date-fns";
 
-function Content() {
-    return (
-        <div className="app-container">
-          <header className="header">
-            <div className="profile">
-              <img
-                src="profile-placeholder.png" // Replace with your image URL
-                alt="Profile"
-                className="profile-pic"
-              />
-              <div className="profile-info">
-                <span className="username">@Golanginya</span>
-                <span className="date">12 November 2023 19:55</span>
-              </div>
-            </div>
-          </header>
-          <main className="content-area">
-            <h1 className="title">Title Area</h1>
-            <p className="description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text ever
-              since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only
-              five centuries, but also the leap into electronic typesetting,
-              remaining essentially unchanged. It was popularised in the 1960s with
-              the release of Letraset sheets containing Lorem Ipsum passages, and
-              more recently with desktop publishing software like Aldus PageMaker
-              including versions of Lorem Ipsum.
-            </p>
-          </main>
+import "./ConversationPage.css";
+
+function Content(props) {
+  let date = new Date(props.data.date);
+  let formattedDate = isNaN(date)
+    ? "Invalid date"
+    : formatDistanceToNow(date, { addSuffix: true });
+
+  return (
+    <div className="content-container">
+      <header>
+        <div className="profile">
+          <Avatar sx={{ width: "60px", height: "60px" }}>
+            {props.data.uname == null ? "user" : props.data.uname[1]}
+          </Avatar>
+          <div className="profile-info">
+            <span className="username">
+              {props.data.uname ?? props.data.uid}
+            </span>
+            <span className="date">{`posted ${formattedDate}`}</span>
+          </div>
         </div>
-      );
+      </header>
+      <main className="content-area">
+        <h1 className="title">{props.data.tit}</h1>
+        <div dangerouslySetInnerHTML={{ __html: props.data.content }} />
+      </main>
+    </div>
+  );
 }
 
 export default Content;

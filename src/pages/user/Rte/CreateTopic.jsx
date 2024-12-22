@@ -1,4 +1,5 @@
 import React, { useState, useRef, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import JoditEditor from "jodit-react";
@@ -22,6 +23,7 @@ import {
 let cookie = new Cookies();
 
 const CreateTopic = () => {
+  const navigate = useNavigate();
   const editor = useRef(null);
   const [form_data, setFormData] = useState({
     uid: jwtDecode(cookie.get("atk")).uid,
@@ -45,6 +47,7 @@ const CreateTopic = () => {
       .post("/createPost.php", form_data)
       .then((res) => {
         alert(res.data.message);
+        navigate(-1);
       })
       .catch((err) => {
         console.error(err);
@@ -52,7 +55,7 @@ const CreateTopic = () => {
   };
 
   const handleClose = () => {
-    // console.log("Topic Creation Closed");
+    navigate(-1);
   };
 
   const setData = (e) => {
@@ -74,7 +77,7 @@ const CreateTopic = () => {
       // showCharsCounter: false,
       // showWordsCounter: false,
       toolbarAdaptive: false,
-      uploader: { insertImageAsBase64URI: false },
+      uploader: { insertImageAsBase64URI: true },
       addNewLine: false,
       statusbar: false,
       buttons: [

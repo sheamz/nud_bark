@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavUser.css";
 import Logo from "../assets/logo.png";
 import { Stack, Avatar, Divider, Collapse } from "@mui/material";
@@ -8,7 +8,19 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
+import { Cookies } from "react-cookie";
+
+let cookie = new Cookies();
+
 export default function NavUser() {
+  const navigate = useNavigate();
+
+  let logOut = () => {
+    cookie.remove("atk");
+
+    navigate("/");
+  };
+
   return (
     <div className="nav_bar sticky-top">
       <div className="container p-0">
@@ -58,7 +70,9 @@ export default function NavUser() {
               <h6>Username</h6>{" "}
             </Dropdown.ItemText>
             <Divider />
-            <Dropdown.Item as="button">Log out</Dropdown.Item>
+            <Dropdown.Item as="button" onClick={logOut}>
+              Log out
+            </Dropdown.Item>
           </DropdownButton>
         </Stack>
       </div>

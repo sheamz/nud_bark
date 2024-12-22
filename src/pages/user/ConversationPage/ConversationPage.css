@@ -5,7 +5,7 @@
     padding: 0;
   } */
 
-.bg {
+/* .bg {
   max-width: 70%;
   height: auto;
   background-color: white;
@@ -15,50 +15,59 @@
   padding: 50px;
   margin-top: 5%;
   margin-bottom: 5%;
-}
+  border: 1px solid red;
+} */
 
-.app-container {
-  margin: 20px auto;
+.content-container {
+  /* margin: 20px auto; */
   border-radius: 8px;
   display: block;
+  /* border: 1px solid red; */
 }
 
-.header {
+.content-container header {
   display: flex;
   align-items: center;
-  padding-bottom: 10px;
-  /* margin-bottom: 20px; */
+  /* padding-bottom: 10px; */
+  margin-bottom: 20px;
 }
 
-.profile {
+.content-container .profile {
   display: flex;
+  align-items: center;
+  /* border: 1px solid green; */
+  /* width: fit-content; */
 }
 
-.profile-pic {
+.content-container .profile-pic {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
-.profile-info {
-  display: flex;
-  flex-direction: column;
+.content-container .profile-info {
+  /* display: flex;
+  flex-direction: column; */
+  /* border: 1px solid red; */
+  width: fit-content;
 }
 
-.username {
+.content-container .username {
   font-weight: bold;
   font-size: 1.2em;
 }
 
-.date {
+.content-container .date {
   font-size: 0.9em;
   color: #888;
+  text-wrap: nowrap;
 }
 
 .content-area {
   padding-top: 10px;
   background-color: transparent;
+  /* border: 1px solid blue; */
 }
 
 .title {
