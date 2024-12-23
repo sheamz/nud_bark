@@ -185,10 +185,8 @@ function getPost()
 function getPostById($pid)
 {
     global $conn;
-    $sql = "SELECT p.pid, p.uid, usd.username as uname , p.title as tit, p.content, p.category as cat, p.date_created as date, p.view as views, COUNT(c.content) as com
+    $sql = "SELECT p.pid, p.uid, usd.username as uname, p.title as tit, p.content, p.category as cat, p.date_created as date, p.view as views
             FROM db_bark.tbl_post as p
-            LEFT JOIN db_bark.tbl_comment as c
-            ON p.pid = c.pid
             INNER JOIN db_bark.tbl_user as usr
             ON p.uid = usr.uid
             LEFT JOIN db_bark.tbl_user_details as usd
@@ -198,18 +196,39 @@ function getPostById($pid)
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':pid', $pid);
     $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode(['status' => 200, 'message' => 'so eto na nga ang specific chika', 'data' => $result]);
+    $post = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Fetch comments
+    $sql_comments = "SELECT c.cid, c.pid, c.uid, c.content, c.date, usd.username as uname, c.parent_cid
+                     FROM db_bark.tbl_comment as c
+                     LEFT JOIN db_bark.tbl_user_details as usd
+                     ON c.uid = usd.uid
+                     WHERE c.pid = :pid
+                     ORDER BY c.date ASC
+                     ;";
+    $stmt_comments = $conn->prepare($sql_comments);
+    $stmt_comments->bindParam(':pid', $pid);
+    $stmt_comments->execute();
+    $comments = $stmt_comments->fetchAll(PDO::FETCH_ASSOC);
+
+    // Organize comments into a nested structure
+    $nested_comments = [];
+    $comment_map = [];
+
+    foreach ($comments as $comment) {
+        $comment['replies'] = [];
+        $comment_map[$comment['cid']] = $comment;
+        if ($comment['parent_cid'] === null) {
+            $nested_comments[] = &$comment_map[$comment['cid']];
+        } else {
+            $comment_map[$comment['parent_cid']]['replies'][] = &$comment_map[$comment['cid']];
+        }
+    }
+
+    $post['comments'] = $nested_comments;
+
+    echo json_encode(['status' => 200, 'message' => 'so eto na nga ang specific chika', 'data' => $post]);
 }
-// cat: "Off Topic"
-// com : 2
-// content: "<p>aldasldhash<strong>dasidk
-// date:"2024-12-21 11:03:47"
-// pid:"PST-00004"
-// tit:"asdasddhad"
-// uid:"USR-00001"
-// uname:null
-// views:0
 
 function addViews($pid)
 {

@@ -18,7 +18,8 @@ function ConversationPage() {
     axios
       .post(`/getPost.php`, { pid: pid })
       .then((res) => {
-        setPost(res.data.data[0]);
+        // console.log(res.data.data);
+        setPost(res.data.data);
       })
       .catch((err) => {
         console.error(err);
