@@ -3,10 +3,8 @@ import "./ConversationPage.css";
 import Content from "./Content";
 import ReplyLayout from "./ReplyLayout.jsx";
 
-import { Paper, Avatar, Stack, IconButton, Button } from "@mui/material";
-import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import { Paper, Avatar, Stack, Button } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 import { formatDistanceToNow } from "date-fns";
 import { Cookies } from "react-cookie";
@@ -121,18 +119,23 @@ function ConversationPage() {
                   <div key={com.cid}>
                     <div className="comment-container">
                       <div className="comment-header">
-                        <Avatar></Avatar>
+                        <Avatar size="small"></Avatar>
                         <div className="author-info">
-                          <p className="author-name">{com.uname ?? com.uid}</p>
-                          <p className="comment-date">{formattedDate}</p>
+                          <small className="author-name">
+                            {com.uname ?? com.uid}
+                          </small>
+                          <p className="comment-date">posted {formattedDate}</p>
                         </div>
                       </div>
-                      <p>{com.content}</p>
+                      <p className="content">{com.content}</p>
                     </div>
                     {com.replies && com.replies.length > 0 ? (
-                      com.replies.map((reply) => (
-                        <ReplyLayout key={reply.cid} reply={reply} />
-                      ))
+                      com.replies
+                        .slice()
+                        .reverse()
+                        .map((reply) => (
+                          <ReplyLayout key={reply.cid} reply={reply} />
+                        ))
                     ) : (
                       <div></div>
                     )}

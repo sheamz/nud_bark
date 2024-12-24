@@ -168,8 +168,8 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 10px;
+  margin-bottom: 10px;
   border-left: 8px solid #fdd41f;
 }
 
@@ -189,46 +189,44 @@
 
 .comment-container .comment-date {
   color: #888;
-  font-size: 12px;
+  font-size: 10px;
+}
+
+.comment-container .content {
+  font-size: 13px;
 }
 
 /* ReplyLayout */
+.reply-root {
+  margin-left: 5%;
+}
+
 .reply-container {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 10px;
+  margin-bottom: 10px;
   border-left: 8px solid #34418e;
-  margin-left: 10%;
+  /* margin-left: 5%; */
 }
 
-.reply-header {
+.reply-container .reply-header {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
-
-.reply-author-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 16px;
-}
-
-.reply-author-info {
-  flex: 1;
-}
-
-.reply-author-name {
+.reply-container .reply-author-name {
   font-weight: bold;
   margin-bottom: 4px;
 }
 
-.reply-date {
+.reply-container .reply-date {
   color: #888;
-  font-size: 12px;
+  font-size: 10px;
 }
 
-.reply-body {
-  margin-top: 16px;
+.reply-container .reply-body {
+  /* margin-top: 16px; */
+  font-size: 13px;
 }
