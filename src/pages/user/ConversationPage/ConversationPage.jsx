@@ -109,33 +109,36 @@ function ConversationPage() {
           </div>
           {/* comments */}
           {post.comments && post.comments.length > 0 ? (
-            post.comments.slice(0, maxComCount).map((com) => {
-              let date = new Date(com.date);
-              let formattedDate = isNaN(date)
-                ? "Invalid date"
-                : formatDistanceToNow(date, { addSuffix: true });
-              return (
-                <div key={com.cid}>
-                  <div className="comment-container">
-                    <div className="comment-header">
-                      <Avatar></Avatar>
-                      <div className="author-info">
-                        <p className="author-name">{com.uname ?? com.uid}</p>
-                        <p className="comment-date">{formattedDate}</p>
+            post.comments
+              .slice(0, maxComCount)
+              .reverse()
+              .map((com) => {
+                let date = new Date(com.date);
+                let formattedDate = isNaN(date)
+                  ? "Invalid date"
+                  : formatDistanceToNow(date, { addSuffix: true });
+                return (
+                  <div key={com.cid}>
+                    <div className="comment-container">
+                      <div className="comment-header">
+                        <Avatar></Avatar>
+                        <div className="author-info">
+                          <p className="author-name">{com.uname ?? com.uid}</p>
+                          <p className="comment-date">{formattedDate}</p>
+                        </div>
                       </div>
+                      <p>{com.content}</p>
                     </div>
-                    <p>{com.content}</p>
+                    {com.replies && com.replies.length > 0 ? (
+                      com.replies.map((reply) => (
+                        <ReplyLayout key={reply.cid} reply={reply} />
+                      ))
+                    ) : (
+                      <div></div>
+                    )}
                   </div>
-                  {com.replies && com.replies.length > 0 ? (
-                    com.replies.map((reply) => (
-                      <ReplyLayout key={reply.cid} reply={reply} />
-                    ))
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-              );
-            })
+                );
+              })
           ) : (
             <small>
               <i>no comments</i>
