@@ -256,3 +256,86 @@ function addViews($pid)
     $stmt->execute();
 
 }
+// $uid, $pid, $comment, $cid
+function createParentComment($uid, $pid, $comment)
+{
+
+    global $conn;
+    // get muna latest comment id
+
+    $sql = "SELECT cid 
+            FROM db_bark.tbl_comment 
+            ORDER BY cid DESC
+            LIMIT 1;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $latest_cid = '0';
+
+    if (!empty($result)) {
+        $latest_cid = explode('-', $result[0]['cid'])[1];
+    }
+    $new_cid = 'COM-' . sprintf("%05d", (int) $latest_cid + 1);
+
+    // sql create comment
+
+    $sql = "INSERT INTO `db_bark`.`tbl_comment` (`cid`, `pid`, `content`, `uid`) 
+            VALUES (?,?,?,?);";
+
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $new_cid);
+    $stmt->bindParam(2, $pid);
+    $stmt->bindParam(3, $comment);
+    $stmt->bindParam(4, $uid);
+    // $stmt->bindParam(5, $pcid);
+    $stmt->execute();
+
+
+    echo json_encode(['status' => 200, 'message' => 'dami mo naman ebas par']);
+    // echo $new_cid;
+}
+
+function createReply($uid, $pid, $comment, $pcid)
+{
+
+    global $conn;
+    // get muna latest comment id
+
+    $sql = "SELECT cid 
+            FROM db_bark.tbl_comment 
+            ORDER BY cid DESC
+            LIMIT 1;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $latest_cid = '0';
+
+    if (!empty($result)) {
+        $latest_cid = explode('-', $result[0]['cid'])[1];
+    }
+    $new_cid = 'COM-' . sprintf("%05d", (int) $latest_cid + 1);
+
+
+
+    // sql create reply
+
+    $sql = "INSERT INTO `db_bark`.`tbl_comment` (`cid`, `pid`, `content`, `uid`, `parent_cid`) 
+            VALUES (?,?,?,?,?);";
+
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $new_cid);
+    $stmt->bindParam(2, $pid);
+    $stmt->bindParam(3, $comment);
+    $stmt->bindParam(4, $uid);
+    $stmt->bindParam(5, $pcid);
+    $stmt->execute();
+
+
+    echo json_encode(['status' => 200, 'message' => 'eto na ambag mo par?']);
+}

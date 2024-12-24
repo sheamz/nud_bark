@@ -64,23 +64,24 @@
   text-wrap: nowrap;
 }
 
-.content-area {
+.content-container .content-area {
   padding-top: 10px;
   background-color: transparent;
   /* border: 1px solid blue; */
 }
 
-.title {
+.content-container .title {
   font-size: 1.8em;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
-.description {
+/* .description {
   font-size: 1em;
   line-height: 1.6;
   color: #555;
-}
+  border: 1px solid red;
+} */
 
 /* Comment */
 .comment-layout {
@@ -90,13 +91,13 @@
   padding: 20px;
 }
 
-.comment-form {
+.comment-layout .comment-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.comment-input {
+.comment-layout .comment-input {
   width: 100%;
   min-height: 60px; /* initial smaller height */
   padding: 10px;
@@ -107,24 +108,24 @@
   font-family: Arial, sans-serif;
 }
 
-.comment-footer {
+.comment-layout .comment-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.char-count {
+.comment-layout .char-count {
   font-size: 12px;
   color: #888;
 }
 
-.comment-buttons {
+.comment-layout .comment-buttons {
   display: flex;
   gap: 10px;
 }
 
-.cancel-button,
-.comment-button {
+.comment-layout .cancel-button,
+.comment-layout .comment-button {
   padding: 8px 15px;
   font-size: 14px;
   border-radius: 5px;
@@ -132,26 +133,26 @@
   border: none;
 }
 
-.cancel-button {
+.comment-layout .cancel-button {
   background-color: #ccc;
   color: #333;
 }
 
-.cancel-button:hover {
+.comment-layout .cancel-button:hover {
   background-color: #aaa;
 }
 
-.comment-button {
+.comment-layout .comment-button {
   background-color: #34418e;
   color: white;
 }
 
-.comment-button:disabled {
+.comment-layout .comment-button:disabled {
   background-color: #ddd;
   cursor: not-allowed;
 }
 
-.comment-button:hover {
+.comment-layout .comment-button:hover {
   background-color: #2c3e90;
 }
 
@@ -172,34 +173,23 @@
   border-left: 8px solid #fdd41f;
 }
 
-.comment-header {
+.comment-container .comment-header {
   display: flex;
   align-items: center;
 }
 
-.author-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 16px;
-}
-
-.author-info {
+.comment-container .author-info {
   flex: 1;
 }
 
-.author-name {
+.comment-container .author-name {
   font-weight: bold;
   margin-bottom: 4px;
 }
 
-.comment-date {
+.comment-container .comment-date {
   color: #888;
   font-size: 12px;
-}
-
-.comment-body {
-  margin-top: 16px;
 }
 
 /* ReplyLayout */

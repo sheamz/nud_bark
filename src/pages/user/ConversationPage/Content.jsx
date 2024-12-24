@@ -15,7 +15,7 @@ function Content(props) {
       <header>
         <div className="profile">
           <Avatar sx={{ width: "60px", height: "60px" }}>
-            {props.data.uname == null ? "user" : props.data.uname[1]}
+            {props.data.uname == null ? "" : props.data.uname[1]}
           </Avatar>
           <div className="profile-info">
             <span className="username">
