@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./ConversationPage.css";
 import Content from "./Content";
+import CommentLayout from "./CommentLayout.jsx";
 import ReplyLayout from "./ReplyLayout.jsx";
 
 import { Paper, Avatar, Stack, Button } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { formatDistanceToNow } from "date-fns";
 import { Cookies } from "react-cookie";
@@ -106,50 +108,28 @@ function ConversationPage() {
             <hr className="comment-divider" />
           </div>
           {/* comments */}
-          {post.comments && post.comments.length > 0 ? (
-            post.comments
-              .slice(0, maxComCount)
-              .reverse()
-              .map((com) => {
-                let date = new Date(com.date);
-                let formattedDate = isNaN(date)
-                  ? "Invalid date"
-                  : formatDistanceToNow(date, { addSuffix: true });
-                return (
-                  <div key={com.cid}>
-                    <div className="comment-container">
-                      <div className="comment-header">
-                        <Avatar size="small"></Avatar>
-                        <div className="author-info">
-                          <small className="author-name">
-                            {com.uname ?? com.uid}
-                          </small>
-                          <p className="comment-date">posted {formattedDate}</p>
-                        </div>
-                      </div>
-                      <p className="content">{com.content}</p>
-                    </div>
-                    {com.replies && com.replies.length > 0 ? (
-                      com.replies
-                        .slice()
-                        .reverse()
-                        .map((reply) => (
-                          <ReplyLayout key={reply.cid} reply={reply} />
-                        ))
-                    ) : (
-                      <div></div>
-                    )}
-                  </div>
-                );
-              })
-          ) : (
-            <small>
-              <i>no comments</i>
-            </small>
-          )}
+          <Stack gap={1}>
+            {post.comments && post.comments.length > 0 ? (
+              post.comments
+                .slice()
+                .reverse()
+                .slice(0, maxComCount)
+                .map((com) => {
+                  let date = new Date(com.date);
+                  let formattedDate = isNaN(date)
+                    ? "Invalid date"
+                    : formatDistanceToNow(date, { addSuffix: true });
+                  return <CommentLayout key={com.cid} com={com} />;
+                })
+            ) : (
+              <small>
+                <i>no comments</i>
+              </small>
+            )}
+          </Stack>
 
-          {post.comments && post.comments.length > maxComCount ? (
-            <Stack direction="row" justifyContent="end" alignItems="center">
+          <Stack direction="row" justifyContent="center" gap={3}>
+            {post.comments && post.comments.length > maxComCount ? (
               <Button
                 size="small"
                 sx={{ color: "grey", textTransform: "lowercase" }}
@@ -159,10 +139,21 @@ function ConversationPage() {
               >
                 see more <KeyboardArrowDownIcon />
               </Button>
-            </Stack>
-          ) : (
-            <div />
-          )}
+            ) : (
+              <div />
+            )}
+            {maxComCount > 5 && (
+              <Button
+                size="small"
+                sx={{ color: "grey", textTransform: "lowercase" }}
+                onClick={() => {
+                  setMaxComCount(5);
+                }}
+              >
+                hide comments <KeyboardArrowUpIcon />
+              </Button>
+            )}
+          </Stack>
         </Paper>
       </div>
     </>

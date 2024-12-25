@@ -169,7 +169,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   border-left: 8px solid #fdd41f;
 }
 
@@ -196,6 +196,11 @@
   font-size: 13px;
 }
 
+.replyCount {
+  font-size: 10px;
+  color: grey;
+}
+
 /* ReplyLayout */
 .reply-root {
   margin-left: 5%;
@@ -206,7 +211,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   border-left: 8px solid #34418e;
   /* margin-left: 5%; */
 }

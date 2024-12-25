@@ -2,7 +2,7 @@
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
-header('Access-Control-Allow-Methods: GET, POST');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Content-Type: application/json');
 
 include 'db_con.php';
@@ -12,6 +12,12 @@ use Firebase\JWT\Key;
 
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
+
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // Handle preflight request
+    http_response_code(200);
+    exit();
+}
 
 function register($email, $pass, $role)
 {
