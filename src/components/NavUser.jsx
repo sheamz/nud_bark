@@ -9,11 +9,13 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 import { Cookies } from "react-cookie";
+import { jwtDecode } from "jwt-decode";
 
 let cookie = new Cookies();
 
 export default function NavUser() {
   const navigate = useNavigate();
+  let uid = jwtDecode(cookie.get("atk")).uid;
 
   let logOut = () => {
     cookie.remove("atk");
@@ -61,7 +63,7 @@ export default function NavUser() {
           </Stack>
         </Stack>
         <Stack direction="row" alignItems={"center"} gap={1} mr={2}>
-          <Link to="/user-profile">
+          <Link to={"/user-profile/" + uid}>
             <Avatar>r</Avatar>
           </Link>
           <DropdownButton id="dropdown-item-button" title="Username">
