@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 // import { FiMenu } from "react-icons/fi"; // Import hamburger menu icon
 import "./PostMngmt.css";
 import AdminNav from "../AdminNav";
@@ -14,51 +14,61 @@ import Paper from "@mui/material/Paper";
 //
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import Slide from "@mui/material/Slide";
 
-const rows = [
-  {
-    pid: "pst-1000",
-    title: "Barado nanamn urinal?",
-    com: 109,
-    view: 348,
-    date: "12-04-2024",
-  },
-  {
-    pid: "pst-1002",
-    title: "LF: upuan sa canten",
-    com: 20,
-    view: 67,
-    date: "12-04-2024",
-  },
-  {
-    pid: "pst-1003",
-    title: "LF: Study buddy",
-    com: 0,
-    view: 3,
-    date: "12-04-2024",
-  },
-  {
-    pid: "pst-1004",
-    title: "Prof namen missing in action",
-    com: 9,
-    view: 4042,
-    date: "12-04-2024",
-  },
-  {
-    pid: "pst-1005",
-    title: "May nakita po ba kayong wallet sa cr ng boys?",
-    com: 109,
-    view: 348,
-    date: "12-04-2024",
-  },
-  {
-    pid: "pst-1006",
-    title: "wala na ako masiisp?",
-    com: 109,
-    view: 348,
-    date: "12-04-2024",
-  },
-];
+// for remove dialog
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
+import axios from "../../../backend/axios";
+
+// const rows = [
+//   {
+//     pid: "pst-1000",
+//     tit: "Barado nanamn urinal?",
+//     com: 109,
+//     views: 348,
+//     date: "12-04-2024",
+//   },
+//   {
+//     pid: "pst-1002",
+//     tit: "LF: upuan sa canten",
+//     com: 20,
+//     views: 67,
+//     date: "12-04-2024",
+//   },
+//   {
+//     pid: "pst-1003",
+//     tit: "LF: Study buddy",
+//     com: 0,
+//     views: 3,
+//     date: "12-04-2024",
+//   },
+//   {
+//     pid: "pst-1004",
+//     tit: "Prof namen missing in action",
+//     com: 9,
+//     views: 4042,
+//     date: "12-04-2024",
+//   },
+//   {
+//     pid: "pst-1005",
+//     tit: "May nakita po ba kayong wallet sa cr ng boys?",
+//     com: 109,
+//     views: 348,
+//     date: "12-04-2024",
+//   },
+//   {
+//     pid: "pst-1006",
+//     tit: "wala na ako masiisp?",
+//     com: 109,
+//     views: 348,
+//     date: "12-04-2024",
+//   },
+// ];
 
 // sorting mui data table
 function descendingComparator(a, b, orderBy) {
@@ -117,14 +127,20 @@ const headCells = [
   },
 ];
 
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 function PostMngmt() {
   let active = location.pathname;
-
+  const [rows, setRows] = useState([]);
+  const [removeDialog, setRemoveDialog] = useState(false);
+  const [toDelete, setToDelete] = useState("");
   // Enhanced Table
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("pid");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -141,6 +157,17 @@ function PostMngmt() {
     setPage(0);
   };
 
+  useEffect(() => {
+    axios
+      .get("/getPost.php")
+      .then((res) => {
+        setRows(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -152,6 +179,15 @@ function PostMngmt() {
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [order, orderBy, page, rowsPerPage]
   );
+
+  let closeRemove = () => {
+    setRemoveDialog(false);
+  };
+  let openRemove = (pid) => {
+    // console.log(pid);
+    setToDelete(pid);
+    setRemoveDialog(true);
+  };
 
   return (
     <div>
@@ -191,15 +227,16 @@ function PostMngmt() {
                       >
                         {row.pid}
                       </TableCell>
-                      <TableCell align="left">{row.title}</TableCell>
+                      <TableCell align="left">{row.tit}</TableCell>
                       <TableCell align="left">{row.date}</TableCell>
                       <TableCell align="left">{row.com}</TableCell>
-                      <TableCell align="left">{row.view}</TableCell>
+                      <TableCell align="left">{row.views}</TableCell>
                       <TableCell align="left">
                         <Stack direction="row" spacing={2}>
                           <Button
                             variant="contained"
                             disableElevation
+                            onClick={() => openRemove(row.pid)}
                             sx={{ backgroundColor: "#e53b3b" }}
                           >
                             Remove
@@ -233,6 +270,26 @@ function PostMngmt() {
             </div>
           </Paper>
         </div>
+
+        {/* remove dialog */}
+        <Dialog
+          open={removeDialog}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={closeRemove}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle>{"Delete Post?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Do you want to delete this post no. {toDelete} ?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeRemove}>Disagree</Button>
+            <Button onClick={closeRemove}>Agree</Button>
+          </DialogActions>
+        </Dialog>
       </section>
     </div>
   );

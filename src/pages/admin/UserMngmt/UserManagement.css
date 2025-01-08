@@ -1,6 +1,24 @@
 .user-management-container {
   width: 100%;
 }
+/* 
+.user-management-container .MuiTableHead-root {
+  background-color: #34418e;
+  border: none;
+  border-radius: 20px;
+}
+.user-management-container .MuiTableHead-root tr th .Mui-hover {
+  color: red;
+}
+.user-management-container .MuiTableHead-root tr th {
+  color: white;
+}
+.user-management-container .MuiTableHead-root tr th span svg {
+  color: white;
+} */
+.user-management-container .MuiTableHead-root tr th:last-child span svg {
+  display: none;
+}
 
 .user-management-container .mui_pagination p {
   margin: 0;
