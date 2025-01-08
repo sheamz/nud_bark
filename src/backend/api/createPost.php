@@ -13,7 +13,7 @@ if (!$uid == '' && !$title == '' && !$content == '' && !$category == '') {
 
 } else {
 
-    echo json_encode(['message' => 'complete the form']);
+    echo json_encode(['status' => 210, 'message' => 'complete the form']);
 
 }
 

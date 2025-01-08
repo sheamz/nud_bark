@@ -46,8 +46,12 @@ const CreateTopic = () => {
     axios
       .post("/createPost.php", form_data)
       .then((res) => {
-        alert(res.data.message);
-        navigate(-1);
+        if (res.data.status == 200) {
+          alert(res.data.message);
+          navigate(-1);
+        } else {
+          alert(res.data.message);
+        }
       })
       .catch((err) => {
         console.error(err);

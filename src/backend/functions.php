@@ -163,7 +163,7 @@ function createPost($uid, $title, $content, $category)
     $stmt->bindParam(5, $category);
     $stmt->execute();
 
-    echo json_encode(['message' => 'goods sirr!!!']);
+    echo json_encode(['message' => 'goods sirr!!!', 'status' => 200]);
 }
 
 
@@ -344,4 +344,25 @@ function createReply($uid, $pid, $comment, $pcid)
 
 
     echo json_encode(['status' => 200, 'message' => 'eto na ambag mo par?']);
+
+
+
+
+
+}
+
+function deletePost($pid)
+{
+    global $conn;
+
+    $sql = "DELETE FROM `db_bark`.`tbl_post` WHERE (`pid` = ?)";
+    ;
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $pid);
+
+    $stmt->execute();
+
+    echo json_encode(['status' => 200, 'message' => 'wala na']);
+
 }

@@ -17,7 +17,13 @@ const headCells = [
   { id: "email", numeric: false, disablePadding: false, label: "Email" },
   { id: "role", numeric: false, disablePadding: false, label: "Role" },
   { id: "date", numeric: false, disablePadding: false, label: "Date Joined" },
-  { id: "action", numeric: false, disableSorting: true, disablePadding: false, label: "" },
+  {
+    id: "action",
+    numeric: false,
+    disableSorting: true,
+    disablePadding: false,
+    label: "",
+  },
 ];
 
 function UserManagement() {
@@ -51,14 +57,16 @@ function UserManagement() {
     setPage(0);
   };
 
-  const sortedUsers = [...users].sort(
-    (a, b) =>
-      order === "asc"
-        ? a[orderBy].localeCompare(b[orderBy])
-        : b[orderBy].localeCompare(a[orderBy])
+  const sortedUsers = [...users].sort((a, b) =>
+    order === "asc"
+      ? a[orderBy].localeCompare(b[orderBy])
+      : b[orderBy].localeCompare(a[orderBy])
   );
 
-  const visibleRows = sortedUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const visibleRows = sortedUsers.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
 
   return (
     <div>
@@ -67,7 +75,11 @@ function UserManagement() {
         <div className="user-management-container">
           <h2>User Management</h2>
           <Paper sx={{ width: "100%", mb: 2, mt: 5 }}>
-            <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={"medium"}>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={"medium"}
+            >
               <EnhancedTableHead
                 order={order}
                 orderBy={orderBy}
@@ -77,14 +89,25 @@ function UserManagement() {
               />
               <TableBody>
                 {visibleRows.map((user, index) => (
-                  <TableRow hover tabIndex={-1} key={user.uid} sx={{ cursor: "pointer" }}>
-                    <TableCell component="th" scope="row" align="left">{user.uid}</TableCell>
+                  <TableRow
+                    hover
+                    tabIndex={-1}
+                    key={user.uid}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    <TableCell component="th" scope="row" align="left">
+                      {user.uid}
+                    </TableCell>
                     <TableCell align="left">{user.email}</TableCell>
                     <TableCell align="left">{user.role}</TableCell>
                     <TableCell align="left">{user.date_created}</TableCell>
                     <TableCell align="left">
                       <Stack direction="row" spacing={2}>
-                        <Button variant="contained" disableElevation sx={{ backgroundColor: "#e53b3b" }}>
+                        <Button
+                          variant="contained"
+                          disableElevation
+                          sx={{ backgroundColor: "#e53b3b" }}
+                        >
                           Remove
                         </Button>
                       </Stack>
@@ -92,7 +115,9 @@ function UserManagement() {
                   </TableRow>
                 ))}
                 {page > 0 && (
-                  <TableRow style={{ height: 53 * (rowsPerPage - visibleRows.length) }}>
+                  <TableRow
+                    style={{ height: 53 * (rowsPerPage - visibleRows.length) }}
+                  >
                     <TableCell colSpan={6} />
                   </TableRow>
                 )}
