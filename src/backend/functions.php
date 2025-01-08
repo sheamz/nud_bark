@@ -345,3 +345,17 @@ function createReply($uid, $pid, $comment, $pcid)
 
     echo json_encode(['status' => 200, 'message' => 'eto na ambag mo par?']);
 }
+
+function getProfile($uid) {
+    global $conn;
+        $sql = "SELECT email, date_created FROM db_bark.tbl_user WHERE uid = :uid";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':uid', $uid);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(['status' => 404, 'message' => 'User not found']);
+        }
+}
