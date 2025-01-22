@@ -6,9 +6,9 @@ import axios from '../../../backend/axios';
 const Profile = () => {
   const [userData, setUserData] = useState({
     profilePicture: 'https://via.placeholder.com/150', 
-    fname: '',
-    mname: '',
-    lname: '',
+    f_name: '',
+    m_name: '',
+    l_name: '',
     suffix: '',
     email: '',
     username: '',
@@ -17,39 +17,57 @@ const Profile = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const toggleEditing = () => {
-    setIsEditing(!isEditing);
+    if (isEditing) {
+      // Save the changes
+      const uid = window.location.pathname.split("/")[2];
+      console.log("Sending data to backend:");
+      console.log({ uid, ...userData });
+      axios.post("/updateProfile.php", { uid, ...userData })
+        .then((res) => {
+          console.log(res.data);
+          setIsEditing(false);
+        })
+        .catch((err) => {
+          console.error('Error updating user data:', err);
+        });
+    } else {
+      setIsEditing(true);
+    }
   };
 
   useEffect(() => {
     const uid = window.location.pathname.split("/")[2];
-    console.log(uid);
-    const userId = 'USER_ID'; // Replace with actual user ID
-    // fetch(`http://localhost/nud_bark/src/backend/api/getProfile.php?uid=${userId}`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //     // setUserData(prevState => ({
-    //     //   ...prevState,
-    //     //   email: data.email,
-    //     //   firstUsedDate: data.date_created,
-    //     // }));
-    //   })
-      // .catch(error => console.error('Error fetching user data:', error));
-      axios.post("/getProfile.php",{uid:uid}).then((res) => {console.log(res.data);
+    axios.post("/getProfile.php", { uid })
+      .then((res) => {
+        console.log(res.data);
         setUserData(prevState => ({
           ...prevState,
-          email: res.data.email,
-          firstUsedDate: res.data.date_created,
+          f_name: res.data.f_name || '',
+          m_name: res.data.m_name || '',
+          l_name: res.data.l_name || '',
+          suffix: res.data.suffix || '',
+          username: res.data.username || '',
+          email: res.data.email || '',
+          firstUsedDate: res.data.date_created || '',
         }));
-      }).catch((err) => {});
+      })
+      .catch((err) => {
+        console.error('Error fetching user data:', err);
+      });
   }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to logout?");
     if (confirmLogout) {
-      // Perform logout logic here, e.g., clearing user session, tokens, etc.
       console.log("User logged out");
-      // Redirect to login page after logout
       window.location.href = '/';
     }
   };
@@ -73,20 +91,20 @@ const Profile = () => {
       </div>
 
       <form className="user-details">
-        <label htmlFor="first-name">First Name</label>
-        <input type='text' className="input-box" disabled={!isEditing}></input>
+        <label htmlFor="f_name">First Name</label>
+        <input type='text' name="f_name" className="input-box" value={userData.f_name} onChange={handleInputChange} disabled={!isEditing} />
 
-        <label htmlFor="middle-name">Middle Name</label>
-        <input type='text' className="input-box"></input>
+        <label htmlFor="m_name">Middle Name</label>
+        <input type='text' name="m_name" className="input-box" value={userData.m_name} onChange={handleInputChange} disabled={!isEditing} />
 
-        <label htmlFor="last-name">Last Name</label>
-        <input type='text' className="input-box"></input>
+        <label htmlFor="l_name">Last Name</label>
+        <input type='text' name="l_name" className="input-box" value={userData.l_name} onChange={handleInputChange} disabled={!isEditing} />
 
         <label htmlFor="suffix">Suffix</label>
-        <input type='text' className="input-box"></input>
+        <input type='text' name="suffix" className="input-box" value={userData.suffix} onChange={handleInputChange} disabled={!isEditing} />
 
         <label htmlFor="username">Username</label>
-        <input type='text' className="input-box"></input>
+        <input type='text' name="username" className="input-box" value={userData.username} onChange={handleInputChange} disabled={!isEditing} />
       </form>
 
       <div className="email-section">

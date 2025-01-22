@@ -166,8 +166,6 @@ function createPost($uid, $title, $content, $category)
     echo json_encode(['message' => 'goods sirr!!!', 'status' => 200]);
 }
 
-
-
 function getPost()
 {
     global $conn;
@@ -369,14 +367,76 @@ function deletePost($pid)
 
 function getProfile($uid) {
     global $conn;
-        $sql = "SELECT email, date_created FROM db_bark.tbl_user WHERE uid = :uid";
+    $sql = "SELECT u.email, u.date_created, d.f_name, d.m_name, d.l_name, d.suffix, d.username 
+            FROM db_bark.tbl_user u
+            LEFT JOIN db_bark.tbl_user_details d ON u.uid = d.uid
+            WHERE u.uid = :uid";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':uid', $uid);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        echo json_encode($result);
+    } else {
+        echo json_encode(['status' => 404, 'message' => 'User not found']);
+    }
+}
+
+function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username) {
+    global $conn;
+
+    // Check if UID exists
+    $checkUid = $conn->prepare("SELECT COUNT(*) FROM db_bark.tbl_user_details WHERE uid = :uid");
+    $checkUid->bindParam(':uid', $uid);
+    $checkUid->execute();
+
+    if ($checkUid->fetchColumn() == 0) {
+        // add user details
+        $sql = "INSERT INTO db_bark.tbl_user_details (uid, f_name, m_name, l_name, suffix, username) 
+                VALUES (:uid, :f_name, :m_name, :l_name, :suffix, :username)";
+
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':uid', $uid);
+        $stmt->bindParam(':f_name', $f_name);
+        $stmt->bindParam(':m_name', $m_name);
+        $stmt->bindParam(':l_name', $l_name);
+        $stmt->bindParam(':suffix', $suffix);
+        $stmt->bindParam(':username', $username);
+
+    }else{
+        // update user details
+        $sql = "UPDATE db_bark.tbl_user_details 
+        SET f_name = :f_name, 
+            m_name = :m_name, 
+            l_name = :l_name, 
+            suffix = :suffix, 
+            username = :username
+        WHERE uid = :uid";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':uid', $uid);
+        $stmt->bindParam(':f_name', $f_name);
+        $stmt->bindParam(':m_name', $m_name);
+        $stmt->bindParam(':l_name', $l_name);
+        $stmt->bindParam(':suffix', $suffix);
+        $stmt->bindParam(':username', $username);
+        
+
+    }
+
+    // Update profile
+   
+
+    try {
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result) {
-            echo json_encode($result);
+        if ($stmt->rowCount() > 0) {
+            echo json_encode(['status' => 200, 'message' => 'Profile updated successfully']);
         } else {
-            echo json_encode(['status' => 404, 'message' => 'User not found']);
+            echo json_encode(['status' => 400, 'message' => 'No changes detected in the profile']);
         }
+    } catch (PDOException $e) {
+        error_log('Update Error: ' . $e->getMessage());
+        echo json_encode(['status' => 500, 'message' => 'Internal server error']);
+    }
 }
+
