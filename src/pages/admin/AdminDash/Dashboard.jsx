@@ -114,7 +114,7 @@ export default function Dashboard() {
         },
       },
       series: [44, 55, 13, 33],
-      labels: ["Apple", "Mango", "Orange", "Watermelon"],
+      labels: ["Ask Community", "Marketplace", "Issue", "Off Topic"],
     },
   };
 

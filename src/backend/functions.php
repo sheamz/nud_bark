@@ -440,3 +440,15 @@ function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username) {
     }
 }
 
+function deleteUser($uid)
+{
+    global $conn;
+
+    $sql = "DELETE FROM `db_bark`.`tbl_user` WHERE `uid` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $uid);
+    $stmt->execute();
+
+    echo json_encode(['status' => 200, 'message' => 'User deleted successfully']);
+}
+

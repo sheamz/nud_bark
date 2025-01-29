@@ -11,6 +11,12 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from "../../../backend/axios";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 const headCells = [
   { id: "uid", numeric: false, disablePadding: false, label: "User ID" },
@@ -26,18 +32,25 @@ const headCells = [
   },
 ];
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 function UserManagement() {
   const [users, setUsers] = useState([]); // State for user data
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("uid");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [removeDialog, setRemoveDialog] = useState(false);
+  const [toDelete, setToDelete] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get("/getUser.php");
         setUsers(response.data); // Update state with API data
+        setPage(0); // Reset to the first page when users are updated
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -55,6 +68,26 @@ function UserManagement() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const openRemoveDialog = (uid) => {
+    setToDelete(uid);
+    setRemoveDialog(true);
+  };
+
+  const closeRemoveDialog = () => {
+    setRemoveDialog(false);
+    setToDelete(null);
+  };
+
+  const handleRemoveUser = async () => {
+    try {
+      await axios.post("/deleteUser.php", { uid: toDelete });
+      setUsers(users.filter(user => user.uid !== toDelete));
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+    closeRemoveDialog();
   };
 
   const sortedUsers = [...users].sort((a, b) =>
@@ -107,6 +140,7 @@ function UserManagement() {
                           variant="contained"
                           disableElevation
                           sx={{ backgroundColor: "#e53b3b" }}
+                          onClick={() => openRemoveDialog(user.uid)}
                         >
                           Remove
                         </Button>
@@ -137,6 +171,24 @@ function UserManagement() {
           </Paper>
         </div>
       </section>
+      <Dialog
+        open={removeDialog}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={closeRemoveDialog}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Delete User?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Do you want to delete this user with ID {toDelete}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeRemoveDialog}>Disagree</Button>
+          <Button onClick={handleRemoveUser}>Agree</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

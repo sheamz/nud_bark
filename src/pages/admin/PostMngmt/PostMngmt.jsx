@@ -162,6 +162,7 @@ function PostMngmt() {
       .get("/getPost.php")
       .then((res) => {
         setRows(res.data.data);
+        setPage(0); // Reset to the first page when rows are updated
       })
       .catch((err) => {
         console.error(err);
@@ -187,6 +188,16 @@ function PostMngmt() {
     // console.log(pid);
     setToDelete(pid);
     setRemoveDialog(true);
+  };
+
+  const handleRemovePost = async () => {
+    try {
+      await axios.post("/deletePost.php", { pid: toDelete });
+      setRows(rows.filter(row => row.pid !== toDelete));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+    closeRemove();
   };
 
   return (
@@ -287,7 +298,7 @@ function PostMngmt() {
           </DialogContent>
           <DialogActions>
             <Button onClick={closeRemove}>Disagree</Button>
-            <Button onClick={closeRemove}>Agree</Button>
+            <Button onClick={handleRemovePost}>Agree</Button>
           </DialogActions>
         </Dialog>
       </section>
