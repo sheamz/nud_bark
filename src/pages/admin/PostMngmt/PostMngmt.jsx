@@ -158,6 +158,10 @@ function PostMngmt() {
   };
 
   useEffect(() => {
+    getPost();
+  }, []);
+
+  let getPost = () => {
     axios
       .get("/getPost.php")
       .then((res) => {
@@ -166,7 +170,7 @@ function PostMngmt() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  };
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -184,9 +188,20 @@ function PostMngmt() {
     setRemoveDialog(false);
   };
   let openRemove = (pid) => {
-    // console.log(pid);
     setToDelete(pid);
     setRemoveDialog(true);
+  };
+
+  let deletePost = () => {
+    axios
+      .post("/deletePost.php", { pid: toDelete })
+      .then((res) => {
+        getPost();
+        setRemoveDialog(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -286,8 +301,10 @@ function PostMngmt() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={closeRemove}>Disagree</Button>
-            <Button onClick={closeRemove}>Agree</Button>
+            <Button onClick={closeRemove} sx={{ color: "#e53b3b" }}>
+              Disagree
+            </Button>
+            <Button onClick={deletePost}>Agree</Button>
           </DialogActions>
         </Dialog>
       </section>

@@ -21,7 +21,6 @@ export default function Login() {
 
   let SubmitForm = (e) => {
     e.preventDefault();
-    console.log(form_data);
     axios
       .post("/login.php", form_data)
       .then((res) => {

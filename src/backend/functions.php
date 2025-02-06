@@ -19,6 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
+function test()
+{
+    global $env;
+    // get token in authorization header
+    $headers = getallheaders();
+    $token = explode(' ', $headers['Authorization'])[1];
+    // get secret from env
+    $secretKey = $env['JWT_SECRET'];
+
+    // decode jwt
+    // $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+    // $decoded = JWT::decode($token, $secretKey, array('HS256'));
+
+
+
+    echo json_encode(['status' => 200, 'message' => 'Hello World!', 'token' => $secretKey]);
+}
+
 function register($email, $pass, $role)
 {
     global $conn;
@@ -365,7 +383,8 @@ function deletePost($pid)
 
 }
 
-function getProfile($uid) {
+function getProfile($uid)
+{
     global $conn;
     $sql = "SELECT u.email, u.date_created, d.f_name, d.m_name, d.l_name, d.suffix, d.username 
             FROM db_bark.tbl_user u
@@ -382,7 +401,8 @@ function getProfile($uid) {
     }
 }
 
-function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username) {
+function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username)
+{
     global $conn;
 
     // Check if UID exists
@@ -403,7 +423,7 @@ function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username) {
         $stmt->bindParam(':suffix', $suffix);
         $stmt->bindParam(':username', $username);
 
-    }else{
+    } else {
         // update user details
         $sql = "UPDATE db_bark.tbl_user_details 
         SET f_name = :f_name, 
@@ -420,13 +440,11 @@ function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username) {
         $stmt->bindParam(':l_name', $l_name);
         $stmt->bindParam(':suffix', $suffix);
         $stmt->bindParam(':username', $username);
-        
+
 
     }
 
     // Update profile
-   
-
     try {
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
@@ -438,5 +456,68 @@ function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username) {
         error_log('Update Error: ' . $e->getMessage());
         echo json_encode(['status' => 500, 'message' => 'Internal server error']);
     }
+}
+
+function getAnalytics()
+{
+    global $conn;
+
+
+    // get registered users per month for the past 12 months
+
+    $sql = "SELECT COUNT(uid) as total_users, MONTH(date_created) as month, YEAR(date_created) as year
+            FROM db_bark.tbl_user
+            GROUP BY YEAR(date_created), MONTH(date_created)
+            LIMIT 12
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $row) {
+        // convert month number to month name
+        $dateObj = DateTime::createFromFormat('!m', $row['month']);
+        $monthName = $dateObj->format('M');
+
+        $categories[] = $monthName . ' ' . $row['year'];
+
+        $values[] = $row['total_users'];
+
+    }
+
+
+    // get post count per category
+
+    $sql = "SELECT COUNT(pid) as post_count, category
+            FROM db_bark.tbl_post
+            GROUP BY category
+            ORDER BY post_count
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $row) {
+        $cat_series[] = $row['post_count'];
+        $cat_label[] = $row['category'];
+    }
+
+
+
+
+    echo json_encode([
+        'status' => 200,
+        'message' => 'Here are the analytics',
+        'user_count' => [
+            'categories' => $categories,
+            'values' => $values
+        ],
+        'post_count' => [
+            'categories' => $cat_label,
+            'values' => $cat_series
+        ]
+    ]);
 }
 

@@ -1,41 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminNav from "../AdminNav";
 import "./Dashboard.css";
 import { Avatar, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
-// import Stack from "@mui/material";
-// table
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
 
 // charts
 import Chart from "react-apexcharts";
 import Ranking from "./Ranking";
-
-const rows = [
-  {
-    uid: "usr-1000",
-    uname: "reztydde",
-    email: "ddd@email.com",
-    count: 9823,
-    percent: "68%",
-  },
-  {
-    uid: "usr-1002",
-    uname: "shasha",
-    email: "ddd@email.com",
-    count: 9823,
-    percent: "68%",
-  },
-];
+import axios from "../../../backend/axios";
 
 export default function Dashboard() {
+  let [user_count, setUserCount] = useState([]);
+  let [user_cat, setUserCat] = useState([]);
+  let [cat_series, setCatSeries] = useState([]);
+  let [cat_labels, setCatLabels] = useState([]);
   let active = location.pathname;
   // alert(active);
 
@@ -50,20 +28,7 @@ export default function Dashboard() {
         },
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        categories: user_cat,
       },
       title: {
         text: "Registered Users",
@@ -81,7 +46,7 @@ export default function Dashboard() {
     series: [
       {
         name: "New Users", // user count
-        data: [30, 40, 45, 50, 49, 600, 70, 91],
+        data: user_count,
       },
     ],
   };
@@ -113,10 +78,26 @@ export default function Dashboard() {
           color: "#263238",
         },
       },
-      series: [44, 55, 13, 33],
-      labels: ["Apple", "Mango", "Orange", "Watermelon"],
+      series: cat_series,
+      labels: cat_labels,
     },
   };
+
+  useEffect(() => {
+    // fetch data
+    axios
+      .get("/getAnalytics.php")
+      .then((res) => {
+        // console.log(res.data.cat_count);
+        setUserCount(res.data.user_count.values);
+        setUserCat(res.data.user_count.categories);
+        setCatSeries(res.data.post_count.values);
+        setCatLabels(res.data.post_count.categories);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <div>
@@ -132,8 +113,6 @@ export default function Dashboard() {
                 type="bar"
                 width="600"
               />
-              {/* <Button variant="contained">go</Button>? */}
-              {/* <Link to={"/user-management"}>manage users --{">"}</Link> */}
             </div>
             <div className="cat-chart rounded-3">
               <Chart
