@@ -10,12 +10,16 @@ import Ranking from "./Ranking";
 import axios from "../../../backend/axios";
 
 export default function Dashboard() {
-  let [user_count, setUserCount] = useState([]);
-  let [user_cat, setUserCat] = useState([]);
-  let [cat_series, setCatSeries] = useState([]);
-  let [cat_labels, setCatLabels] = useState([]);
+  let [analyticsData, setAnalyticsData] = useState({
+    user_label: [],
+    user_count: [],
+    cat_label: [],
+    cat_count: [],
+    top_contributors: [],
+    most_popular_posts: [],
+    most_viewed_posts: [],
+  });
   let active = location.pathname;
-  // alert(active);
 
   let user_chart = {
     options: {
@@ -28,7 +32,7 @@ export default function Dashboard() {
         },
       },
       xaxis: {
-        categories: user_cat,
+        categories: analyticsData.user_label,
       },
       title: {
         text: "Registered Users",
@@ -46,7 +50,7 @@ export default function Dashboard() {
     series: [
       {
         name: "New Users", // user count
-        data: user_count,
+        data: analyticsData.user_count,
       },
     ],
   };
@@ -78,8 +82,8 @@ export default function Dashboard() {
           color: "#263238",
         },
       },
-      series: cat_series,
-      labels: cat_labels,
+      series: analyticsData.cat_count,
+      labels: analyticsData.cat_label,
     },
   };
 
@@ -88,11 +92,15 @@ export default function Dashboard() {
     axios
       .get("/getAnalytics.php")
       .then((res) => {
-        // console.log(res.data.cat_count);
-        setUserCount(res.data.user_count.values);
-        setUserCat(res.data.user_count.categories);
-        setCatSeries(res.data.post_count.values);
-        setCatLabels(res.data.post_count.categories);
+        setAnalyticsData({
+          user_label: res.data.user_count.categories,
+          user_count: res.data.user_count.values,
+          cat_label: res.data.post_count.categories,
+          cat_count: res.data.post_count.values,
+          top_contributors: res.data.top_contributors,
+          most_popular_posts: res.data.most_popular_posts,
+          most_viewed_posts: res.data.most_viewed_posts,
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -128,7 +136,7 @@ export default function Dashboard() {
             gap={5}
             className="my-5 justify-content-around flex-wrap"
           >
-            <Ranking />
+            <Ranking analyticsData={analyticsData} />
           </Stack>
         </div>
       </div>

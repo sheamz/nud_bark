@@ -486,9 +486,7 @@ function getAnalytics()
 
     }
 
-
-    // get post count per category
-
+    // get posts per category
     $sql = "SELECT COUNT(pid) as post_count, category
             FROM db_bark.tbl_post
             GROUP BY category
@@ -504,9 +502,58 @@ function getAnalytics()
         $cat_label[] = $row['category'];
     }
 
+    // get top contributors
+
+    $sql = "SELECT usr.uid, usd.username, usr.email, pst.category, COUNT(pst.pid) as count
+            FROM db_bark.tbl_post as pst
+            JOIN db_bark.tbl_user as usr
+            ON pst.uid = usr.uid
+            LEFT JOIN db_bark.tbl_user_details as usd
+            ON usr.uid = usd.uid
+            GROUP BY usr.uid
+            ORDER BY count DESC
+            LIMIT 3
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $top_contri_res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // get most popular post
+    $sql = "SELECT pst.title, pst.category, COUNT(cid) as com_count
+            FROM db_bark.tbl_post as pst
+            JOIN db_bark.tbl_comment as com
+            ON pst.pid = com.pid
+            GROUP BY pst.pid
+            ORDER BY com_count DESC
+
+            LIMIT 3";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $most_pop_res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+    // get most views
+    $sql = "SELECT pst.title, pst.category, view as view_count
+            FROM db_bark.tbl_post as pst
+            ORDER BY view_count DESC
+            LIMIT 3";
 
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $most_view_res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // get total views
+    $sql = "SELECT SUM(view) as total_views
+            FROM db_bark.tbl_post
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $total_views = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // send result
     echo json_encode([
         'status' => 200,
         'message' => 'Here are the analytics',
@@ -517,6 +564,12 @@ function getAnalytics()
         'post_count' => [
             'categories' => $cat_label,
             'values' => $cat_series
+        ],
+        'top_contributors' => $top_contri_res,
+        'most_popular_posts' => $most_pop_res,
+        'most_viewed_posts' => [
+            'post' => $most_view_res,
+            'total_views' => (int) $total_views[0]['total_views']
         ]
     ]);
 }
