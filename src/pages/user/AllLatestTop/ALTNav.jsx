@@ -17,7 +17,7 @@ const ALTNav = () => {
   return (
     <>
       <div className="navbar">
-        <div className="navbar-left">
+        {/* <div className="navbar-left">
           <div className="all">
             <h3>All</h3>
           </div>
@@ -27,10 +27,10 @@ const ALTNav = () => {
           <div className="top">
             <h3>Top Choices</h3>
           </div>
-        </div>
+        </div> */}
 
         <div className="navbar-right">
-          <div className="category-dropdown">
+          {/* <div className="category-dropdown">
             <select
               id="category"
               value={category}
@@ -43,11 +43,16 @@ const ALTNav = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           <div className="actions">
             <Link to="/create-topic">
-              <button className="create-post-btn">Create Post</button>
+              <button
+                className="create-post-btn"
+                style={{ color: "darkblue", fontWeight: "bold" }}
+              >
+                Create Post
+              </button>
             </Link>
           </div>
         </div>
