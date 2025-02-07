@@ -142,6 +142,21 @@ function PostMngmt() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  let getPost = () => {
+    axios
+      .get("/getPost.php")
+      .then((res) => {
+        setRows(res.data.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -157,21 +172,6 @@ function PostMngmt() {
     setPage(0);
   };
 
-  useEffect(() => {
-    getPost();
-  }, []);
-
-  let getPost = () => {
-    axios
-      .get("/getPost.php")
-      .then((res) => {
-        setRows(res.data.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -181,7 +181,7 @@ function PostMngmt() {
       [...rows]
         .sort(getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, rows]
   );
 
   let closeRemove = () => {
