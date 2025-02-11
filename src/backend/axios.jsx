@@ -6,5 +6,5 @@ const token = cookie.get("atk");
 
 export default axios.create({
   baseURL: "http://localhost/nud_bark/src/backend/api",
-  headers: { Authorization: `Bearer ${token}` },
+  headers: token ? { Authorization: `Bearer ${token}` } : {},
 });

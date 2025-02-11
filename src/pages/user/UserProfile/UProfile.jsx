@@ -10,9 +10,9 @@ const cookie = new Cookies();
 
 const Profile = () => {
   const navigate = useNavigate();
-  var token = cookie.get("atk");
-  var decoded = jwtDecode(token);
-  const uid = decoded.uid;
+  // var token = cookie.get("atk");
+  // var decoded = jwtDecode(token);
+  // const uid = decoded.uid;
 
   const [userData, setUserData] = useState({
     profilePicture: "https://via.placeholder.com/150",
@@ -33,7 +33,7 @@ const Profile = () => {
       // console.log("Sending data to backend:");
       // console.log({ uid, ...userData });
       axios
-        .post("/updateProfile.php", { uid, ...userData })
+        .post("/updateProfile.php", { ...userData })
         .then((res) => {
           // console.log(res.data);
           setIsEditing(false);
@@ -47,9 +47,9 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const uid = window.location.pathname.split("/")[2];
+    // const uid = window.location.pathname.split("/")[2];
     axios
-      .post("/getProfile.php", { uid })
+      .post("/getProfile.php")
       .then((res) => {
         // console.log(res.data);
         setUserData((prevState) => ({

@@ -4,6 +4,5 @@ ini_set('display_errors', 1);
 
 include '../functions.php';
 
-$uid = $data["uid"];
-getProfile($uid);
-?>
+// $uid = $data["uid"];
+getProfile();

@@ -16,7 +16,7 @@ const ALTNav = () => {
 
   return (
     <>
-      <div className="navbar">
+      <div>
         {/* <div className="navbar-left">
           <div className="all">
             <h3>All</h3>
@@ -48,8 +48,11 @@ const ALTNav = () => {
           <div className="actions">
             <Link to="/create-topic">
               <button
-                className="create-post-btn"
-                style={{ color: "darkblue", fontWeight: "bold" }}
+                className="create-post-btn my-3 mx-0"
+                style={{
+                  color: "darkblue",
+                  fontWeight: "bold",
+                }}
               >
                 Create Post
               </button>

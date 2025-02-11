@@ -19,23 +19,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-function test()
-{
-    global $env;
-    // get token in authorization header
-    $headers = getallheaders();
-    $token = explode(' ', $headers['Authorization'])[1];
-    // get secret from env
-    $secretKey = $env['JWT_SECRET'];
+// get token in authorization header
+$headers = getallheaders();
+// get secret from env
+$secretKey = $env['JWT_SECRET'];
 
+
+if (array_key_exists('Authorization', $headers)) {
     // decode jwt
-    // $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
-    // $decoded = JWT::decode($token, $secretKey, array('HS256'));
+    try {
+        //code...
+        $token = explode(' ', $headers['Authorization'])[1];
 
+        $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+        $dec_uid = $decoded->uid;
+        $dec_rol = $decoded->rol;
 
-
-    echo json_encode(['status' => 200, 'message' => 'Hello World!', 'token' => $secretKey]);
+    } catch (\Throwable $th) {
+        //throw $th;
+        header('HTTP/1.1 400 InvalidToken');
+        echo json_encode(['message' => 'expired token']);
+        die;
+    }
 }
+
+
+
+
+// }
 
 function register($email, $pass, $role)
 {
@@ -252,6 +263,26 @@ function getPostById($pid)
     echo json_encode(['status' => 200, 'message' => 'so eto na nga ang specific chika', 'data' => $post]);
 }
 
+function getPostByUser()
+{
+    global $conn, $dec_uid;
+
+    $sql = "SELECT * 
+            FROM db_bark.tbl_post
+            WHERE uid = :uid
+            ORDER BY date_created DESC
+            ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':uid', $dec_uid);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(['status' => 200, 'message' => 'so eto na nga ang mga chika', 'data' => $result]);
+
+}
+
+
 function addViews($pid)
 {
     global $conn;
@@ -383,15 +414,17 @@ function deletePost($pid)
 
 }
 
-function getProfile($uid)
+function getProfile()
 {
-    global $conn;
-    $sql = "SELECT u.email, u.date_created, d.f_name, d.m_name, d.l_name, d.suffix, d.username 
+    global $conn, $dec_uid;
+
+
+    $sql = "SELECT u.uid, u.email, u.date_created, d.f_name, d.m_name, d.l_name, d.suffix, d.username 
             FROM db_bark.tbl_user u
             LEFT JOIN db_bark.tbl_user_details d ON u.uid = d.uid
             WHERE u.uid = :uid";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':uid', $uid);
+    $stmt->bindParam(':uid', $dec_uid);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result) {
@@ -401,13 +434,13 @@ function getProfile($uid)
     }
 }
 
-function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username)
+function updateProfile($f_name, $m_name, $l_name, $suffix, $username)
 {
-    global $conn;
+    global $conn, $dec_uid;
 
     // Check if UID exists
     $checkUid = $conn->prepare("SELECT COUNT(*) FROM db_bark.tbl_user_details WHERE uid = :uid");
-    $checkUid->bindParam(':uid', $uid);
+    $checkUid->bindParam(':uid', $dec_uid);
     $checkUid->execute();
 
     if ($checkUid->fetchColumn() == 0) {
@@ -416,7 +449,7 @@ function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username)
                 VALUES (:uid, :f_name, :m_name, :l_name, :suffix, :username)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':uid', $uid);
+        $stmt->bindParam(':uid', $dec_uid);
         $stmt->bindParam(':f_name', $f_name);
         $stmt->bindParam(':m_name', $m_name);
         $stmt->bindParam(':l_name', $l_name);
@@ -434,7 +467,7 @@ function updateProfile($uid, $f_name, $m_name, $l_name, $suffix, $username)
         WHERE uid = :uid";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':uid', $uid);
+        $stmt->bindParam(':uid', $dec_uid);
         $stmt->bindParam(':f_name', $f_name);
         $stmt->bindParam(':m_name', $m_name);
         $stmt->bindParam(':l_name', $l_name);
@@ -574,3 +607,37 @@ function getAnalytics()
     ]);
 }
 
+function getNews()
+{
+    global $conn;
+
+    $sql = "SELECT pid, title, category, date_created
+            FROM db_bark.tbl_post as pst
+            WHERE pst.category = 'Bark News' 
+            ORDER BY date_created DESC
+            LIMIT 3";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $latest_news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(['status' => 200, 'message' => 'okoksokoskks', 'latest_news' => $latest_news]);
+
+}
+
+function getTopCategories()
+{
+    global $conn;
+
+    $sql = "SELECT  category as name, COUNT(category) as cat_count
+            FROM db_bark.tbl_post as pst
+            GROUP BY category
+            ORDER BY cat_count DESC
+            LIMIT 3";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $top_categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(['status' => 200, 'message' => 'okoksokoskks', 'top_categories' => $top_categories]);
+}

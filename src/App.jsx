@@ -16,6 +16,7 @@ import Protected from "./pages/routes/protected.jsx";
 import { jwtDecode } from "jwt-decode";
 import { Cookies } from "react-cookie";
 import "./App.css";
+import MyPost from "./pages/user/MyPost/myPost.jsx";
 
 let cookie = new Cookies();
 let token = cookie.get("atk");
@@ -42,13 +43,16 @@ function AppRoutes() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<Protected />}>
+        {/* user */}
         <Route path="/home" element={<Home />} />
         <Route path="/create-topic" element={<CreateTopic />} />
         <Route path="/your-contri" element={<YourContri />} />
         <Route path="/your-comments" element={<YourComments />} />
         <Route path="/browse" element={<ALT />} />
-        <Route path="/user-profile/*" element={<UProfile />} />
+        <Route path="/user-profile" element={<UProfile />} />
         <Route path="/browse/post/*" element={<ConversationPage />} />
+        <Route path="/myposts" element={<MyPost />} />
+        {/* admin */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/user-management" element={<UserManagement />} />
         <Route path="/post-management" element={<PostManagement />} />

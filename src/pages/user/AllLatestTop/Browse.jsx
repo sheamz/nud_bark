@@ -89,7 +89,7 @@ const Browse = () => {
   }, []);
 
   return (
-    <div className="blue-bg">
+    <div className="blue-bg ">
       <NavUser />
 
       <div className="container p-0 mt-5">

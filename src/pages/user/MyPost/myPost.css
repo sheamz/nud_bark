@@ -1,0 +1,38 @@
+.myPosts .background_profile {
+  width: 100%;
+  height: 250px;
+  background-color: aqua;
+  position: relative;
+}
+
+.myPosts .background_profile .MuiStack-root {
+  position: absolute;
+  left: 50%;
+  bottom: -75px;
+  transform: translateX(-75px);
+  align-items: center;
+}
+
+.myPosts .background_profile .MuiAvatar-root {
+  width: 150px;
+  height: 150px;
+}
+
+.myPosts .MuiPaper-root:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.myPosts .date {
+  font-size: small;
+  color: #9e9e9e;
+}
+
+.myPosts .content-area p {
+  font-size: small;
+}
+
+.myPosts .content-area img {
+  width: 100%;
+  border-radius: 10px;
+}

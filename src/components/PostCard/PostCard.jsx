@@ -44,7 +44,7 @@ const PostCard = (_props) => {
           <div className="post-container">
             <div className="post-section">
               <Avatar alt={data.uname ?? data.uid}>
-                {data.uname == null ? "" : data.uname[1]}
+                {data.uname == null ? "" : data.uname[0]}
               </Avatar>
               <div className="post-detail">
                 {/* title */}

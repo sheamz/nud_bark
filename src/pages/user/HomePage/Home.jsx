@@ -18,12 +18,23 @@ export default function Home() {
   const totalComments = 100; // Example total comments, replace with actual data
 
   const [posts, setPosts] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
     axios
       .get("/getPost.php")
       .then((res) => {
         setPosts(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .get("/getProfile.php")
+      .then((res) => {
+        // console.log(res.data);
+        setUserDetails(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -47,7 +58,8 @@ export default function Home() {
               <Header title={"Your Contributions"} />
               <div className="card-body-contri">
                 <Typography variant="body1">
-                  Hi {username}, here is your total contributions.
+                  Hi <b>{userDetails.username ?? userDetails.uid}</b>, here is
+                  your total contributions.
                 </Typography>
                 <Typography variant="body2" className="body2">
                   {totalPosts} Total Posts
@@ -56,7 +68,7 @@ export default function Home() {
                   {totalComments} Total Comments
                 </Typography>
                 <div className="see-all-button-contri">
-                  <Button component={Link} to="/your-contri">
+                  <Button component={Link} to="/myposts">
                     See All
                   </Button>
                 </div>
