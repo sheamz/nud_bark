@@ -113,7 +113,7 @@ function register($email, $pass, $role)
 function getUser()
 {
     global $conn;
-    $sql = "SELECT * FROM tbl_user";
+    $sql = "SELECT * FROM tbl_user WHERE role = 'user'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -640,4 +640,50 @@ function getTopCategories()
     $top_categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode(['status' => 200, 'message' => 'okoksokoskks', 'top_categories' => $top_categories]);
+}
+
+function getComPostByUser()
+{
+    global $conn, $dec_uid;
+
+    // comment count
+    $sql = "SELECT COUNT(c.cid) as com_count, d.username
+            FROM db_bark.tbl_user u
+            LEFT JOIN db_bark.tbl_user_details d 
+            ON u.uid = d.uid
+            LEFT JOIN db_bark.tbl_comment c
+            ON c.uid = u.uid
+            WHERE u.uid = :uid
+            GROUP BY u.uid";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':uid', $dec_uid);
+    $stmt->execute();
+    $com_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // get post count
+
+    $sql = "SELECT  COUNT(p.pid) as post_count
+            FROM db_bark.tbl_user u
+            LEFT JOIN db_bark.tbl_user_details d 
+            ON u.uid = d.uid
+            LEFT JOIN db_bark.tbl_post p
+            ON p.uid = u.uid
+            WHERE u.uid = :uid
+            GROUP BY u.uid";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':uid', $dec_uid);
+    $stmt->execute();
+    $post_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $data = [
+        'uid' => $dec_uid,
+        'username' => $com_count[0]['username'],
+        'com_count' => $com_count[0]['com_count'],
+        'post_count' => $post_count[0]['post_count']
+    ];
+
+    echo json_encode(['status' => 200, 'message' => 'okoksokoskks', 'data' => $data]);
+
 }

@@ -107,7 +107,7 @@ const CreateTopic = () => {
   );
 
   return (
-    <div className="blue-bg">
+    <div className="blue-bg" style={{ minHeight: "100vh" }}>
       <OtherNav title={"Create New Topic"} />
       <div className="container p-0 mt-5">
         <div className="create-topic-container">

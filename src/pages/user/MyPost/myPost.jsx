@@ -39,39 +39,107 @@ export default function MyPost() {
           alignItems: "center",
         }}
       >
-        <Stack spacing={3} width={"600px"} m={10}>
-          {myPost.map((post) => {
-            let date = new Date(post.date_created);
-            let formattedDate = isNaN(date)
-              ? "Invalid date"
-              : formatDistanceToNow(date, { addSuffix: true });
+        <Stack spacing={3} width={"600px"} m={10} alignItems={"center"}>
+          {myPost.length != 0 ? (
+            myPost.map((post) => {
+              let date = new Date(post.date_created);
+              let formattedDate = isNaN(date)
+                ? "Invalid date"
+                : formatDistanceToNow(date, { addSuffix: true });
 
-            return (
-              <Link
-                key={post.pid}
-                style={{ textDecoration: "none" }}
-                to={"/browse/post/" + post.pid}
-              >
-                <Paper
-                  elevation={1}
-                  sx={{
-                    padding: "15px",
-                    backgroundColor: "white",
-                    borderRadius: "10px",
-                  }}
+              let category_color = "";
+
+              switch (post.category) {
+                case "Ask Community":
+                  category_color = "cyan";
+
+                  break;
+
+                case "Marketplace":
+                  category_color = "lightblue";
+
+                  break;
+
+                case "Ask Suggestion":
+                  category_color = "green";
+
+                  break;
+
+                case "Off Topic":
+                  category_color = "yellow";
+
+                  break;
+
+                case "Issue":
+                  category_color = "pink";
+
+                  break;
+
+                default:
+                  category_color = "violet";
+
+                  break;
+              }
+
+              return (
+                <Link
+                  key={post.pid}
+                  style={{ textDecoration: "none" }}
+                  to={"/browse/post/" + post.pid}
                 >
-                  <Stack direction="row" spacing={2} alignItems="center" mb={2}>
-                    <h4>{post.title}</h4>
-                    <p className="date">posted {formattedDate}</p>
-                  </Stack>
-                  <div
-                    className="content-area"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                  />
-                </Paper>
-              </Link>
-            );
-          })}
+                  <Paper
+                    elevation={1}
+                    sx={{
+                      padding: "15px",
+                      backgroundColor: "white",
+                      borderRadius: "10px",
+                      minWidth: "600px",
+                    }}
+                  >
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      alignItems="center"
+                      mb={2}
+                    >
+                      <h4>{post.title}</h4>
+                      <p className="date">posted {formattedDate}</p>
+                    </Stack>
+                    <Divider />
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        width: "fit-content",
+                        borderRadius: "10px",
+                        px: 2,
+                        backgroundColor: category_color,
+                        fontSize: "13px",
+                        my: "10px",
+                      }}
+                    >
+                      {post.category}
+                    </Paper>
+                    <div
+                      className="content-area"
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
+
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "grey",
+                        marginTop: "10px",
+                      }}
+                    >
+                      Views: {post.view}
+                    </p>
+                  </Paper>
+                </Link>
+              );
+            })
+          ) : (
+            <h1>No Post Yet</h1>
+          )}
         </Stack>
       </div>
     </div>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import NavUser from "../../../components/NavUser";
-import HomeContri from "./HomeContri";
-import HomeList from "./HomeList";
 import HomeUpper from "./HomeUpper";
 import PostCard from "../../../components/PostCard/PostCard";
 import Footer from "../../../components/Footer";
@@ -13,10 +11,6 @@ import { Paper, Stack, Divider, Typography, Button } from "@mui/material";
 import "./Home.css"; // Import the CSS file
 
 export default function Home() {
-  const username = "@basher"; // Example username, replace with actual user data
-  const totalPosts = 100; // Example total posts, replace with actual data
-  const totalComments = 100; // Example total comments, replace with actual data
-
   const [posts, setPosts] = useState([]);
   const [userDetails, setUserDetails] = useState({});
 
@@ -31,10 +25,9 @@ export default function Home() {
       });
 
     axios
-      .get("/getProfile.php")
+      .get("/getComPostByUser.php")
       .then((res) => {
-        // console.log(res.data);
-        setUserDetails(res.data);
+        setUserDetails(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -42,7 +35,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="blue-bg">
+    <div className="blue-bg" style={{ minHeight: "100vh" }}>
       <NavUser />
       <div className="container mt-5 p-0">
         <Stack className="home-container" width="100%" gap={10}>
@@ -62,10 +55,10 @@ export default function Home() {
                   your total contributions.
                 </Typography>
                 <Typography variant="body2" className="body2">
-                  {totalPosts} Total Posts
+                  {userDetails.post_count} Total Posts
                 </Typography>
                 <Typography variant="body2" className="body2">
-                  {totalComments} Total Comments
+                  {userDetails.com_count} Total Comments
                 </Typography>
                 <div className="see-all-button-contri">
                   <Button component={Link} to="/myposts">
