@@ -5,12 +5,14 @@ import axios from "../../../backend/axios";
 import { formatDistanceToNow, parseISO } from "date-fns";
 
 import { Stack, Avatar, Divider, Collapse, Paper } from "@mui/material";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import { Link } from "react-router-dom";
 
 export default function MyPost() {
   const [myPost, setMyPost] = useState([]);
   const [userDetails, setUserDetails] = useState({});
 
+  // let navigate = useNavigate();
   useEffect(() => {
     axios.get("/getPostByUser.php").then((res) => {
       // console.log(res.data.data);
@@ -22,13 +24,18 @@ export default function MyPost() {
     });
   }, []);
 
+  // let goToChangeProfile = () => {};
+
   return (
     <div className="blue-bg myPosts" style={{ minHeight: "100vh" }}>
       <NavUser />
       <div className="background_profile">
         <Stack>
           <Avatar></Avatar>
-          <h3>{userDetails.username ?? userDetails.uid}</h3>
+          <Stack direction="row" alignItems={"center"}>
+            <h3>{userDetails.username ?? userDetails.uid}</h3>
+            <BorderColorRoundedIcon />
+          </Stack>
         </Stack>
       </div>
       <div

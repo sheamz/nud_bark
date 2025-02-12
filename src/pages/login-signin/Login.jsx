@@ -27,8 +27,8 @@ export default function Login() {
         // console.log(res.data);
 
         if (res.data.status == 200) {
-          alert(res.data.message);
           cookie.set("atk", res.data.atk);
+          alert(res.data.message);
 
           let role = jwtDecode(res.data.atk).rol;
 

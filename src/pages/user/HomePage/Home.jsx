@@ -7,7 +7,7 @@ import Header from "../../../components/Header";
 import axios from "../../../backend/axios";
 
 import { Link } from "react-router-dom";
-import { Paper, Stack, Divider, Typography, Button } from "@mui/material";
+import { Paper, Stack, Typography, Button } from "@mui/material";
 import "./Home.css"; // Import the CSS file
 
 export default function Home() {
@@ -51,7 +51,7 @@ export default function Home() {
               <Header title={"Your Contributions"} />
               <div className="card-body-contri">
                 <Typography variant="body1">
-                  Hi <b>{userDetails.username ?? userDetails.uid}</b>, here is
+                  Hi <b>userDetails.username ?? userDetails.uid</b>, here is
                   your total contributions.
                 </Typography>
                 <Typography variant="body2" className="body2">

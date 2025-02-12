@@ -21,13 +21,11 @@ export default function NavUser() {
 
   let logOut = () => {
     cookie.remove("atk");
-
     navigate("/");
   };
 
   useEffect(() => {
     axios.get("/getProfile.php").then((res) => {
-      // console.log(res.data);
       setUserDetails(res.data);
     });
   }, []);

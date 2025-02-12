@@ -19,10 +19,10 @@ import "./App.css";
 import MyPost from "./pages/user/MyPost/myPost.jsx";
 
 let cookie = new Cookies();
-let token = cookie.get("atk");
 
 function AppRoutes() {
   const navigate = useNavigate();
+  let token = cookie.get("atk");
 
   useEffect(() => {
     if (token) {
@@ -36,7 +36,7 @@ function AppRoutes() {
     } else {
       navigate("/");
     }
-  }, [token]);
+  }, []);
 
   return (
     <Routes>
