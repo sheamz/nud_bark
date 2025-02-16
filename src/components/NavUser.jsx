@@ -9,14 +9,12 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 import { Cookies } from "react-cookie";
-import { jwtDecode } from "jwt-decode";
 import axios from "../backend/axios";
 
 let cookie = new Cookies();
 
 export default function NavUser() {
   const navigate = useNavigate();
-  // let uid = jwtDecode(cookie.get("atk")).uid;/
   const [userDetails, setUserDetails] = useState({});
 
   let logOut = () => {
@@ -72,7 +70,7 @@ export default function NavUser() {
         <Stack direction="row" alignItems={"center"} gap={1} mr={2}>
           {/* <Link to={"/user-profile/" + uid}> */}
           <Link to={"/myposts"} style={{ textDecoration: "none" }}>
-            <Avatar>{userDetails.username ?? userDetails.uid}</Avatar>
+            <Avatar>{userDetails.f_name ?? userDetails.uid}</Avatar>
           </Link>
           <DropdownButton
             id="dropdown-item-button"

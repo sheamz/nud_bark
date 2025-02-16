@@ -1,14 +1,10 @@
 import React, { useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaPlus } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import JoditEditor from "jodit-react";
 import "./CreateTopic.css";
-import NavUser from "../../../components/NavUser";
 import OtherNav from "../../../components/OtherNav";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Cookies } from "react-cookie";
-import { jwtDecode } from "jwt-decode";
 import axios from "../../../backend/axios.jsx";
 
 import {
@@ -20,13 +16,10 @@ import {
   Stack,
 } from "@mui/material";
 
-let cookie = new Cookies();
-
 const CreateTopic = () => {
   const navigate = useNavigate();
   const editor = useRef(null);
   const [form_data, setFormData] = useState({
-    uid: jwtDecode(cookie.get("atk")).uid,
     tit: "",
     cat: "",
     con: "",

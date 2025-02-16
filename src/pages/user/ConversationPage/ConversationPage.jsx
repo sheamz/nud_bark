@@ -9,17 +9,12 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { formatDistanceToNow } from "date-fns";
-import { Cookies } from "react-cookie";
-import { jwtDecode } from "jwt-decode";
 
 import OtherNav from "../../../components/OtherNav";
 import axios from "../../../backend/axios.jsx";
 
-let cookies = new Cookies();
-
 function ConversationPage() {
   const pid = window.location.pathname.split("/")[3];
-  const uid = jwtDecode(cookies.get("atk")).uid;
   const [post, setPost] = React.useState({});
   const [maxComCount, setMaxComCount] = useState(5);
 
@@ -57,7 +52,7 @@ function ConversationPage() {
     e.preventDefault();
     if (countWords(com) > 0 && countWords(com) <= maxWords) {
       axios
-        .post("/createComment.php", { pid, uid, com })
+        .post("/createComment.php", { pid, com })
         .then((res) => {
           alert(res.data.message);
           setComment("");

@@ -3,9 +3,8 @@
 
 include '../functions.php';
 
-if (isset($data['uid'], $data['com'], $data['pid'])) {
+if (isset($data['com'], $data['pid'])) {
 
-    $uid = trim($data['uid']);
     $com = trim($data['com']);
     $pid = trim($data['pid']);
 
@@ -14,10 +13,10 @@ if (isset($data['uid'], $data['com'], $data['pid'])) {
 
         $pcid = trim($data['pcid']);
 
-        createReply($uid, $pid, $com, $pcid);
+        createReply($pid, $com, $pcid);
 
     } else {
-        createParentComment($uid, $pid, $com);
+        createParentComment($pid, $com);
 
     }
 }

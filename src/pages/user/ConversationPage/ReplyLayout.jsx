@@ -7,23 +7,17 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { formatDistanceToNow } from "date-fns";
-import { Cookies } from "react-cookie";
-import { jwtDecode } from "jwt-decode";
 
 import axios from "../../../backend/axios";
 
 import "./ConversationPage.css";
 
-let cookie = new Cookies();
-
 function ReplyLayout(props) {
   // console.log(props.reply);
-  const uid = jwtDecode(cookie.get("atk")).uid;
   const [maxReply, setMaxReply] = useState(0);
 
   const [toggleInputReply, setToggleInputReply] = useState(false);
   const [replyData, setReplyData] = useState({
-    uid: uid,
     pid: props.reply.pid,
     com: "",
     pcid: props.reply.cid,

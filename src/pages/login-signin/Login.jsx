@@ -11,7 +11,7 @@ import { jwtDecode } from "jwt-decode";
 
 const cookie = new Cookies();
 
-export default function Login() {
+export default function Login({ setToken }) {
   const navigate = useNavigate();
   const [form_data, setFormData] = useState([]);
 
@@ -27,7 +27,11 @@ export default function Login() {
         // console.log(res.data);
 
         if (res.data.status == 200) {
-          cookie.set("atk", res.data.atk);
+          cookie.set("atk", res.data.atk, {
+            expires: new Date(Date.now() + 86400 * 1000),
+            secure: true,
+          });
+          // setToken(res.data.atk);
           alert(res.data.message);
 
           let role = jwtDecode(res.data.atk).rol;

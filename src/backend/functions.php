@@ -43,9 +43,81 @@ if (array_key_exists('Authorization', $headers)) {
     }
 }
 
+function createLog($action, $status)
+{
+    global $conn, $dec_uid;
 
+    // get latest log id
+    $sql = "SELECT lid 
+            FROM db_bark.tbl_logs
+            ORDER BY lid DESC
+            LIMIT 1
+            ;";
 
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $latest_lid = '0';
+
+    if (!empty($result)) {
+        $latest_lid = explode('-', $result[0]['lid'])[1];
+    }
+
+    // create log id
+    $new_lid = 'LOG-' . sprintf("%05d", (int) $latest_lid + 1);
+
+    // update logs
+
+    $sql = "INSERT INTO `db_bark`.`tbl_logs` (`lid`, `uid`, `action`, `status`) 
+            VALUES (?,?,?,?);";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $new_lid);
+    $stmt->bindParam(2, $dec_uid);
+    $stmt->bindParam(3, $action);
+    $stmt->bindParam(4, $status);
+    $stmt->execute();
+
+}
+
+function createLogLogin($action, $status, $uid)
+{
+    global $conn;
+
+    // get latest log id
+    $sql = "SELECT lid 
+            FROM db_bark.tbl_logs
+            ORDER BY lid DESC
+            LIMIT 1
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $latest_lid = '0';
+
+    if (!empty($result)) {
+        $latest_lid = explode('-', $result[0]['lid'])[1];
+    }
+
+    // create log id
+    $new_lid = 'LOG-' . sprintf("%05d", (int) $latest_lid + 1);
+
+    // update logs
+
+    $sql = "INSERT INTO `db_bark`.`tbl_logs` (`lid`, `uid`, `action`, `status`) 
+            VALUES (?,?,?,?);";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $new_lid);
+    $stmt->bindParam(2, $uid);
+    $stmt->bindParam(3, $action);
+    $stmt->bindParam(4, $status);
+    $stmt->execute();
+
+}
 // }
 
 function register($email, $pass, $role)
@@ -65,6 +137,7 @@ function register($email, $pass, $role)
 
     if (!empty($result)) {
         // registered na yung email
+        createLog('Register attempt', 'Failed: Email already registered');
         echo json_encode(['status' => 400, 'message' => 'email is already registered!']);
     } else {
         // new email
@@ -106,6 +179,7 @@ function register($email, $pass, $role)
         $stmt->bindParam(4, $role);
         $stmt->execute();
 
+        createLog('Register attempt', 'Success');
         echo json_encode(['status' => 200, 'message' => 'I got your deets na bruh, you can go in na.']);
     }
 }
@@ -136,6 +210,7 @@ function login($email, $pass)
 
     if (empty($result)) {
         // walang ganitong user
+        createLog('Login attempt', 'Failed: User not found');
         echo json_encode(['status' => 400, 'message' => 'The email is invalid.']);
     } else {
         // may user
@@ -152,17 +227,19 @@ function login($email, $pass)
             ];
             $jwt = JWT::encode($payload, $key, 'HS256');
 
+            createLogLogin('Login attempt', 'Success', $result[0]["uid"]);
             echo json_encode(['status' => 200, 'message' => 'Logged in successfully', 'atk' => $jwt]);
         } else {
             // wrong password
+            createLog('Login attempt', 'Failed: Wrong password');
             echo json_encode(['status' => 400, 'message' => 'The password is wrong.']);
         }
     }
 }
 
-function createPost($uid, $title, $content, $category)
+function createPost($title, $content, $category)
 {
-    global $conn;
+    global $conn, $dec_uid;
 
     // get muna latest post id
     $sql = "SELECT pid 
@@ -186,12 +263,13 @@ function createPost($uid, $title, $content, $category)
             VALUES (?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $new_pid);
-    $stmt->bindParam(2, $uid);
+    $stmt->bindParam(2, $dec_uid);
     $stmt->bindParam(3, $title);
     $stmt->bindParam(4, $content);
     $stmt->bindParam(5, $category);
     $stmt->execute();
 
+    createLog('Create post', 'Success');
     echo json_encode(['message' => 'goods sirr!!!', 'status' => 200]);
 }
 
@@ -310,10 +388,10 @@ function addViews($pid)
 
 }
 // $uid, $pid, $comment, $cid
-function createParentComment($uid, $pid, $comment)
+function createParentComment($pid, $comment)
 {
 
-    global $conn;
+    global $conn, $dec_uid;
     // get muna latest comment id
 
     $sql = "SELECT cid 
@@ -342,19 +420,17 @@ function createParentComment($uid, $pid, $comment)
     $stmt->bindParam(1, $new_cid);
     $stmt->bindParam(2, $pid);
     $stmt->bindParam(3, $comment);
-    $stmt->bindParam(4, $uid);
-    // $stmt->bindParam(5, $pcid);
+    $stmt->bindParam(4, $dec_uid);
     $stmt->execute();
 
-
+    createLog('Create comment', 'Success');
     echo json_encode(['status' => 200, 'message' => 'dami mo naman ebas par']);
-    // echo $new_cid;
 }
 
-function createReply($uid, $pid, $comment, $pcid)
+function createReply($pid, $comment, $pcid)
 {
 
-    global $conn;
+    global $conn, $dec_uid;
     // get muna latest comment id
 
     $sql = "SELECT cid 
@@ -385,11 +461,11 @@ function createReply($uid, $pid, $comment, $pcid)
     $stmt->bindParam(1, $new_cid);
     $stmt->bindParam(2, $pid);
     $stmt->bindParam(3, $comment);
-    $stmt->bindParam(4, $uid);
+    $stmt->bindParam(4, $dec_uid);
     $stmt->bindParam(5, $pcid);
     $stmt->execute();
 
-
+    createLog('Create comment', 'Success');
     echo json_encode(['status' => 200, 'message' => 'eto na ambag mo par?']);
 
 
@@ -410,6 +486,7 @@ function deletePost($pid)
 
     $stmt->execute();
 
+    createLog('Delete post ' . $pid, 'Success');
     echo json_encode(['status' => 200, 'message' => 'wala na']);
 
 }
@@ -481,12 +558,15 @@ function updateProfile($f_name, $m_name, $l_name, $suffix, $username)
     try {
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
+            createLog('Update profile', 'Success');
             echo json_encode(['status' => 200, 'message' => 'Profile updated successfully']);
         } else {
+            createLog('Update profile', 'Failed: No changes detected');
             echo json_encode(['status' => 400, 'message' => 'No changes detected in the profile']);
         }
     } catch (PDOException $e) {
         error_log('Update Error: ' . $e->getMessage());
+        createLog('Update profile', 'Failed: Internal server error');
         echo json_encode(['status' => 500, 'message' => 'Internal server error']);
     }
 }
@@ -685,5 +765,64 @@ function getComPostByUser()
     ];
 
     echo json_encode(['status' => 200, 'message' => 'okoksokoskks', 'data' => $data]);
+
+}
+
+function newPassword($old_pass, $new_pass)
+{
+    global $conn, $dec_uid;
+
+    // get old password
+    $sql = "SELECT pass
+            FROM db_bark.tbl_user
+            WHERE uid = :uid
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':uid', $dec_uid);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // compare with old password
+    if (!password_verify($old_pass, $result['pass'])) {
+        createLog('Change password', 'Failed: Old password doesn\'t match');
+        echo json_encode(['status' => 400, 'message' => 'Old password doesn\'t match your current password']);
+        die;
+    }
+
+    // hash new password
+    $hash_new_pass = password_hash(
+        $new_pass,
+        PASSWORD_DEFAULT
+    );
+
+    // update password
+    $sql = "UPDATE db_bark.tbl_user
+            SET pass = :new_pass
+            WHERE uid = :uid
+            ;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':new_pass', $hash_new_pass);
+    $stmt->bindParam(':uid', $dec_uid);
+    $stmt->execute();
+
+    createLog('Change password', 'Success');
+    echo json_encode(['status' => 200, 'message' => 'Password updated successfully']);
+
+}
+
+function deleteUser($uid)
+{
+    global $conn;
+
+    $sql = "DELETE FROM `db_bark`.`tbl_user` WHERE (`uid` = ?);";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $uid);
+    $stmt->execute();
+
+    createLog('Delete user ' . $uid, 'Success');
+    echo json_encode(['status' => 200, 'message' => 'User deleted successfully']);
 
 }
