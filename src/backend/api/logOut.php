@@ -2,4 +2,4 @@
 
 include '../functions.php';
 
-createLog('User logged out', 'success');
+createLog('User logged out', 'Success');

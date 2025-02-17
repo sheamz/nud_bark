@@ -826,3 +826,22 @@ function deleteUser($uid)
     echo json_encode(['status' => 200, 'message' => 'User deleted successfully']);
 
 }
+
+function getLogs()
+{
+    global $conn;
+
+    $sql = "SELECT l.lid, l.uid, d.username, l.action ,l.status, l.time_of_log 
+            FROM db_bark.tbl_logs as l
+            LEFT JOIN db_bark.tbl_user as u
+            ON l.uid = u.uid
+            LEFT JOIN db_bark.tbl_user_details as d
+            ON d.uid = u.uid
+            ORDER BY time_of_log DESC";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(['status' => 200, 'message' => 'okoksokoskks', 'data' => $result]);
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
@@ -9,16 +9,27 @@ import { Avatar, Divider } from "@mui/material";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Cookies } from "react-cookie";
+import axios from "../../backend/axios";
 
 let cookie = new Cookies();
 
 function AdminNav(props) {
   const navigate = useNavigate();
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    axios.get("/getProfile.php").then((res) => {
+      setProfile(res.data);
+    });
+  }, []);
 
   let logOut = () => {
-    cookie.remove("atk");
-
-    navigate("/");
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (!confirmLogout) return;
+    axios.get("/logOut.php").then((res) => {
+      cookie.remove("atk");
+      navigate("/");
+    });
   };
 
   return (
@@ -35,7 +46,7 @@ function AdminNav(props) {
           >
             <div className="profile">
               <div className="profile-info">
-                <span className="username">Anima Agrawal</span>
+                <span className="username">{profile.uid}</span>
               </div>
               <Avatar></Avatar>
             </div>
@@ -71,6 +82,14 @@ function AdminNav(props) {
               className={props.active == "/post-management" ? "active" : ""}
             >
               <BsFileEarmarkPostFill /> Post Management
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/logs"
+              className={props.active == "/logs" ? "active" : ""}
+            >
+              <BsFileEarmarkPostFill /> Admin Logs
             </Link>
           </li>
         </ul>

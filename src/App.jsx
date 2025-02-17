@@ -22,6 +22,7 @@ import { jwtDecode } from "jwt-decode";
 import { Cookies } from "react-cookie";
 import "./App.css";
 import MyPost from "./pages/user/MyPost/myPost.jsx";
+import Logs from "./pages/admin/Logs/logs.jsx";
 
 let cookie = new Cookies();
 
@@ -162,6 +163,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute allowedRoles={["admin"]}>
             <PostManagement />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/logs"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <Logs />
           </ProtectedRoute>
         }
       />

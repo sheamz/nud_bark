@@ -84,10 +84,11 @@ const Profile = () => {
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to logout?");
-    if (confirmLogout) {
+    if (!confirmLogout) return;
+    axios.get("/logOut.php").then((res) => {
       cookie.remove("atk");
       navigate("/");
-    }
+    });
   };
 
   const [isPassDialog, setIsPassDialog] = useState(false);
