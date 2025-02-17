@@ -24,9 +24,9 @@
 
 .myPosts .background_profile .MuiStack-root {
   position: absolute;
-  left: 50%;
-  bottom: -75px;
-  transform: translateX(-75px);
+  left: 51%;
+  bottom: -50px;
+  transform: translateX(-110px);
   align-items: center;
 }
 
