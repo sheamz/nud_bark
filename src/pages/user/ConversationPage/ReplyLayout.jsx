@@ -42,7 +42,6 @@ function ReplyLayout(props) {
     axios
       .post("/createComment.php", replyData)
       .then((res) => {
-        // alert(res.data.message);
         props.getPosts;
       })
       .catch((err) => {
