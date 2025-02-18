@@ -3,16 +3,16 @@
 include '../functions.php';
 
 $email = $data['eml'];
-$role = $data['rol'];
+// $role = $data['rol'];
 $pass = $data['pas'];
 
-if (isset($email, $role, $pass)) {
+if (isset($email, $pass)) {
 
     $email = trim($data['eml']);
-    $role = trim($data['rol']);
+    // $role = trim($data['rol']);
     $pass = trim($data['pas']);
 
-    register($email, $pass, $role);
+    register($email, $pass, 'user');
 
 }
 // else {

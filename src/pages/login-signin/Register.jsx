@@ -47,13 +47,13 @@ export default function Register() {
         <Form onSubmit={SubmitForm}>
           <h1>Create Account</h1>
           <Stack gap={2}>
-            <Form.Select name="rol" defaultValue="" onInput={setData} required>
+            {/* <Form.Select name="rol" defaultValue="" onInput={setData} required>
               <option value="" disabled>
                 -- Choose Role --
               </option>
               <option value="user">User</option>
               <option value="admin">Admin</option>
-            </Form.Select>
+            </Form.Select> */}
 
             <Form.Group controlId="input_email">
               <Form.Control
