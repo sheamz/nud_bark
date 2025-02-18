@@ -38,12 +38,12 @@ function ReplyLayout(props) {
 
   const submitReply = (e) => {
     e.preventDefault();
-    console.log(replyData);
 
     axios
       .post("/createComment.php", replyData)
       .then((res) => {
-        alert(res.data.message);
+        // alert(res.data.message);
+        props.getPosts;
       })
       .catch((err) => {
         console.error(err);

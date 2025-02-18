@@ -18,17 +18,19 @@ function ConversationPage() {
   const [post, setPost] = React.useState({});
   const [maxComCount, setMaxComCount] = useState(5);
 
-  useEffect(() => {
+  const getPosts = () => {
     axios
       .post(`/getPost.php`, { pid: pid })
       .then((res) => {
-        // console.log(res.data.data.comments);
         setPost(res.data.data);
       })
       .catch((err) => {
         console.error(err);
       });
+  };
 
+  useEffect(() => {
+    getPosts();
     axios.post("/addView.php", { pid: pid });
   }, []);
 
@@ -55,6 +57,7 @@ function ConversationPage() {
         .post("/createComment.php", { pid, com })
         .then((res) => {
           alert(res.data.message);
+          getPosts();
           setComment("");
         })
         .catch();
@@ -114,7 +117,13 @@ function ConversationPage() {
                   let formattedDate = isNaN(date)
                     ? "Invalid date"
                     : formatDistanceToNow(date, { addSuffix: true });
-                  return <CommentLayout key={com.cid} com={com} />;
+                  return (
+                    <CommentLayout
+                      key={com.cid}
+                      com={com}
+                      getPosts={getPosts}
+                    />
+                  );
                 })
             ) : (
               <small>

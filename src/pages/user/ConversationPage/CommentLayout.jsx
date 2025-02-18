@@ -54,7 +54,8 @@ function CommentLayout(props) {
     axios
       .post("/createComment.php", replyData)
       .then((res) => {
-        alert(res.data.message);
+        // alert(res.data.message);
+        props.getPosts();
       })
       .catch((err) => {
         console.error(err);
@@ -162,7 +163,13 @@ function CommentLayout(props) {
             .slice()
             .reverse()
             .slice(0, maxReply)
-            .map((reply) => <ReplyLayout key={reply.cid} reply={reply} />)
+            .map((reply) => (
+              <ReplyLayout
+                key={reply.cid}
+                reply={reply}
+                getPosts={props.getPosts()}
+              />
+            ))
         ) : (
           <div></div>
         )}
