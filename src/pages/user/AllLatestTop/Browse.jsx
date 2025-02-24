@@ -7,73 +7,6 @@ import "./Browse.css";
 import Footer from "../../../components/Footer.jsx";
 import axios from "../../../backend/axios.jsx";
 
-const alt = [
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-  {
-    tit: "Looking for my section: INF290",
-    cat: "Ask Community",
-    uname: "@basher",
-    com: 100,
-    views: 100,
-    date: "11/29/2024",
-  },
-];
-
 const Browse = () => {
   const [posts, setPosts] = useState([]);
 
@@ -96,10 +29,8 @@ const Browse = () => {
         <div className="browse-container">
           <h2>Browse Posts</h2>
           <ALTNav />
-          {/* posts */}
           <PostCard data={posts} _post_per_page={5} _pagination={true} />
         </div>
-        {/* <div className="side-panel">categories</div> */}
       </div>
       <Footer />
     </div>

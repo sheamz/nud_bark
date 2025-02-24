@@ -99,12 +99,12 @@
 
 .comment-layout .comment-input {
   width: 100%;
-  min-height: 60px; /* initial smaller height */
+  min-height: 60px;
   padding: 10px;
   font-size: 14px;
   border-radius: 10px;
   border: 1px solid #ddd;
-  resize: vertical; /* Allow user to resize vertically */
+  resize: vertical;
   font-family: Arial, sans-serif;
 }
 
@@ -163,13 +163,11 @@
   margin-bottom: 5%;
 }
 
-/* CommentLayout */
 .comment-container {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  /* margin-bottom: 10px; */
   border-left: 8px solid #fdd41f;
 }
 
@@ -201,7 +199,6 @@
   color: grey;
 }
 
-/* ReplyLayout */
 .reply-root {
   margin-left: 5%;
 }
@@ -211,9 +208,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  /* margin-bottom: 10px; */
   border-left: 8px solid #34418e;
-  /* margin-left: 5%; */
 }
 
 .reply-container .reply-header {
@@ -232,6 +227,5 @@
 }
 
 .reply-container .reply-body {
-  /* margin-top: 16px; */
   font-size: 13px;
 }

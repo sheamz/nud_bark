@@ -12,14 +12,14 @@
 
 .footer-content {
   display: flex;
-  align-items: center; /* Align items horizontally */
+  align-items: center;
   margin-left: 16vh;
 }
 
 .footer-logo {
-  width: 120px; 
+  width: 120px;
   margin-bottom: 10px;
-  margin-right: 20px; /* Space between logo and description */
+  margin-right: 20px;
 }
 
 .footer-description-container {
@@ -31,35 +31,34 @@
 .footer-description {
   font-size: 10px;
   color: #6c757d;
-  max-width: 400px; 
+  max-width: 400px;
   text-align: left;
 }
 
 .vertical-line-footer {
-  width: 1px; /* Adjust the width as needed */
-  height: 100px; /* Adjust the height as needed */
+  width: 1px;
+  height: 100px;
   background-color: #6c757d;
-  margin-left: 20px; /* Space between description and vertical line */
+  margin-left: 20px;
 }
 
 .footer-contact {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px; /* Space between vertical line and contact info */
+  margin-left: 20px;
 }
 
 .social-icons-footer {
   display: flex;
-  gap: 10px; /* Space between icons */
+  gap: 10px;
 }
 
 .icon-footer {
-  font-size: 20px; /* Adjust the size as needed */
+  font-size: 20px;
   color: #6c757d;
 }
 
 .contact-info-footer {
   margin-top: 10px;
 }
-

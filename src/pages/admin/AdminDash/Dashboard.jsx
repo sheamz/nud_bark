@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AdminNav from "../AdminNav";
 import "./Dashboard.css";
-import { Avatar, Button, Stack } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Stack } from "@mui/material";
 
-// charts
 import Chart from "react-apexcharts";
 import Ranking from "./Ranking";
 import axios from "../../../backend/axios";
@@ -88,7 +86,6 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    // fetch data
     axios
       .get("/getAnalytics.php")
       .then((res) => {

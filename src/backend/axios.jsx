@@ -7,7 +7,6 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost/nud_bark/src/backend/api",
 });
 
-// Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = cookie.get("atk");

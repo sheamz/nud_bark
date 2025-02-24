@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavUser.css";
 import Logo from "../assets/logo.png";
-import { Stack, Avatar, Divider, Collapse } from "@mui/material";
+import { Stack, Avatar, Divider } from "@mui/material";
 
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -72,7 +72,6 @@ export default function NavUser() {
           </Stack>
         </Stack>
         <Stack direction="row" alignItems={"center"} gap={1} mr={2}>
-          {/* <Link to={"/user-profile/" + uid}> */}
           <Link to={"/myposts"} style={{ textDecoration: "none" }}>
             <Avatar>{userDetails.f_name ?? userDetails.uid}</Avatar>
           </Link>

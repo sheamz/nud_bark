@@ -22,7 +22,6 @@ export default function Ranking(props) {
 
   return (
     <>
-      {/* top Contributr */}
       <Paper
         elevation={5}
         sx={{ width: "fit-content", height: "fit-content" }}
@@ -57,7 +56,6 @@ export default function Ranking(props) {
           </Stack>
         ))}
       </Paper>
-      {/* most popular */}
       <Paper
         elevation={5}
         sx={{ width: "fit-content", height: "fit-content" }}
@@ -92,7 +90,6 @@ export default function Ranking(props) {
           );
         })}
       </Paper>
-      {/* most views */}
       <Paper
         elevation={5}
         sx={{ width: "fit-content", height: "fit-content" }}

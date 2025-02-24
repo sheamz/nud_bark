@@ -2,34 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Stack, Typography } from "@mui/material";
 import { TiMessages } from "react-icons/ti";
-import { FaExclamationCircle, FaBook } from "react-icons/fa"; // Importing icons from react-icons
+import { FaExclamationCircle, FaBook } from "react-icons/fa";
 import Header from "../../../components/Header";
 import axios from "../../../backend/axios";
 import { Link } from "react-router-dom";
-
-// const categories = [
-//   {
-//     color: "blue",
-//     name: "Ask Community",
-//     icon: <TiMessages className="icon blue-icon" />,
-//   },
-//   {
-//     color: "green",
-//     name: "Issue",
-//     icon: <FaExclamationCircle className="icon green-icon" />,
-//   },
-//   {
-//     color: "yellow",
-//     name: "Off topic",
-//     icon: <FaBook className="icon yellow-icon" />,
-//   },
-// ];
-
-// const newsItems = [
-//   { title: "News Title 1", date: "2023-10-01" },
-//   { title: "News Title 2", date: "2023-10-02" },
-//   { title: "News Title 3", date: "2023-10-03" },
-// ];
 
 const HomeUpper = () => {
   var [newsItems, setNewsItems] = useState([]);

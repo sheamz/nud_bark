@@ -101,8 +101,6 @@
   font-size: 1.1em;
 }
 
-/* YourContri.css */
-
 .your-contri {
   font-family: Arial, sans-serif;
   margin-left: 5%;
@@ -200,16 +198,6 @@ h2 {
   margin-left: 5%;
   margin-right: 5%;
 }
-
-/* .header {
-    display: flex;
-    justify-content: space-between;
-    background-color: #34418E;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  } */
 
 .topic-header {
   font-size: 18px;

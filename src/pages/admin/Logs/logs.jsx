@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AdminNav from "../AdminNav";
 import axios from "../../../backend/axios";
 
-//imports for data table
 import EnhancedTableHead from "../../../components/MuiDataTables/TableHead";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,8 +9,6 @@ import TableCell from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { faIR } from "@mui/material/locale";
-//
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -29,7 +26,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// headers
 const headCells = [
   {
     id: "Log ID",
@@ -72,7 +68,6 @@ const headCells = [
 export default function Logs() {
   const [rows, setRows] = useState([]);
 
-  // Enhanced Table
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("pid");
   const [page, setPage] = useState(0);
@@ -95,7 +90,6 @@ export default function Logs() {
     setOrderBy(property);
   };
 
-  // functions
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -104,7 +98,6 @@ export default function Logs() {
     setPage(0);
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 

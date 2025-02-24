@@ -8,7 +8,6 @@ let cookies = new Cookies();
 
 function CommentArea() {
   const pid = window.location.pathname.split("/")[3];
-  const uid = jwtDecode(cookies.get("atk")).uid;
 
   const [com, setComment] = useState("");
   const maxWords = 200;

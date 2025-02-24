@@ -5,9 +5,8 @@ import { BsFileEarmarkPostFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
 import "./AdminNav.css";
 import Logo from "../../assets/logo.png";
-import { Avatar, Divider } from "@mui/material";
+import { Avatar } from "@mui/material";
 import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import { Cookies } from "react-cookie";
 import axios from "../../backend/axios";
 

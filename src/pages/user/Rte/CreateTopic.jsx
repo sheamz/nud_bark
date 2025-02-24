@@ -60,19 +60,13 @@ const CreateTopic = () => {
   };
 
   const handleJodit = (e) => {
-    // e.preventDefault();
-    // console.log("teet");
     setFormData({ ...form_data, con: e });
   };
 
   const config = useMemo(
     () => ({
       readonly: false,
-      placeholder: "Start typings...",
-      // removeButtons: ["Break"],
-      // showXPathInStatusbar: false,
-      // showCharsCounter: false,
-      // showWordsCounter: false,
+      placeholder: "Ang chika naten for today ay...",
       toolbarAdaptive: false,
       uploader: { insertImageAsBase64URI: true },
       addNewLine: false,
@@ -147,7 +141,6 @@ const CreateTopic = () => {
             value={form_data.con}
             config={config}
             onBlur={handleJodit}
-            // onChange={handleJodit}
           />
 
           <div className="buttons">

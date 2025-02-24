@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./ConversationPage.css";
 import Content from "./Content";
 import CommentLayout from "./CommentLayout.jsx";
-import ReplyLayout from "./ReplyLayout.jsx";
 
-import { Paper, Avatar, Stack, Button } from "@mui/material";
+import { Paper, Stack, Button } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -70,7 +69,6 @@ function ConversationPage() {
       <div className="container p-0 my-5">
         <Paper elevation={3} sx={{ padding: "40px", width: "100%" }}>
           <Content data={post} />
-          {/* create comment form */}
           <div className="comment-layout">
             <form className="comment-form" onSubmit={submitComment}>
               <textarea
@@ -105,7 +103,6 @@ function ConversationPage() {
             </form>
             <hr className="comment-divider" />
           </div>
-          {/* comments */}
           <Stack gap={1}>
             {post.comments && post.comments.length > 0 ? (
               post.comments

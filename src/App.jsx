@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/login-signin/Login";
 import Home from "./pages/user/HomePage/Home";
 import PostManagement from "./pages/admin/PostMngmt/PostMngmt.jsx";
@@ -23,6 +17,8 @@ import { Cookies } from "react-cookie";
 import "./App.css";
 import MyPost from "./pages/user/MyPost/myPost.jsx";
 import Logs from "./pages/admin/Logs/logs.jsx";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 let cookie = new Cookies();
 
@@ -76,7 +72,6 @@ function AppRoutes() {
           </PublicRoute>
         }
       />
-      {/* user */}
       <Route
         path="/home"
         element={

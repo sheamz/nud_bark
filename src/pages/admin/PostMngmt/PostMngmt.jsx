@@ -1,9 +1,7 @@
 import React, { useEffect, useState, forwardRef } from "react";
-// import { FiMenu } from "react-icons/fi"; // Import hamburger menu icon
 import "./PostMngmt.css";
 import AdminNav from "../AdminNav";
 
-//imports for data table
 import EnhancedTableHead from "../../../components/MuiDataTables/TableHead";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,12 +9,10 @@ import TableCell from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-//
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Slide from "@mui/material/Slide";
 
-// for remove dialog
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -25,52 +21,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import axios from "../../../backend/axios";
 
-// const rows = [
-//   {
-//     pid: "pst-1000",
-//     tit: "Barado nanamn urinal?",
-//     com: 109,
-//     views: 348,
-//     date: "12-04-2024",
-//   },
-//   {
-//     pid: "pst-1002",
-//     tit: "LF: upuan sa canten",
-//     com: 20,
-//     views: 67,
-//     date: "12-04-2024",
-//   },
-//   {
-//     pid: "pst-1003",
-//     tit: "LF: Study buddy",
-//     com: 0,
-//     views: 3,
-//     date: "12-04-2024",
-//   },
-//   {
-//     pid: "pst-1004",
-//     tit: "Prof namen missing in action",
-//     com: 9,
-//     views: 4042,
-//     date: "12-04-2024",
-//   },
-//   {
-//     pid: "pst-1005",
-//     tit: "May nakita po ba kayong wallet sa cr ng boys?",
-//     com: 109,
-//     views: 348,
-//     date: "12-04-2024",
-//   },
-//   {
-//     pid: "pst-1006",
-//     tit: "wala na ako masiisp?",
-//     com: 109,
-//     views: 348,
-//     date: "12-04-2024",
-//   },
-// ];
-
-// sorting mui data table
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -87,7 +37,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// headers
 const headCells = [
   {
     id: "pid",
@@ -136,7 +85,6 @@ function PostMngmt() {
   const [rows, setRows] = useState([]);
   const [removeDialog, setRemoveDialog] = useState(false);
   const [toDelete, setToDelete] = useState("");
-  // Enhanced Table
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("pid");
   const [page, setPage] = useState(0);
@@ -163,7 +111,6 @@ function PostMngmt() {
     setOrderBy(property);
   };
 
-  // functions
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -172,7 +119,6 @@ function PostMngmt() {
     setPage(0);
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -286,7 +232,6 @@ function PostMngmt() {
           </Paper>
         </div>
 
-        {/* remove dialog */}
         <Dialog
           open={removeDialog}
           TransitionComponent={Transition}

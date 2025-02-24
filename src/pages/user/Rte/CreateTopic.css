@@ -49,7 +49,6 @@
 }
 
 .create-topic-container .jodit-react-container {
-  /* border: 1px solid red; */
   border: 1px solid lightgray;
   border-radius: 10px;
   overflow: hidden;
@@ -64,7 +63,6 @@
 }
 
 .create-topic-container .jodit-container .jodit-toolbar-button {
-  /* border: 1px solid red; */
   border-radius: 100px;
 }
 

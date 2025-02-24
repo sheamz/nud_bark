@@ -41,17 +41,15 @@ export default function Home() {
         <Stack className="home-container" width="100%" gap={10}>
           <HomeUpper />
           <Stack direction="row" gap={5} m={0}>
-            {/* <HomeList /> */}
             <Stack flex={3} gap={2} alignItems="center">
-              <Header title={"Most Popular"} link={"/browse"} />
+              <Header title={"Latest"} link={"/browse"} />
               <PostCard data={posts} _pagination={false} />
             </Stack>
-            {/* <HomeContri /> */}
             <Paper className="card-contri" sx={{ flex: 1 }}>
               <Header title={"Your Contributions"} />
               <div className="card-body-contri">
                 <Typography variant="body1">
-                  Hi <b>userDetails.username ?? userDetails.uid</b>, here is
+                  Hi <b>{userDetails.username ?? userDetails.uid}</b>, here is
                   your total contributions.
                 </Typography>
                 <Typography variant="body2" className="body2">

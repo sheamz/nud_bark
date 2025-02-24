@@ -12,7 +12,6 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from "../../../backend/axios";
 
-// for remove dialog
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -39,7 +38,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 function UserManagement() {
-  const [users, setUsers] = useState([]); // State for user data
+  const [users, setUsers] = useState([]);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("uid");
   const [page, setPage] = useState(0);
@@ -50,7 +49,7 @@ function UserManagement() {
   const fetchUsers = async () => {
     try {
       const response = await axios.get("/getUser.php");
-      setUsers(response.data); // Update state with API data
+      setUsers(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -172,7 +171,6 @@ function UserManagement() {
             </div>
           </Paper>
         </div>
-        {/* remove dialog */}
         <Dialog
           open={removeDialog}
           TransitionComponent={Transition}

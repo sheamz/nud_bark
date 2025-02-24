@@ -13,7 +13,6 @@ import axios from "../../../backend/axios";
 import "./ConversationPage.css";
 
 function ReplyLayout(props) {
-  // console.log(props.reply);
   const [maxReply, setMaxReply] = useState(0);
 
   const [toggleInputReply, setToggleInputReply] = useState(false);
@@ -56,7 +55,6 @@ function ReplyLayout(props) {
     <div className="reply-root">
       <div className="reply-container">
         <div className="reply-header">
-          {/* <div className="reply-author-avatar"></div> */}
           <Avatar size="small" sx={{ marginRight: "10px" }}></Avatar>
 
           <div className="reply-author-info">
@@ -148,7 +146,6 @@ function ReplyLayout(props) {
           </Stack>
         </Box>
       </div>
-      {/* <ReplyLayout /> */}
       <Stack gap={1}>
         {props.reply.replies && props.reply.replies.length > 0 ? (
           props.reply.replies

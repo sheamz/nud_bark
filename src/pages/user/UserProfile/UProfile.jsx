@@ -6,18 +6,12 @@ import axios from "../../../backend/axios";
 import { Cookies } from "react-cookie";
 import NavUser from "../../../components/NavUser";
 
-import { Avatar, Box, FormControl, Stack } from "@mui/material";
-// password dialog
+import { Avatar, Box, DialogContent, Stack } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Divider from "@mui/material/Divider";
-import SaveIcon from "@mui/icons-material/Save";
 
 const cookie = new Cookies();
 
@@ -143,12 +137,9 @@ const Profile = () => {
         </div>
 
         <div className="det ">
-          {/* <div className="profile-picture-page"> */}
-          {/* <img src={userData.profilePicture} alt="Profile" /> */}
           <Avatar sx={{ width: "70px", height: "70px" }}>
             {userData.f_name}
           </Avatar>
-          {/* </div> */}
           <div className="profile-info">
             <div className="name">{userData.username}</div>
             <div className="email">{userData.email}</div>
@@ -241,7 +232,7 @@ const Profile = () => {
           <DialogTitle>{"Change password?"}</DialogTitle>
           <DialogContent dividers>
             <Box
-              component={"form"} // to prevent form submission
+              component={"form"}
               onSubmit={submitNewPassword}
               sx={{
                 flexDirection: "column",
@@ -250,7 +241,6 @@ const Profile = () => {
                 gap: "20px",
               }}
             >
-              {/* old password */}
               <TextField
                 required
                 type="password"
@@ -261,7 +251,6 @@ const Profile = () => {
                 size="small"
                 onInput={handlePassChange}
               />
-              {/* new password */}
               <TextField
                 required
                 inputProps={{ minLength: 8 }}
@@ -273,7 +262,6 @@ const Profile = () => {
                 size="small"
                 onInput={handlePassChange}
               />
-              {/* confirm new pass */}
               <TextField
                 required
                 type="password"
@@ -292,13 +280,6 @@ const Profile = () => {
               </Stack>
             </Box>
           </DialogContent>
-          {/* <DialogActions>
-            <Button onClick={closePassDialog} sx={{ color: "grey" }}>
-              Disagree
-            </Button>
-
-            <Button onClick={closePassDialog}>Agree</Button>
-          </DialogActions> */}
         </Dialog>
       </div>
     </div>

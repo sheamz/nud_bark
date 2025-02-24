@@ -1,7 +1,13 @@
 import React from "react";
 import "./Footer.css";
-import logo from "../assets/logo.png"; // Adjust the path to your logo
-import { FaFacebook, FaInstagram, FaTwitter, FaEnvelope, FaPhone } from "react-icons/fa";
+import logo from "../assets/logo.png";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaEnvelope,
+  FaPhone,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -11,7 +17,10 @@ export default function Footer() {
           <img src={logo} alt="Logo" className="footer-logo" />
           <div className="footer-description-container">
             <p className="footer-description">
-              An online platform designed for students of National University Dasmariñas to connect, share experiences, and seek academic support. This forum fosters a sense of community and engagement, helping students stay informed and involved in university life.
+              An online platform designed for students of National University
+              Dasmariñas to connect, share experiences, and seek academic
+              support. This forum fosters a sense of community and engagement,
+              helping students stay informed and involved in university life.
             </p>
           </div>
           <div className="vertical-line-footer"></div>

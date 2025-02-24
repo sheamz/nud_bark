@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import NavUser from "../../../components/NavUser";
 import "./myPost.css";
 import axios from "../../../backend/axios";
-import { formatDistanceToNow, parseISO } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 
-import { Stack, Avatar, Divider, Collapse, Paper } from "@mui/material";
+import { Stack, Avatar, Divider, Paper } from "@mui/material";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import { Link } from "react-router-dom";
 
@@ -12,19 +12,14 @@ export default function MyPost() {
   const [myPost, setMyPost] = useState([]);
   const [userDetails, setUserDetails] = useState({});
 
-  // let navigate = useNavigate();
   useEffect(() => {
     axios.get("/getPostByUser.php").then((res) => {
-      // console.log(res.data.data);
       setMyPost(res.data.data);
     });
     axios.get("/getProfile.php").then((res) => {
-      // console.log(res.data);
       setUserDetails(res.data);
     });
   }, []);
-
-  // let goToChangeProfile = () => {};
 
   return (
     <div className="blue-bg myPosts" style={{ minHeight: "100vh" }}>

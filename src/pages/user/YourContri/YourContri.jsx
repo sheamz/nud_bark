@@ -1,22 +1,28 @@
-import React, { useState } from "react"; 
-import NavUser from "../../../components/NavUser"; 
+import React, { useState } from "react";
+import NavUser from "../../../components/NavUser";
 import { Link } from "react-router-dom";
-import YourContriTblTemplate from "./YourContriTblTemplate";
 import "./YourContri.css";
 
-const YourContri = () => { 
-  const [category, setCategory] = useState(''); 
-  const categories = ["Ask Community", "Marketplace", "Suggestions", "Off Topic", "Issue", "Bark News"]; // Categories array
+const YourContri = () => {
+  const [category, setCategory] = useState("");
+  const categories = [
+    "Ask Community",
+    "Marketplace",
+    "Suggestions",
+    "Off Topic",
+    "Issue",
+    "Bark News",
+  ];
 
   return (
     <>
-      <NavUser /> 
+      <NavUser />
 
       <div className="your-post-title">Your Posts</div>
 
       <div className="under-header">
         <div className="topics">Topics</div>
-        
+
         <Link to="/your-comments" className="link-style">
           <div className="comments">Comments</div>
         </Link>
@@ -24,9 +30,7 @@ const YourContri = () => {
 
       <div className="post-underline"></div>
 
-      <div className="topics-filter">
-        {/* filter func */}
-      </div>
+      <div className="topics-filter"></div>
 
       <div className="navbar">
         <div className="navbar-left">
@@ -40,17 +44,19 @@ const YourContri = () => {
             <h3>Top Choices</h3>
           </div>
         </div>
-  
-        <div className="navbar-right"> 
+
+        <div className="navbar-right">
           <div className="category-dropdown">
             <select
               id="category"
               value={category}
-              onChange={(e) => setCategory(e.target.value)} 
+              onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">Select a category</option>
               {categories.map((cat, index) => (
-                <option key={index} value={cat}>{cat}</option>
+                <option key={index} value={cat}>
+                  {cat}
+                </option>
               ))}
             </select>
           </div>
@@ -63,8 +69,6 @@ const YourContri = () => {
           </div>
         </div>
       </div>
-
-      <YourContriTblTemplate />
     </>
   );
 };

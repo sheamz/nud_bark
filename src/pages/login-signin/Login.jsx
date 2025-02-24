@@ -7,13 +7,12 @@ import axios from "../../backend/axios";
 import { Cookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 
-// import Button from "@mui/material/Button";
-
 const cookie = new Cookies();
 
 export default function Login({ setToken }) {
   const navigate = useNavigate();
   const [form_data, setFormData] = useState([]);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...form_data, [e.target.name]: e.target.value });
@@ -21,17 +20,15 @@ export default function Login({ setToken }) {
 
   let SubmitForm = (e) => {
     e.preventDefault();
+    setIsLoggingIn(true);
     axios
       .post("/login.php", form_data)
       .then((res) => {
-        // console.log(res.data);
-
         if (res.data.status == 200) {
           cookie.set("atk", res.data.atk, {
             expires: new Date(Date.now() + 86400 * 1000),
             secure: true,
           });
-          // setToken(res.data.atk);
           alert(res.data.message);
 
           let role = jwtDecode(res.data.atk).rol;
@@ -43,10 +40,12 @@ export default function Login({ setToken }) {
           }
         } else {
           alert(res.data.message);
+          setIsLoggingIn(false);
         }
       })
       .catch((err) => {
         console.error(err);
+        setIsLoggingIn(false);
       });
   };
 
@@ -74,7 +73,12 @@ export default function Login({ setToken }) {
               required
             />
           </Form.Group>
-          <Button variant="primary" className="btn_submit" type="submit">
+          <Button
+            variant="primary"
+            className="btn_submit"
+            type="submit"
+            disabled={isLoggingIn}
+          >
             Log In
           </Button>
           <p className="mt-3">

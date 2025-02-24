@@ -5,16 +5,16 @@ import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../backend/axios";
 
-// import Stack from "@mui/material";
-
 import { Stack } from "@mui/material";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [isRegistering, setIsRegistering] = useState(false);
   const [form_data, setFormData] = useState({});
 
   let SubmitForm = (e) => {
     e.preventDefault();
+    setIsRegistering(true);
 
     if (form_data.con != form_data.pas) {
       alert("ayos password par");
@@ -27,11 +27,12 @@ export default function Register() {
             navigate("/");
           } else {
             alert(res.data.message);
-            console.log(res);
+            setIsRegistering(false);
           }
         })
         .catch((err) => {
           console.error(err);
+          setIsRegistering(false);
         });
     }
   };
@@ -47,14 +48,6 @@ export default function Register() {
         <Form onSubmit={SubmitForm}>
           <h1>Create Account</h1>
           <Stack gap={2}>
-            {/* <Form.Select name="rol" defaultValue="" onInput={setData} required>
-              <option value="" disabled>
-                -- Choose Role --
-              </option>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </Form.Select> */}
-
             <Form.Group controlId="input_email">
               <Form.Control
                 type="email"
@@ -84,7 +77,12 @@ export default function Register() {
                 required
               />
             </Form.Group>
-            <Button variant="primary" className="btn_submit" type="submit">
+            <Button
+              variant="primary"
+              className="btn_submit"
+              type="submit"
+              disabled={isRegistering}
+            >
               Register
             </Button>
           </Stack>

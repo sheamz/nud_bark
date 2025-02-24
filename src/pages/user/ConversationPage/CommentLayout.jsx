@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 
 import { formatDistanceToNow } from "date-fns";
-import {
-  Avatar,
-  IconButton,
-  Button,
-  Box,
-  TextField,
-  Stack,
-} from "@mui/material";
+import { Avatar, Button, Box, TextField, Stack } from "@mui/material";
 import ReplyIcon from "@mui/icons-material/Reply";
 import SendIcon from "@mui/icons-material/Send";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -18,19 +11,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import ReplyLayout from "./ReplyLayout";
 
 import "./ConversationPage.css";
-
-import { Cookies } from "react-cookie";
-import { jwtDecode } from "jwt-decode";
 import axios from "../../../backend/axios.jsx";
 
-let cookie = new Cookies();
-
 function CommentLayout(props) {
-  const uid = jwtDecode(cookie.get("atk")).uid;
   const [maxReply, setMaxReply] = useState(0);
   const [toggleInputReply, setToggleInputReply] = useState(false);
   const [replyData, setReplyData] = useState({
-    uid: uid,
     pid: props.com.pid,
     com: "",
     pcid: props.com.cid,
@@ -54,7 +40,6 @@ function CommentLayout(props) {
     axios
       .post("/createComment.php", replyData)
       .then((res) => {
-        // alert(res.data.message);
         props.getPosts();
       })
       .catch((err) => {
